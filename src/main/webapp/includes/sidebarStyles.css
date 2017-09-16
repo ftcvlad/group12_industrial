@@ -1,0 +1,91 @@
+html{
+    font-family: Arial, Calibri;
+}
+
+/*reset button styles*/
+button {
+    background: none;
+    border: 0;
+    color: inherit;
+    cursor: default;
+    font: inherit;
+    line-height: normal;
+    overflow: visible;
+    padding: 0;
+    -webkit-appearance: button;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+#sidebar{
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 180px;
+    background-color: #424B55;
+    height: 3000px;
+    border-right: solid #535D68 3px;
+    padding: 10px;
+    transition: all 0.3s;
+}
+
+#sidebar:hover {
+    transition: all 0.3s;
+}
+
+#DusaLogo{
+    position: relative;
+    width: 50%;
+    left: 25%;
+    height: auto;
+    padding-bottom: 10px;
+    cursor: pointer;
+}
+
+.module_button{
+    width: 100%;
+    height: 100px;
+    border-top: solid #535D68 1px;
+    border-bottom: solid #535D68 1px;
+    color: #D1D1D1;
+    transition: all 0.2s
+}
+
+.module_button_image{
+    position: relative;
+    height: auto;
+    width: 20%;
+    padding-top: 2%;
+}
+
+.module_button:hover {
+    background-color: #3B434C;
+    color: #3286D8;
+    cursor: pointer;
+    height: 120px;
+    font-size: 0.8em;
+    transition: all 0.1s;
+}
+
+/* include in module_button class, to button to indicate it's selected */
+.selected{
+    background-color: #3B434C;
+    color: #3286D8;
+    cursor: pointer;
+    height: 120px;
+    font-size: 0.8em;
+    transition: all 0.1s;
+}
+
+
+.main_content{
+    position: relative;
+   
+    margin: 20px 20px 20px 215px;
+    width: auto;
+    background: white;
+    overflow: auto;
+    z-index: 1;
+}

@@ -1,0 +1,27 @@
+# Java build artifacts class files
+*.class
+
+# other generated files
+bin/
+gen/
+build/
+
+# local configuration file (for Android sdk path, etc)
+local.properties
+
+
+# Eclipse project files
+.classpath
+.project
+
+#NDK
+obj/
+
+# OSX files
+.DS_Store
+
+#org.eclipse.buildship.core.prefs
+.settings
+
+#gradle caching or smth
+.gradle

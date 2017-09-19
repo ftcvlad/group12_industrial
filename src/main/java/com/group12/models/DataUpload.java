@@ -37,6 +37,10 @@ public class DataUpload {
 	}
 	
 	
+	@Override 
+	public String toString() {
+		return periodStart+" "+periodEnd;
 	
+	}
 	
 }

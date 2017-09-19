@@ -1,5 +1,7 @@
 package com.group12.models;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -89,32 +91,45 @@ public class RetailModel {
 	}
 	
 	
-	public static void saveUploadHistory() {
-
-		DataUpload du = new DataUpload();
-
-		du.setPeriodEnd("end");
-		du.setPeriodStart("start");
-		
-
+	public static List<DataUpload> getAllDataUploads(){
 		
 		Configuration con = new Configuration().configure().addAnnotatedClass(DataUpload.class);
 		SessionFactory sf = con.buildSessionFactory();
 		Session session = sf.openSession();
-		Transaction tx = null;
+		Transaction tx = null;//with hibernate transaction even for read :)
+		List<DataUpload> list;
 		try {
-			//with hibernate always use transactions
+			
 			tx = session.beginTransaction();
-			session.save(du);
+			
+			list = session.createQuery("from DataUpload").list(); 
+			Collections.reverse(list);
+			
+			Collections.sort(list, new Comparator<DataUpload>() {
+			    @Override
+			    public int compare(DataUpload lhs, DataUpload rhs) {
+			        return -(lhs.getPeriodEnd().compareTo(rhs.getPeriodEnd()));
+			    }
+			});
+			
 			tx.commit();
 
 		} catch (HibernateException e) {
 			if (tx!=null) tx.rollback();
 			e.printStackTrace();
+			return null;
 		} finally {
 			session.close();
 		}
-
+		
+		for (DataUpload ul: list) {
+			System.out.println(ul);
+		}
+		
+		return list;
+		
+		
+		
 	}
 
 

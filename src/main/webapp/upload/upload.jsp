@@ -92,7 +92,15 @@
 					    </tr>
 					  </thead>
 					  <tbody id="tableBody">
-					
+						<c:forEach var="item" items="${allDataUploads}">
+							
+							 <tr>
+					      
+							      <th>File name</th>
+							      <th><c:out value="${item.periodStart}"/></th>
+							      <th><c:out value="${item.periodEnd}"/></th>
+						    </tr>
+						</c:forEach>
 					
 					  </tbody>
 					</table>

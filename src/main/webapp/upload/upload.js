@@ -3,6 +3,11 @@ $( document ).ready(function() {
  
     var spinner = new Spinner({top:'35%', width: 1, length:20, radius:15}).spin();
   	document.getElementById("spinnerContainer").appendChild(spinner.el);
+  	
+  	
+  	
+  	
+  	
 });
 
 

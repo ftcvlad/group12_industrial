@@ -24,7 +24,14 @@ public class servletExample extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        
        
+    	List<DataUpload> allUploads = RetailModel.getAllDataUploads();
+    	
+    	/*Gson gson = new GsonBuilder().create();
+    	String jsonStr = gson.toJson(allUploads, new TypeToken<List<DataUpload>>(){}.getType());*/
+    	
+    	
         request.setAttribute("page", "upload");
+        request.setAttribute("allDataUploads", allUploads);
         request.getRequestDispatcher("upload/upload.jsp").forward(request, response); 
     }
 

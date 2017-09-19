@@ -1,5 +1,6 @@
 package com.group12.controllers;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
 
@@ -12,15 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import java.lang.reflect.Type;
-
-import com.group12.models.YoyoTransaction;
 import com.group12.models.RetailModel;
+import com.group12.models.YoyoTransaction;
 
 
 @WebServlet(name = "ServletExample", urlPatterns = {"upload"}, loadOnStartup = 1) 
@@ -35,17 +29,14 @@ public class servletExample extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
     	
-    	
-    	String data = (String) request.getParameter("parsedXls");
-        
         
     	Gson gson = new GsonBuilder().create();
+    	BufferedReader reader = request.getReader();
+    	List<YoyoTransaction> list = gson.fromJson(reader, new TypeToken<List<YoyoTransaction>>(){}.getType());
     	
-    	List<YoyoTransaction> list = gson.fromJson(data, new TypeToken<List<YoyoTransaction>>(){}.getType());
+    	
     	
 
-    	
-    	list.forEach(x -> System.out.println(x));
         
         RetailModel.saveRetailData(list);
         

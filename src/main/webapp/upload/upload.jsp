@@ -16,9 +16,17 @@
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
 
-
+<link href="upload/upload.css" rel="stylesheet"	>
+	
 <script lang="javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.11.3/xlsx.core.min.js"></script>
+	
+	<script lang="javascript"
+	src="upload/spinner.min.js"></script>
+	
+	
+
+	
 </head>
 
 <body>
@@ -29,9 +37,49 @@
 
 		<div class="panel panel-default">
 			<div class="panel-heading">Panel heading without title</div>
-			<div class="panel-body">
-				<input name="myFile" type="file" id="fileInput">
-				<button type="button" class="btn btn-primary" onClick="uploadData()">Primary</button>
+			<div class="panel-body" >
+			
+				<div id="uploadControlContainer"  >
+					
+						<div id="loadingOverlay">
+							
+							<div id="spinnerContainer"></div>
+						
+							<div id="spinnerTextContainer">Processing...</div>
+							<div id="cancelButtonContainer">
+								<button type="button" class="btn btn-primary" onClick="cancelUpload()">Cancel</button>
+							</div>
+						</div>
+					
+						<div  >
+							<label class="btn btn-default" for="fileInput">
+							    <input id="fileInput" type="file" style="display:none" onchange="$('#upload-file-info').html(this.files[0].name)">
+							    Browse
+							</label>
+							<span class='label label-info' id="upload-file-info">No file chosen</span>
+						</div>
+						
+		
+						
+						<div >
+							<button type="button" class="btn btn-primary" onClick="uploadData()">Upload</button>
+						</div>
+				
+				
+					
+					
+					
+					
+					
+					
+					
+				</div>
+				
+				<div id="uploadStatsContainer">
+				
+				</div>
+			
+				
 			</div>
 		</div>
 	</div>

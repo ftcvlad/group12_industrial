@@ -71,11 +71,12 @@ function startWorker(file) {
               if (e.data.log){
               	 console.log('Worker said: ', e.data.log);
               }
-              
+             
               if (e.data.success){
-              
+             
               	//handle success
               	finishWork("Uploaded successfully!", true);
+              	addUploadRecord(e.data.success, file.name);
               }
               else if (e.data.error){
               	//handle error
@@ -102,5 +103,13 @@ function startWorker(file) {
 //TODO: 
 
 
+function addUploadRecord(dataStr, fileName){
+
+	var obj = JSON.parse(dataStr);
+	
+	$('#tableBody').prepend('<tr><td>'+fileName+'</td><td>'+obj.periodStart+'</td><td>'+obj.periodEnd+'</td></tr>');
+
+
+}
 
 

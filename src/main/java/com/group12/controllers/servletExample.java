@@ -2,6 +2,7 @@ package com.group12.controllers;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.group12.models.DataUpload;
 import com.group12.models.RetailModel;
 import com.group12.models.YoyoTransaction;
 
@@ -38,14 +40,21 @@ public class servletExample extends HttpServlet {
     	
 
         
-        RetailModel.saveRetailData(list);
+        DataUpload finishedUpload = RetailModel.saveRetailData(list);
         
+        if (finishedUpload == null) {
+        	response.setStatus(500);
+        }
+        else {
+        	response.setContentType("application/json");
+    	    PrintWriter out = response.getWriter();
+    	    out.print("{\"periodStart\":"+"\""+finishedUpload.getPeriodStart()+"\""+",\"periodEnd\":"+"\""+finishedUpload.getPeriodEnd()+"\""+"}");
+    	    out.flush();
+        }
+       
 	        
-        //return json
-        //response.setContentType("application/json");
-	    // PrintWriter out = response.getWriter();
-	    // out.print("{\"zz\":"+num+"}");
-	    // out.flush();
+      
+        
     }
     
     

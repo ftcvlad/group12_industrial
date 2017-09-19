@@ -15,6 +15,7 @@
 	rel="stylesheet"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
+	
 
 <link href="upload/upload.css" rel="stylesheet"	>
 	
@@ -77,10 +78,24 @@
 					
 					
 				</div>
+				<br>
 				<h2>Upload history</h2>
-				
+				<br>
 				<div id="uploadStatsContainer">
-				
+					<table class="table">
+					  <thead >
+					    <tr>
+					      
+					      <th>File name</th>
+					      <th>Period start</th>
+					      <th>Period end</th>
+					    </tr>
+					  </thead>
+					  <tbody id="tableBody">
+					
+					
+					  </tbody>
+					</table>
 				</div>
 			
 				

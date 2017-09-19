@@ -64,7 +64,7 @@ function js_xlsx(file){
 		    	
 		    	ajax("/group12/upload",  XL_row_object1, function(data) {
 				   //do something with the data like:
-				    self.postMessage({"log": ("success: "+new Date().getTime()), "success": "oo yeah" });
+				    self.postMessage({"log": ("success: "+new Date().getTime()), "success": data });
 				}, function (data){
 					self.postMessage({'error':data});
 				}, 'POST');

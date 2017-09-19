@@ -47,3 +47,8 @@
     position: absolute;
     left: 5px;
 }
+
+thead{
+	background: black;
+	color: white;
+}

@@ -34,14 +34,30 @@ public class RetailModel {
 	}*/
 
 	
-	public static void saveRetailData(List<YoyoTransaction> data) {
-		Configuration con = new Configuration().configure().addAnnotatedClass(YoyoTransaction.class);
+	public static DataUpload saveRetailData(List<YoyoTransaction> data) {
+		Configuration con = new Configuration().configure().addAnnotatedClass(YoyoTransaction.class).addAnnotatedClass(DataUpload.class);
 		SessionFactory sf = con.buildSessionFactory();
 		Session session = sf.openSession();
 		Transaction tx = null;
+		DataUpload currentUpload = null;
 		try {
 			
 			tx = session.beginTransaction();
+			
+			//ASSUME THEY UPLOAD IT SEQUENTIALLY -- I.E. CANNOT UPLOAD NEXT WEEK AND THEN PREVIOUS WEEK
+			//DATA HAS DUPLICATE ENTRIES AND SIMILAR ENTRIES. HARD TO GET UNIQUE INDEX.
+			//+ HIBERNATE DOESN'T LIKE 'INSERT IGNORE'
+			//BUT DIRTY AND SAD :(
+			
+			currentUpload = new DataUpload();
+			currentUpload.setPeriodStart(data.get(0).getDateTime());
+			currentUpload.setPeriodEnd(data.get(data.size()-1).getDateTime());
+			
+			//get last upload 
+			//getLastUpload();
+			
+			//check if currentUpload.startDate>=latestUpload.endDate
+			//upload data
 			int i=1;
 			for (YoyoTransaction yt : data) {
 			    session.save(yt);
@@ -54,16 +70,19 @@ public class RetailModel {
 			//TODO: update upload stats
 			
 			
+			session.save(currentUpload);
+			
 			tx.commit();
 
 		} catch (HibernateException e) {
 			if (tx!=null) tx.rollback();
 			e.printStackTrace();
+			return null;
 		} finally {
 			session.close();
 		}
 		
-		
+		return currentUpload;
 		
 		
 		

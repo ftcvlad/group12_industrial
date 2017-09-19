@@ -46,13 +46,15 @@ function js_xlsx(file){
 			
 			};
 
+
 		      for (var i=0; i<XL_row_object1.length;i++){
 		      		XL_row_object1[i]["A"] = XL_row_object2[i]["A"];//add date
 		      		XL_row_object1[i]["F"] = XL_row_object1[i]["F"].substr(5);//remove 'dusa-'
 		      		XL_row_object1[i]["G"] = paymentTypeMap[XL_row_object1[i]["G"]];//convert payment type to number
+		     		
 		      }
 		      
-		   
+		
 		 	  
 		 	 	self.postMessage({"log": ("converted to json: "+new Date().getTime()), "spinnerMessageUpdate": "saving to database..." });
 		    

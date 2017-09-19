@@ -34,6 +34,8 @@ public class RetailModel {
 		}
 
 	}*/
+	
+	
 
 	
 	public static DataUpload saveRetailData(List<YoyoTransaction> data, String fileName) {
@@ -45,21 +47,8 @@ public class RetailModel {
 		try {
 			
 			tx = session.beginTransaction();
-			
-			//ASSUME THEY UPLOAD IT SEQUENTIALLY -- I.E. CANNOT UPLOAD NEXT WEEK AND THEN PREVIOUS WEEK
-			//DATA HAS DUPLICATE ENTRIES AND SIMILAR ENTRIES. HARD TO GET UNIQUE INDEX.
-			//+ HIBERNATE DOESN'T LIKE 'INSERT IGNORE'
-			//BUT DIRTY AND SAD :(
-			
-			currentUpload = new DataUpload();
-			currentUpload.setPeriodStart(data.get(0).getDateTime());
-			currentUpload.setPeriodEnd(data.get(data.size()-1).getDateTime());
-			currentUpload.setFileName(fileName);
-			
-			//get last upload 
-			//getLastUpload();
-			
-			//check if currentUpload.startDate>=latestUpload.endDate
+
+
 			//upload data
 			int i=1;
 			for (YoyoTransaction yt : data) {
@@ -70,9 +59,11 @@ public class RetailModel {
 			    }
 			}
 			
-			//TODO: update upload stats
-			
-			
+			//update upload stats
+			currentUpload = new DataUpload();
+			currentUpload.setPeriodStart(data.get(0).getDateTime());
+			currentUpload.setPeriodEnd(data.get(data.size()-1).getDateTime());
+			currentUpload.setFileName(fileName);
 			session.save(currentUpload);
 			
 			tx.commit();
@@ -131,6 +122,21 @@ public class RetailModel {
 		
 		
 		
+	}
+	
+	
+	public static boolean checkFileAlreadyUploaded(List<YoyoTransaction> data) {
+		
+		List<DataUpload> allPreviousUploads = getAllDataUploads();
+		String middleTransactionTime = data.get(data.size()/2).getDateTime();
+
+		for (DataUpload du: allPreviousUploads) {
+			if (du.getPeriodStart().compareTo(middleTransactionTime) < 0 && 
+						du.getPeriodEnd().compareTo(middleTransactionTime) > 0 ) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 

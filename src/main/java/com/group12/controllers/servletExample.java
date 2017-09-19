@@ -26,8 +26,6 @@ public class servletExample extends HttpServlet {
        
     	List<DataUpload> allUploads = RetailModel.getAllDataUploads();
     	
-    	/*Gson gson = new GsonBuilder().create();
-    	String jsonStr = gson.toJson(allUploads, new TypeToken<List<DataUpload>>(){}.getType());*/
     	
     	
         request.setAttribute("page", "upload");
@@ -38,27 +36,33 @@ public class servletExample extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
     	String fileName = request.getParameter("fileName");
-    	System.out.println(fileName);
+    	
         
     	Gson gson = new GsonBuilder().create();
     	BufferedReader reader = request.getReader();
     	List<YoyoTransaction> list = gson.fromJson(reader, new TypeToken<List<YoyoTransaction>>(){}.getType());
     	
     	
-    	
+    	boolean wasUploaded = RetailModel.checkFileAlreadyUploaded(list);
+    	if (wasUploaded) {
+    		response.setStatus(400);
+    	}
+    	else {
+    		DataUpload finishedUpload = RetailModel.saveRetailData(list, fileName);
+    	        
+	        if (finishedUpload == null) {
+	        	response.setStatus(500);
+	        }
+	        else {
+	        	response.setContentType("application/json");
+	    	    PrintWriter out = response.getWriter();
+	    	    out.print("{\"periodStart\":"+"\""+finishedUpload.getPeriodStart()+"\""+",\"periodEnd\":"+"\""+finishedUpload.getPeriodEnd()+"\""+"}");
+	    	    out.flush();
+	        }
+    	}
 
         
-        DataUpload finishedUpload = RetailModel.saveRetailData(list, fileName);
-        
-        if (finishedUpload == null) {
-        	response.setStatus(500);
-        }
-        else {
-        	response.setContentType("application/json");
-    	    PrintWriter out = response.getWriter();
-    	    out.print("{\"periodStart\":"+"\""+finishedUpload.getPeriodStart()+"\""+",\"periodEnd\":"+"\""+finishedUpload.getPeriodEnd()+"\""+"}");
-    	    out.flush();
-        }
+       
        
 	        
       

@@ -15,7 +15,7 @@ function js_xlsx(file){
 		        type: 'binary'
 		      });
 		      
-		      self.postMessage({"log": ("read data: "+new Date().getTime()) });
+		      self.postMessage({"log": ("read data: "+new Date().getTime()), "spinnerMessageUpdate": "processing data..." });
 		      
 		       
 		 	
@@ -54,7 +54,7 @@ function js_xlsx(file){
 		      
 		   
 		 	  
-		 	 self.postMessage({"log": ("converted to json: "+new Date().getTime()) });
+		 	 	self.postMessage({"log": ("converted to json: "+new Date().getTime()), "spinnerMessageUpdate": "saving to database..." });
 		    
 		     
 		    
@@ -64,7 +64,7 @@ function js_xlsx(file){
 		    	
 		    	ajax("/group12/upload",  XL_row_object1, function(data) {
 				   //do something with the data like:
-				    self.postMessage({"log": ("success: "+new Date().getTime()) });
+				    self.postMessage({"log": ("success: "+new Date().getTime()), "success": "oo yeah" });
 				}, function (data){
 					self.postMessage({'error':data});
 				}, 'POST');
@@ -73,8 +73,7 @@ function js_xlsx(file){
 		    };
 		
 		    reader.onerror = function(ex) {
-		      console.log(ex);
-		      //TODO: some error message
+		      self.postMessage({'error':ex});
 		    };
 		
 		    reader.readAsBinaryString(file);
@@ -86,7 +85,6 @@ function js_xlsx(file){
 
 
 self.addEventListener('message', function(e) {
-  //self.postMessage(e.data);
   
   js_xlsx(e.data);
 }, false);
@@ -108,7 +106,7 @@ var ajax = function(url, XL_row_object1, successCallback, failCallback, type) {
     	failCallback(req.statusText);
     }
   };
-  self.postMessage({"log": ("sending data...: "+new Date().getTime()) });
+ 
   req.send(JSON.stringify(XL_row_object1));
  
 };

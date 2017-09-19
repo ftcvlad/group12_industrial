@@ -36,14 +36,17 @@
 	<div class="main_content">
 
 		<div class="panel panel-default">
-			<div class="panel-heading">Panel heading without title</div>
+			
 			<div class="panel-body" >
 			
+				<h2>Upload data</h2>
+				<p>Uploading large files may take a couple of minutes. Stay patient!</p>
+				
 				<div id="uploadControlContainer"  >
-					
+						<div id="messageDiv"></div>
 						<div id="loadingOverlay">
 							
-							<div id="spinnerContainer"></div>
+							<div id="spinnerContainer" ></div>
 						
 							<div id="spinnerTextContainer">Processing...</div>
 							<div id="cancelButtonContainer">
@@ -74,6 +77,7 @@
 					
 					
 				</div>
+				<h2>Upload history</h2>
 				
 				<div id="uploadStatsContainer">
 				

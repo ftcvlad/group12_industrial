@@ -1,29 +1,64 @@
 $( document ).ready(function() {
-    var spinner = new Spinner({top:'35%', width: 1, length:20, radius:15}).spin();
-	document.getElementById("spinnerContainer").appendChild(spinner.el);
+   
  
-    //$("#uploadBtn").addClass("selected");
-  
+    var spinner = new Spinner({top:'35%', width: 1, length:20, radius:15}).spin();
+  	document.getElementById("spinnerContainer").appendChild(spinner.el);
 });
 
 
 
 function uploadData(){
+
 	 var file = document.getElementById("fileInput").files[0];
          
         
      if (!file) {
-        alert('no file');
+        updateStatusMessage("select file!", false);
      }
      else{
         	
+        	updateSpinnerMessage("reading data...");
+        	updateStatusMessage("", true);
+			document.getElementById("loadingOverlay").style.display = "inherit";
           	startWorker(file);
          
      }
 
 }
 
+function cancelUpload(){
+	
+	finishWork("Upload cancelled", false);
+}
 
+function stopWorker() { 
+	if (w !== undefined){
+		w.terminate();
+    	w = undefined;
+	}
+    
+}
+
+
+function finishWork(message, success){
+	stopWorker();
+	document.getElementById("loadingOverlay").style.display = "none";
+	updateStatusMessage(message, success);
+
+}
+function updateSpinnerMessage(message){
+	document.getElementById("spinnerTextContainer").innerHTML = message;
+}
+
+function updateStatusMessage(message, success){
+	if (success){
+		document.getElementById("messageDiv").style.color = "green";
+	}
+	else {
+		document.getElementById("messageDiv").style.color = "red";
+	}
+	document.getElementById("messageDiv").innerHTML = message;
+}
 
 var w;
 function startWorker(file) {
@@ -32,17 +67,23 @@ function startWorker(file) {
             w = new Worker("upload/parserWorker.js");
             
             w.addEventListener('message', function(e) {
-            
+            	
               if (e.data.log){
               	 console.log('Worker said: ', e.data.log);
               }
               
               if (e.data.success){
+              
               	//handle success
+              	finishWork("Uploaded successfully!", true);
               }
               else if (e.data.error){
               	//handle error
-              	console.log('error handler!');
+              	finishWork(e.data.error, false);
+              }
+              
+              if (e.data.spinnerMessageUpdate){
+              	  updateSpinnerMessage(e.data.spinnerMessageUpdate);
               }
               
               
@@ -53,14 +94,12 @@ function startWorker(file) {
         }
     
     } else {
-        document.getElementById("result").innerHTML = "Sorry! No Web Worker support.";
+    	updateStatusMessage("Sorry! No Web Worker support. Start using a normal browser!", false);
     }
 }
 
-function stopWorker() { 
-    w.terminate();
-    w = undefined;
-}
+//TODO: disable cancel button when started to do request
+//TODO: 
 
 
 

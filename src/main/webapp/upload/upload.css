@@ -24,6 +24,8 @@
     align-items: center;
     color: white;
     background: rgba(0, 0, 0, 0.62);
+    
+    display: none;
 	
 }
 
@@ -33,8 +35,15 @@
 
 #spinnerContainer{
 	margin-bottom:auto;
+	
 }
 
 #spinnerContainer div {
     background: white !important;
+}
+
+#messageDiv{
+	top: 5px;
+    position: absolute;
+    left: 5px;
 }

@@ -18,9 +18,9 @@
         </button>
         
         <button onclick="location.href='http://www.google.com'" class="module_button">
-            Callender
+            Calendar
             <div>
-                <image class="module_button_image" src="images/callender.png"></image>
+                <image class="module_button_image" src="images/calendar.png"></image>
             </div>
         </button>
         

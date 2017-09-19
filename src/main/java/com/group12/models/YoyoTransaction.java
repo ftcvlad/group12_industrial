@@ -10,7 +10,6 @@ import javax.persistence.Table;
 
 import com.google.gson.annotations.SerializedName;
 
-
 @Entity
 @Table(name = "retail_data")
 public class YoyoTransaction{
@@ -27,16 +26,12 @@ public class YoyoTransaction{
 	@SerializedName("J") @Column(name = "Total") float total;
 	
 	
-	
-	
 	public String getDateTime() {
 		return dateTime;
 	}
 	public void setDateTime(String dateTime) {
 		this.dateTime = dateTime;
 	}
-	
-	
 	
 	public int getId() {
 		return id;

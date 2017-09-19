@@ -12,10 +12,7 @@ public class DatabaseConnectionManager{
 	
 	
 	public static Connection getConnection() {
-		
-
-		
-		
+	
 		try {
 			
 			Class.forName("com.mysql.cj.jdbc.Driver");

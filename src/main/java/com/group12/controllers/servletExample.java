@@ -26,30 +26,23 @@ import com.group12.models.RetailModel;
 @WebServlet(name = "ServletExample", urlPatterns = {"upload"}, loadOnStartup = 1) 
 public class servletExample extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       
-       
+
         request.setAttribute("page", "upload");
         request.getRequestDispatcher("upload/upload.jsp").forward(request, response); 
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-    	
-    	
     	String data = (String) request.getParameter("parsedXls");
-        
         
     	Gson gson = new GsonBuilder().create();
     	
     	List<YoyoTransaction> list = gson.fromJson(data, new TypeToken<List<YoyoTransaction>>(){}.getType());
-    	
 
-    	
     	list.forEach(x -> System.out.println(x));
         
         RetailModel.saveRetailData(list);
-        
-	        
+
         //return json
         //response.setContentType("application/json");
 	    // PrintWriter out = response.getWriter();
@@ -59,9 +52,7 @@ public class servletExample extends HttpServlet {
     
     
     /*private class YoyoTransactionDeserialiser implements JsonDeserializer<YoyoTransaction> {
-    	
-    	
-    	
+
     	@Override
     	public YoyoTransaction deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException {
 

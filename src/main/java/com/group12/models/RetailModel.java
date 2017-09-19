@@ -53,7 +53,6 @@ public class RetailModel {
 			
 			//TODO: update upload stats
 			
-			
 			tx.commit();
 
 		} catch (HibernateException e) {
@@ -62,13 +61,7 @@ public class RetailModel {
 		} finally {
 			session.close();
 		}
-		
-		
-		
-		
-		
 	}
-	
 	
 	public static void saveUploadHistory() {
 
@@ -76,8 +69,6 @@ public class RetailModel {
 
 		du.setPeriodEnd("end");
 		du.setPeriodStart("start");
-		
-
 		
 		Configuration con = new Configuration().configure().addAnnotatedClass(DataUpload.class);
 		SessionFactory sf = con.buildSessionFactory();

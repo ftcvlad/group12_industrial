@@ -37,7 +37,8 @@ public class servletExample extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-    	
+    	String fileName = request.getParameter("fileName");
+    	System.out.println(fileName);
         
     	Gson gson = new GsonBuilder().create();
     	BufferedReader reader = request.getReader();
@@ -47,7 +48,7 @@ public class servletExample extends HttpServlet {
     	
 
         
-        DataUpload finishedUpload = RetailModel.saveRetailData(list);
+        DataUpload finishedUpload = RetailModel.saveRetailData(list, fileName);
         
         if (finishedUpload == null) {
         	response.setStatus(500);

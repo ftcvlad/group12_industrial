@@ -57,12 +57,12 @@ function js_xlsx(file){
 		 	 	self.postMessage({"log": ("converted to json: "+new Date().getTime()), "spinnerMessageUpdate": "saving to database..." });
 		    
 		     
-		    
-		    
 		    	
-		    	
-		    	
-		    	ajax("/group12/upload",  XL_row_object1, function(data) {
+		    	//TODO: urlencode :) spaces + some sql injection? but not in this life
+		    	//+ when inserted not sorted by time
+		    	//+ not bold when inserted
+		    	//will do for now
+		    	ajax("/group12/upload?fileName="+file.name,  XL_row_object1, function(data) {
 				   //do something with the data like:
 				    self.postMessage({"log": ("success: "+new Date().getTime()), "success": data });
 				}, function (data){

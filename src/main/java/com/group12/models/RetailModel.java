@@ -36,7 +36,7 @@ public class RetailModel {
 	}*/
 
 	
-	public static DataUpload saveRetailData(List<YoyoTransaction> data) {
+	public static DataUpload saveRetailData(List<YoyoTransaction> data, String fileName) {
 		Configuration con = new Configuration().configure().addAnnotatedClass(YoyoTransaction.class).addAnnotatedClass(DataUpload.class);
 		SessionFactory sf = con.buildSessionFactory();
 		Session session = sf.openSession();
@@ -54,6 +54,7 @@ public class RetailModel {
 			currentUpload = new DataUpload();
 			currentUpload.setPeriodStart(data.get(0).getDateTime());
 			currentUpload.setPeriodEnd(data.get(data.size()-1).getDateTime());
+			currentUpload.setFileName(fileName);
 			
 			//get last upload 
 			//getLastUpload();

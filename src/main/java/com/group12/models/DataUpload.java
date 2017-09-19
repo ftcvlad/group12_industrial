@@ -15,8 +15,15 @@ public class DataUpload {
 	int id;
 	String periodStart;
 	String periodEnd;
+	String fileName;
 	
 	
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 	public int getId() {
 		return id;
 	}

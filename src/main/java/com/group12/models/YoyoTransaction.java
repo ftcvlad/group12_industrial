@@ -8,10 +8,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.SQLInsert;
+
 import com.google.gson.annotations.SerializedName;
 
 @Entity
 @Table(name = "retail_data")
+//DA JEBANAJA!!!! @SQLInsert(sql="INSERT IGNORE INTO retail_data(dateTime, OutletRef, Customer, TransactionType, Spent, Discount, Total) VALUES(?,?,?,?,?,?,?)")
 public class YoyoTransaction{
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 

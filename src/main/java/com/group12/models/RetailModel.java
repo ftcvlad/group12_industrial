@@ -1,5 +1,7 @@
 package com.group12.models;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -7,6 +9,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+
+import com.group12.utils.DatabaseConnectionManager;
 
 public class RetailModel {
 
@@ -32,64 +36,107 @@ public class RetailModel {
 		}
 
 	}*/
+	
+	
 
 	
-	public static void saveRetailData(List<YoyoTransaction> data) {
-		Configuration con = new Configuration().configure().addAnnotatedClass(YoyoTransaction.class);
-		SessionFactory sf = con.buildSessionFactory();
-		Session session = sf.openSession();
-		Transaction tx = null;
-		try {
-			
-			tx = session.beginTransaction();
-			int i=1;
-			for (YoyoTransaction yt : data) {
-			    session.save(yt);
-			    if ( i % 50 == 0 ) {
-			        session.flush();
-			        session.clear();
-			    }
-			}
-			
-			//TODO: update upload stats
-			
-			tx.commit();
-
-		} catch (HibernateException e) {
-			if (tx!=null) tx.rollback();
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-	}
-	
-	public static void saveUploadHistory() {
-
-		DataUpload du = new DataUpload();
-
-		du.setPeriodEnd("end");
-		du.setPeriodStart("start");
+	public static DataUpload saveRetailData(List<YoyoTransaction> data, String fileName) {
+		SessionFactory sf = DatabaseConnectionManager.getSessionFactory();
 		
-		Configuration con = new Configuration().configure().addAnnotatedClass(DataUpload.class);
-		SessionFactory sf = con.buildSessionFactory();
 		Session session = sf.openSession();
 		Transaction tx = null;
+		DataUpload currentUpload = null;
 		try {
-			//with hibernate always use transactions
+			
+        tx = session.beginTransaction();
+
+
+        //upload data
+        int i=1;
+        for (YoyoTransaction yt : data) {
+            session.save(yt);
+            if ( i % 50 == 0 ) {
+                session.flush();
+                session.clear();
+            }
+        }
+
+        //update upload stats
+        currentUpload = new DataUpload();
+        currentUpload.setPeriodStart(data.get(0).getDateTime());
+        currentUpload.setPeriodEnd(data.get(data.size()-1).getDateTime());
+        currentUpload.setFileName(fileName);
+        session.save(currentUpload);
+      
+        tx.commit();
+
+      } catch (HibernateException e) {
+        if (tx!=null) tx.rollback();
+        e.printStackTrace();
+        return null;
+      } finally {
+        session.close();
+      }
+
+      return currentUpload;
+		
+	}
+	
+	
+	public static List<DataUpload> getAllDataUploads(){
+		
+		SessionFactory sf = DatabaseConnectionManager.getSessionFactory();
+
+		Session session = sf.openSession();
+		Transaction tx = null;//with hibernate transaction even for read :)
+		List<DataUpload> list;
+		try {
+			
 			tx = session.beginTransaction();
-			session.save(du);
+			
+			list = session.createQuery("from DataUpload").list(); 
+			Collections.reverse(list);
+			
+			Collections.sort(list, new Comparator<DataUpload>() {
+			    @Override
+			    public int compare(DataUpload lhs, DataUpload rhs) {
+			        return -(lhs.getPeriodEnd().compareTo(rhs.getPeriodEnd()));
+			    }
+			});
+			
 			tx.commit();
 
 		} catch (HibernateException e) {
 			if (tx!=null) tx.rollback();
 			e.printStackTrace();
+			return null;
 		} finally {
 			session.close();
 		}
-
+		
+		for (DataUpload ul: list) {
+			System.out.println(ul);
+		}
+		
+		return list;
+		
+		
+		
 	}
+	
+	
+	public static boolean checkFileAlreadyUploaded(List<YoyoTransaction> data) {
+		
+		List<DataUpload> allPreviousUploads = getAllDataUploads();
+		String middleTransactionTime = data.get(data.size()/2).getDateTime();
 
-
-
+		for (DataUpload du: allPreviousUploads) {
+			if (du.getPeriodStart().compareTo(middleTransactionTime) < 0 && 
+						du.getPeriodEnd().compareTo(middleTransactionTime) > 0 ) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 }

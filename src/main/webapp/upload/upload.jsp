@@ -13,10 +13,19 @@
 	rel="stylesheet"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
+	
 
-
+<link href="upload/upload.css" rel="stylesheet"	>
+	
 <script lang="javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.11.3/xlsx.core.min.js"></script>
+	
+	<script lang="javascript"
+	src="upload/spinner.min.js"></script>
+	
+	
+
+	
 </head>
 
 <body>
@@ -26,10 +35,74 @@
 	<div class="main_content">
 
 		<div class="panel panel-default">
-			<div class="panel-heading">Panel heading without title</div>
-			<div class="panel-body">
-				<input name="myFile" type="file" id="fileInput">
-				<button type="button" class="btn btn-primary" onClick="uploadData()">Primary</button>
+			
+			<div class="panel-body" >
+			
+				<h2>Upload data</h2>
+				<p>Uploading large files may take a couple of minutes. Stay patient!</p>
+				
+				<div id="uploadControlContainer"  >
+						<div id="messageDiv"></div>
+						<div id="loadingOverlay">
+							
+							<div id="spinnerContainer" ></div>
+						
+							<div id="spinnerTextContainer">Processing...</div>
+							<div id="cancelButtonContainer">
+								<button type="button" class="btn btn-primary" onClick="cancelUpload()">Cancel</button>
+							</div>
+						</div>
+					
+						<div  >
+							<label class="btn btn-default" for="fileInput">
+							    <input id="fileInput" type="file" style="display:none" onchange="$('#upload-file-info').html(this.files[0].name)">
+							    Browse
+							</label>
+							<span class='label label-info' id="upload-file-info">No file chosen</span>
+						</div>
+						
+		
+						
+						<div >
+							<button type="button" class="btn btn-primary" onClick="uploadData()">Upload</button>
+						</div>
+				
+				
+					
+					
+					
+					
+					
+					
+					
+				</div>
+				<br>
+				<h2>Upload history</h2>
+				<br>
+				<div id="uploadStatsContainer">
+					<table class="table">
+					  <thead >
+					    <tr>
+					      
+					      <th>File name</th>
+					      <th>Period start</th>
+					      <th>Period end</th>
+					    </tr>
+					  </thead>
+					  <tbody id="tableBody">
+						<c:forEach var="item" items="${allDataUploads}">
+							 <tr>
+							      <th><c:out value="${item.fileName}"/></th>
+							      <th><c:out value="${item.periodStart}"/></th>
+							      <th><c:out value="${item.periodEnd}"/></th>
+						    </tr>
+						</c:forEach>
+					
+					  </tbody>
+					</table>
+				</div>
+			
+				
 			</div>
 		</div>
 	</div>

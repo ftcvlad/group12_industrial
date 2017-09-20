@@ -1,82 +1,119 @@
 $( document ).ready(function() {
-    
+   
  
-    //$("#uploadBtn").addClass("selected");
-  
+    var spinner = new Spinner({top:'35%', width: 1, length:20, radius:15}).spin();
+  	document.getElementById("spinnerContainer").appendChild(spinner.el);
+  	
+  	
+  	
+  	
+  	
 });
 
 
 
 function uploadData(){
+
 	 var file = document.getElementById("fileInput").files[0];
          
+        
      if (!file) {
-        alert('no file');
+        updateStatusMessage("select file!", false);
      }
      else{
-        
-          	var reader = new FileReader();
-
-		    reader.onload = function(e) {
-		 
-		      var data = e.target.result;
-		      console.log(new Date().getTime());
-		      var workbook = XLSX.read(data, {
-		        type: 'binary'
-		      });
-		      
-		      console.log(new Date().getTime());
-		      //set needed columns and key names
-		      var arr = [];
-		      arr[2] = "C";
-		      arr[5] = "F";
-		      arr[6] = "G";
-		      arr[7] = "I";
-		      arr[8] = "J";
-		      var XL_row_object1 = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], {header:arr, range:1, raw:true})//drop header row and use A,B,C as keys
-		     
-		     
-		      //take dateTime values separately, as i don't know how to specify "raw" property per column
-		      var arr2 = [];
-		      arr2[0] = "A";
-		      var XL_row_object2 = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], {header:arr2, range:1, raw:false})
-		     
-
-		      for (var i=0; i<XL_row_object1.length;i++){
-		      		XL_row_object1[i]["A"] = XL_row_object2[i]["A"];	
-		      }
-		      
-		     console.log(new Date().getTime());
-		    
-		      $.ajax({
-		      
-			      	url: "upload", 
-			      	method: "POST",
-			      	//contentType:"application/json; charset=utf-8",
-			      	cache: false,
-			      	data: {'parsedXls': JSON.stringify(XL_row_object1)},
-			      	success: function(result){
-			        	console.log(result);
-			        	
-			        	//TODO: some message
-			    	},
-			    	error: function(jqXHR, textStatus, errorThrown ){
-			    		alert(errorThrown);
-			    		//TODO: some error message
-			    	}
-		    	
-		    	});
-		
-		    };
-		
-		    reader.onerror = function(ex) {
-		      console.log(ex);
-		      //TODO: some error message
-		    };
-		
-		    reader.readAsBinaryString(file);
+        	
+        	updateSpinnerMessage("reading data...");
+        	updateStatusMessage("", true);
+			document.getElementById("loadingOverlay").style.display = "inherit";
+          	startWorker(file);
          
      }
+
+}
+
+function cancelUpload(){
+	
+	finishWork("Upload cancelled", false);
+}
+
+function stopWorker() { 
+	if (w !== undefined){
+		w.terminate();
+    	w = undefined;
+	}
+    
+}
+
+
+function finishWork(message, success){
+	stopWorker();
+	document.getElementById("loadingOverlay").style.display = "none";
+	updateStatusMessage(message, success);
+
+}
+function updateSpinnerMessage(message){
+	document.getElementById("spinnerTextContainer").innerHTML = message;
+}
+
+function updateStatusMessage(message, success){
+	if (success){
+		document.getElementById("messageDiv").style.color = "green";
+	}
+	else {
+		document.getElementById("messageDiv").style.color = "red";
+	}
+	document.getElementById("messageDiv").innerHTML = message;
+}
+
+var w;
+function startWorker(file) {
+    if(typeof(Worker) !== "undefined") {
+        if(typeof(w) == "undefined") {
+            w = new Worker("upload/parserWorker.js");
+            
+            w.addEventListener('message', function(e) {
+            	
+              if (e.data.log){
+              	 console.log('Worker said: ', e.data.log);
+              }
+             
+              if (e.data.success){
+             
+              	//handle success
+              	finishWork("Uploaded successfully!", true);
+              	addUploadRecord(e.data.success, file.name);
+              }
+              else if (e.data.error){
+              	//handle error
+              	finishWork(e.data.error, false);
+              }
+              
+              if (e.data.spinnerMessageUpdate){
+              	  updateSpinnerMessage(e.data.spinnerMessageUpdate);
+              }
+              
+              
+			  
+			}, false);
+			            
+            w.postMessage(file);
+        }
+    
+    } else {
+    	updateStatusMessage("Sorry! No Web Worker support. Start using a normal browser!", false);
+    }
+}
+
+//TODO: disable cancel button when started to do request
+//TODO: 
+
+
+function addUploadRecord(dataStr, fileName){
+
+	var obj = JSON.parse(dataStr);
+	
+	$('#tableBody').prepend('<tr><td>'+fileName+'</td><td>'+obj.periodStart+'</td><td>'+obj.periodEnd+'</td></tr>');
+
 
 }
 

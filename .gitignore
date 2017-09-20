@@ -25,3 +25,6 @@ obj/
 
 #gradle caching or smth
 .gradle
+
+#database credentials
+config.properties

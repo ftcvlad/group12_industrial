@@ -10,6 +10,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import com.group12.utils.DatabaseConnectionManager;
+
 public class RetailModel {
 
 /*	mysql style
@@ -39,8 +41,8 @@ public class RetailModel {
 
 	
 	public static DataUpload saveRetailData(List<YoyoTransaction> data, String fileName) {
-		Configuration con = new Configuration().configure().addAnnotatedClass(YoyoTransaction.class).addAnnotatedClass(DataUpload.class);
-		SessionFactory sf = con.buildSessionFactory();
+		SessionFactory sf = DatabaseConnectionManager.getSessionFactory();
+		
 		Session session = sf.openSession();
 		Transaction tx = null;
 		DataUpload currentUpload = null;
@@ -85,8 +87,7 @@ public class RetailModel {
 	
 	public static List<DataUpload> getAllDataUploads(){
 		
-		Configuration con = new Configuration().configure().addAnnotatedClass(DataUpload.class);
-		SessionFactory sf = con.buildSessionFactory();
+		SessionFactory sf = DatabaseConnectionManager.getSessionFactory();
 		Session session = sf.openSession();
 		Transaction tx = null;//with hibernate transaction even for read :)
 		List<DataUpload> list;

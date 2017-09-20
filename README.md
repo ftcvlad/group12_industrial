@@ -6,9 +6,8 @@
 
 
 
-# Database
+# Database (update!)
 
-- to use database modify src/main/resources/hibernate.cfg.xml file (if you use Hibernate); You can also modify DatabaseConnectionManager if not
-
+- create a config.properties file in this folder(check config.properties.EXAMPLE). Set database credentials in config.properties. You don't have to set them anywhere else. 
 
 - group12.sql to generate tables

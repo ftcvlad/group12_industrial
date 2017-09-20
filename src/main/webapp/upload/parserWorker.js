@@ -23,20 +23,17 @@ function js_xlsx(file){
 		    
 		      //set needed columns and key names
 		      var arr = [];
+		      arr[0] = "A";
 		      arr[2] = "C";
 		      arr[5] = "F";
 		      arr[6] = "G";
-		      arr[7] = "I";
-		      arr[8] = "J";
-		      var XL_row_object1 = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], {header:arr, range:1, raw:true})//drop header row and use A,B,C as keys
+		      arr[7] = "H";
+		      arr[8] = "I";
+		      arr[9] = "J";
+		      var XL_row_object1 = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], {header:arr, range:1, raw:false})//drop header row and use A,B,C as keys
+		     self.postMessage({"log": ("1: "+new Date().getTime()) });
 		     
-		     
-		      //take dateTime values separately, as i don't know how to specify "raw" property per column
-		      var arr2 = [];
-		      arr2[0] = "A";
-		      var XL_row_object2 = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], {header:arr2, range:1, raw:false})
-		     
-
+			
 			var paymentTypeMap = {
 				"Payment": 1,
 				"Discounted payment": 2,
@@ -45,18 +42,25 @@ function js_xlsx(file){
 				"Reversal": 5
 			
 			};
-
+			self.postMessage({"log": ("2: "+new Date().getTime()) });
 
 		      for (var i=0; i<XL_row_object1.length;i++){
-		      		XL_row_object1[i]["A"] = XL_row_object2[i]["A"];//add date
+		      	
 		      		XL_row_object1[i]["F"] = XL_row_object1[i]["F"].substr(5);//remove 'dusa-'
 		      		XL_row_object1[i]["G"] = paymentTypeMap[XL_row_object1[i]["G"]];//convert payment type to number
 		     		
+		     		XL_row_object1[i]["H"] = XL_row_object1[i]["H"].replace(/\u00A3/g, '');
+		      		XL_row_object1[i]["I"] = XL_row_object1[i]["I"].replace(/\u00A3/g, '');
+		      		XL_row_object1[i]["J"] = XL_row_object1[i]["J"].replace(/\u00A3/g, '');
+		      	
 		      }
-		      
+		     // self.postMessage({"log": XL_row_object1 });
+			  //reading--read 183sec
+		     //read data -- converted to json (308sec) (137sec)
+			 //convert to json -- saved 194 sec
 		
 		 	  
-		 	 	self.postMessage({"log": ("converted to json: "+new Date().getTime()), "spinnerMessageUpdate": "saving to database..." });
+		 	 	self.postMessage({"log": ("converted to json 3: "+new Date().getTime()), "spinnerMessageUpdate": "saving to database..." });
 		    
 		     
 		    	

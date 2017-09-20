@@ -14,7 +14,7 @@ import java.util.Properties;
 
 
 /**
- * Application configuration.
+ * Application configuration. Taken from Agile module!
  *
  * @author Robert T.
  */

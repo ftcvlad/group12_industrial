@@ -1,10 +1,46 @@
 
+buildscript {
+    dependencies {
+        classpath 'mysql:mysql-connector-java:6.0.6'
+    }
+}
 
 plugins {
     id 'java'
     id 'war'  
     id "org.akhikhl.gretty" version "2.0.0"
+    id "org.flywaydb.flyway" version "4.2.0"
 }
+
+
+
+
+flyway {
+
+	Properties props = new Properties()
+	def filePath = "config.properties"
+    if (file(filePath).exists()) {
+        props.load(new FileInputStream(filePath))
+    }
+
+    def DB_HOST = props.getProperty("DATABASE_HOST", "localhost")
+    def DB_PORT = props.getProperty("DATABASE_PORT", "3306")
+    def DB_SCHEMA = props.getProperty("DATABASE_SCHEMA", "quizsystem")
+    def DB_USER = props.getProperty("DATABASE_USER")
+    def DB_PASSWORD = props.getProperty("DATABASE_PASSWORD")
+
+    if (DB_USER == null || DB_PASSWORD == null) {
+        throw new RuntimeException("No database user or password in $filePath - fix that and re-run.")
+    }
+    
+    url = "jdbc:mysql://$DB_HOST:$DB_PORT/$DB_SCHEMA"
+    user = "$DB_USER"
+    password = "$DB_PASSWORD"
+    schemas = ["$DB_SCHEMA"]
+}
+
+
+
 
 gretty {
   	httpPort = 8080

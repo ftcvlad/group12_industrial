@@ -24,9 +24,10 @@ CREATE TABLE IF NOT EXISTS `group12_industrial`.`data_uploads` (
   `id` SMALLINT(6) NOT NULL AUTO_INCREMENT,
   `periodStart` VARCHAR(25) NOT NULL,
   `periodEnd` VARCHAR(25) NOT NULL,
+  `fileName` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 7
+AUTO_INCREMENT = 17
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -39,13 +40,12 @@ CREATE TABLE IF NOT EXISTS `group12_industrial`.`retail_data` (
   `OutletRef` SMALLINT(5) UNSIGNED NOT NULL,
   `Customer` VARCHAR(15) NOT NULL,
   `TransactionType` VARCHAR(30) NOT NULL,
-  `Spent` DECIMAL(4,2) NOT NULL,
-  `Discount` DECIMAL(4,2) NOT NULL,
-  `Total` DECIMAL(4,2) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `time_user_unique` (`dateTime` ASC, `Customer` ASC, `TransactionType` ASC))
+  `Spent` DECIMAL(5,2) NOT NULL,
+  `Discount` DECIMAL(5,2) NOT NULL,
+  `Total` DECIMAL(5,2) NOT NULL,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 34
+AUTO_INCREMENT = 307570
 DEFAULT CHARACTER SET = utf8;
 
 

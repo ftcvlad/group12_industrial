@@ -12,7 +12,6 @@ import org.hibernate.annotations.SQLInsert;
 
 import com.google.gson.annotations.SerializedName;
 
-
 @Entity
 @Table(name = "retail_data")
 //DA JEBANAJA!!!! @SQLInsert(sql="INSERT IGNORE INTO retail_data(dateTime, OutletRef, Customer, TransactionType, Spent, Discount, Total) VALUES(?,?,?,?,?,?,?)")
@@ -30,16 +29,12 @@ public class YoyoTransaction{
 	@SerializedName("J") @Column(name = "Total") float total;
 	
 	
-	
-	
 	public String getDateTime() {
 		return dateTime;
 	}
 	public void setDateTime(String dateTime) {
 		this.dateTime = dateTime;
 	}
-	
-	
 	
 	public int getId() {
 		return id;

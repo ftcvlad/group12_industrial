@@ -48,39 +48,37 @@ public class RetailModel {
 		DataUpload currentUpload = null;
 		try {
 			
-			tx = session.beginTransaction();
+        tx = session.beginTransaction();
 
 
-			//upload data
-			int i=1;
-			for (YoyoTransaction yt : data) {
-			    session.save(yt);
-			    if ( i % 50 == 0 ) {
-			        session.flush();
-			        session.clear();
-			    }
-			}
-			
-			//update upload stats
-			currentUpload = new DataUpload();
-			currentUpload.setPeriodStart(data.get(0).getDateTime());
-			currentUpload.setPeriodEnd(data.get(data.size()-1).getDateTime());
-			currentUpload.setFileName(fileName);
-			session.save(currentUpload);
-			
-			tx.commit();
+        //upload data
+        int i=1;
+        for (YoyoTransaction yt : data) {
+            session.save(yt);
+            if ( i % 50 == 0 ) {
+                session.flush();
+                session.clear();
+            }
+        }
 
-		} catch (HibernateException e) {
-			if (tx!=null) tx.rollback();
-			e.printStackTrace();
-			return null;
-		} finally {
-			session.close();
-		}
-		
-		return currentUpload;
-		
-		
+        //update upload stats
+        currentUpload = new DataUpload();
+        currentUpload.setPeriodStart(data.get(0).getDateTime());
+        currentUpload.setPeriodEnd(data.get(data.size()-1).getDateTime());
+        currentUpload.setFileName(fileName);
+        session.save(currentUpload);
+      
+        tx.commit();
+
+      } catch (HibernateException e) {
+        if (tx!=null) tx.rollback();
+        e.printStackTrace();
+        return null;
+      } finally {
+        session.close();
+      }
+
+      return currentUpload;
 		
 	}
 	
@@ -88,6 +86,7 @@ public class RetailModel {
 	public static List<DataUpload> getAllDataUploads(){
 		
 		SessionFactory sf = DatabaseConnectionManager.getSessionFactory();
+
 		Session session = sf.openSession();
 		Transaction tx = null;//with hibernate transaction even for read :)
 		List<DataUpload> list;
@@ -139,8 +138,5 @@ public class RetailModel {
 		}
 		return false;
 	}
-
-
-
 
 }

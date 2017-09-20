@@ -3,13 +3,11 @@
 <%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 
-
-
 <html>
 
 <head>
 <title>DUSA Data App</title>
-
+<link rel="stylesheet" href="styles.css">
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	rel="stylesheet"

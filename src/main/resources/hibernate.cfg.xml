@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-configuration SYSTEM "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd" PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN">
-
--<hibernate-configuration>
--	<session-factory>
-		<property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-		<property name="hibernate.connection.password">5402.ip17t.2045</property>
-		<property name="hibernate.connection.url">jdbc:mysql://silva.computing.dundee.ac.uk/ip17team12db</property>
-		<property name="hibernate.connection.username">ip17team12</property>
-		<property name="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
-		<property name="hibernate.jdbc.batch_size">50</property>
-	</session-factory>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.password">malolg</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/group12_industrial</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
+        <property name="hibernate.jdbc.batch_size">50</property>
+    </session-factory>
 </hibernate-configuration>

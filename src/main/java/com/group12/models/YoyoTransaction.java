@@ -25,6 +25,10 @@ public class YoyoTransaction{
 		this.sumTotal = st;
 	}
 	
+	public YoyoTransaction(int ct) {
+		this.countTotal = ct;
+	}
+	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
 	int id;
 	
@@ -40,6 +44,15 @@ public class YoyoTransaction{
 	@Formula(value = "SUM(total)")
 	float sumTotal;
 	
+	@Formula(value = "COUNT(total)")
+	int countTotal;
+	
+	public int getCountTotal() {
+		return countTotal;
+	}
+	public void setCountTotal(int countTotal) {
+		this.countTotal = countTotal;
+	}
 	public float getSumTotal() {
 		return sumTotal;
 	}
@@ -104,7 +117,7 @@ public class YoyoTransaction{
 		}
 		
 		
-		return str+outletRef+" "+ customer+" "+transactionType+" "+spent+" "+discount+" "+total+ " "+id+" "+sumTotal;
+		return str+outletRef+" "+ customer+" "+transactionType+" "+spent+" "+discount+" "+total+ " "+id+" "+sumTotal+" "+countTotal;
 	
 	}
 	

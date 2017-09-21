@@ -1,11 +1,11 @@
 package com.group12.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Order;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.HibernateException;
@@ -19,7 +19,7 @@ public class GraphModel {
 
 
 
-	public static List<YoyoTransaction> getGraph9Data() {
+	public static List<YoyoTransaction> getGraph9Data(GraphFilters filters) {
 		SessionFactory sf = DatabaseConnectionManager.getSessionFactory();
 
 		Session session = sf.openSession();
@@ -35,14 +35,26 @@ public class GraphModel {
 			
 			Root<YoyoTransaction> root = cQuery.from(YoyoTransaction.class); 
 			
-			Order sortOrder = builder.desc(root.get("sumTotal"));
+			Order sortOrder = null;
 			
-			cQuery.multiselect(root.get("sumTotal"));
-			cQuery.orderBy(sortOrder);
+			if (filters.getGraphType() == GraphFilters.TOTAL_TRANSACTIONS) {
+				cQuery.multiselect(root.get("countTotal"));
+				sortOrder = builder.desc(root.get("countTotal"));
+			}
+			else if (filters.getGraphType() == GraphFilters.TOTAL_SPENDING) {
+				cQuery.multiselect(root.get("sumTotal"));
+				sortOrder = builder.desc(root.get("sumTotal"));
+			}
+			else {
+				//other?
+			}
 			
+			Predicate predicate = root.get("outletRef").in(filters.getLocations());
+			cQuery.where(predicate);
 			cQuery.groupBy(root.get("customer"));
+			cQuery.orderBy(sortOrder);
 		
-			///cQuery.multiselect(root.get("customer"));
+			
 			
 
 			list = session.createQuery(cQuery).getResultList();
@@ -50,9 +62,6 @@ public class GraphModel {
 			
 			
 			//cQuery.select(root.get("shippingAddress").<String>get("state"));
-			
-			
-
 			//List<YoyoTransaction> list = session.createCriteria(YoyoTransaction.class).list();
 
 			tx.commit();

@@ -1,38 +1,40 @@
 
 package com.group12.models;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.SQLInsert;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.google.gson.annotations.SerializedName;
 
 @Entity
 @Table(name = "retail_data")
-//DA JEBANAJA!!!! @SQLInsert(sql="INSERT IGNORE INTO retail_data(dateTime, OutletRef, Customer, TransactionType, Spent, Discount, Total) VALUES(?,?,?,?,?,?,?)")
 public class YoyoTransaction{
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
 	int id;
 	
-	@SerializedName("A") @Column(name = "DateTime") String dateTime;
+	
+	@SerializedName("A") @Column(name = "DateTime") @Temporal(TemporalType.TIMESTAMP) private Date dateTime;
 	@SerializedName("C") @Column(name = "OutletRef") int outletRef;
-	@SerializedName("F") @Column(name = "Customer") String customer;
-	@SerializedName("G") @Column(name = "TransactionType") String transactionType;
+	@SerializedName("F") @Column(name = "Customer") int customer;
+	@SerializedName("G") @Column(name = "TransactionType") int transactionType;
 	@SerializedName("H") @Column(name = "Spent") float spent;
 	@SerializedName("I") @Column(name = "Discount") float discount;
 	@SerializedName("J") @Column(name = "Total") float total;
 	
 	
-	public String getDateTime() {
+	public Date getDateTime() {
 		return dateTime;
 	}
-	public void setDateTime(String dateTime) {
+	public void setDateTime(Date dateTime) {
 		this.dateTime = dateTime;
 	}
 	
@@ -48,16 +50,16 @@ public class YoyoTransaction{
 	public void setOutletRef(int outletRef) {
 		this.outletRef = outletRef;
 	}
-	public String getCustomer() {
+	public int getCustomer() {
 		return customer;
 	}
-	public void setCustomer(String customer) {
+	public void setCustomer(int customer) {
 		this.customer = customer;
 	}
-	public String getTransactionType() {
+	public int getTransactionType() {
 		return transactionType;
 	}
-	public void setTransactionType(String transactionType) {
+	public void setTransactionType(int transactionType) {
 		this.transactionType = transactionType;
 	}
 	public float getSpent() {
@@ -80,7 +82,7 @@ public class YoyoTransaction{
 	}
 	@Override 
 	public String toString() {
-		return dateTime+ " "+outletRef+" "+ customer+" "+transactionType+" "+spent+" "+discount+" "+total+ " "+id;
+		return dateTime.toString()+ " "+outletRef+" "+ customer+" "+transactionType+" "+spent+" "+discount+" "+total+ " "+id;
 	
 	}
 	

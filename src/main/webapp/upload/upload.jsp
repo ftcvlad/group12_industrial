@@ -1,6 +1,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 
 <html>
@@ -90,11 +91,14 @@
 					    </tr>
 					  </thead>
 					  <tbody id="tableBody">
+					    
 						<c:forEach var="item" items="${allDataUploads}">
 							 <tr>
+							 	
+							 
 							      <th><c:out value="${item.fileName}"/></th>
-							      <th><c:out value="${item.periodStart}"/></th>
-							      <th><c:out value="${item.periodEnd}"/></th>
+							      <th><fmt:formatDate value="${item.periodStart}" pattern="yyyy-MM-dd HH:mm:ss" /></th>
+							      <th><fmt:formatDate value="${item.periodEnd}" pattern="yyyy-MM-dd HH:mm:ss" /></th>
 						    </tr>
 						</c:forEach>
 					

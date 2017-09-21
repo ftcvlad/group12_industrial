@@ -3,6 +3,7 @@ package com.group12.controllers;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -18,76 +19,85 @@ import com.group12.models.DataUpload;
 import com.group12.models.RetailModel;
 import com.group12.models.YoyoTransaction;
 
-
-@WebServlet(name = "ServletExample", urlPatterns = {"upload"}, loadOnStartup = 1) 
+@WebServlet(name = "ServletExample", urlPatterns = { "upload" }, loadOnStartup = 1)
 public class servletExample extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-    	  List<DataUpload> allUploads = RetailModel.getAllDataUploads();
-      
-        request.setAttribute("page", "upload");
-        request.setAttribute("allDataUploads", allUploads);
-        request.getRequestDispatcher("upload/upload.jsp").forward(request, response); 
-    }
+		List<DataUpload> allUploads = RetailModel.getAllDataUploads();
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-    	  String fileName = request.getParameter("fileName");
-    	
-        Gson gson = new GsonBuilder().create();
-        BufferedReader reader = request.getReader();
-        List<YoyoTransaction> list = gson.fromJson(reader, new TypeToken<List<YoyoTransaction>>(){}.getType());
-    	
+		request.setAttribute("page", "upload");
+		request.setAttribute("allDataUploads", allUploads);
+		request.getRequestDispatcher("upload/upload.jsp").forward(request, response);
+	}
 
-        boolean wasUploaded = RetailModel.checkFileAlreadyUploaded(list);
-        if (wasUploaded) {
-            response.setStatus(400);
-        }
-        else {
-            DataUpload finishedUpload = RetailModel.saveRetailData(list, fileName);
+	
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-            if (finishedUpload == null) {
-              response.setStatus(500);
-            }
-            else {
-              response.setContentType("application/json");
-              PrintWriter out = response.getWriter();
-              out.print("{\"periodStart\":"+"\""+finishedUpload.getPeriodStart()+"\""+",\"periodEnd\":"+"\""+finishedUpload.getPeriodEnd()+"\""+"}");
-              out.flush();
-            }
-        }
+		String fileName = request.getParameter("fileName");
 
+		Gson gson = new GsonBuilder().setDateFormat("dd/mm/yyyy hh:mm:ss").create();
+		BufferedReader reader = request.getReader();
+		List<YoyoTransaction> list = gson.fromJson(reader, new TypeToken<List<YoyoTransaction>>() {
+		}.getType());
 
-    }
-    
-    
-    /*private class YoyoTransactionDeserialiser implements JsonDeserializer<YoyoTransaction> {
+		boolean wasUploaded = RetailModel.checkFileAlreadyUploaded(list);
+		if (wasUploaded) {
+			response.setStatus(400);
+		} else {
+			DataUpload finishedUpload = RetailModel.saveRetailData(list, fileName);
 
-    	@Override
-    	public YoyoTransaction deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException {
+			if (finishedUpload == null) {
+				response.setStatus(500);
+			} else {
+				response.setContentType("application/json");
+				PrintWriter out = response.getWriter();
+				
+				
+				SimpleDateFormat dt1 = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+				String start = dt1.format(finishedUpload.getPeriodStart());
+				String end = dt1.format(finishedUpload.getPeriodEnd());
+				
+				
+				
+				out.print("{\"periodStart\":" + "\"" + start + "\"" + ",\"periodEnd\":" + "\""
+						+ end + "\"" + "}");
+				out.flush();
+			}
+		}
 
-    	    JsonObject jobject = json.getAsJsonObject();
+	}
 
-    	    YoyoTransaction yyt = new YoyoTransaction();
-    	    yyt.setDateTime(jobject.get("A").getAsString());
-    	    yyt.setOutletRef(jobject.get("C").getAsInt());
-    	    yyt.setCustomer(jobject.get("F").getAsString());
-    	    
-    	    //map to int?
-    	    yyt.setTransactionType(jobject.get("G").getAsString());
-    	    
-    	  
-    	    yyt.setSpent(jobject.get("H").getAsFloat());
-    	    yyt.setSpent(jobject.get("I").getAsFloat());
-    	    yyt.setSpent(jobject.get("J").getAsFloat());
-    	   
-    	   
-    	    
-    	    
-    	    return yyt;
-    	    
-    	  
-    	}
-    }*/
-    
+	/*
+	 * private class YoyoTransactionDeserialiser implements
+	 * JsonDeserializer<YoyoTransaction> {
+	 * 
+	 * @Override public YoyoTransaction deserialize(JsonElement json, Type type,
+	 * JsonDeserializationContext context) throws JsonParseException {
+	 * 
+	 * JsonObject jobject = json.getAsJsonObject();
+	 * 
+	 * YoyoTransaction yyt = new YoyoTransaction();
+	 * yyt.setDateTime(jobject.get("A").getAsString());
+	 * yyt.setOutletRef(jobject.get("C").getAsInt());
+	 * yyt.setCustomer(jobject.get("F").getAsString());
+	 * 
+	 * //map to int? yyt.setTransactionType(jobject.get("G").getAsString());
+	 * 
+	 * 
+	 * yyt.setSpent(jobject.get("H").getAsFloat());
+	 * yyt.setSpent(jobject.get("I").getAsFloat());
+	 * yyt.setSpent(jobject.get("J").getAsFloat());
+	 * 
+	 * 
+	 * 
+	 * 
+	 * return yyt;
+	 * 
+	 * 
+	 * } }
+	 */
+
 }

@@ -68,14 +68,6 @@
 							<button type="button" class="btn btn-primary" onClick="uploadData()">Upload</button>
 						</div>
 				
-				
-					
-					
-					
-					
-					
-					
-					
 				</div>
 				<br>
 				<h2>Upload history</h2>

@@ -92,9 +92,7 @@ public class RetailModel {
 			Collections.sort(list, new Comparator<DataUpload>() {
 				@Override
 				public int compare(DataUpload first, DataUpload second) {
-					
 					return first.getPeriodEnd().after(second.getPeriodEnd()) ? -1 : 1;
-					
 				}
 			});
 

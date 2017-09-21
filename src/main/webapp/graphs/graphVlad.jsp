@@ -8,6 +8,7 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script type="text/javascript" src="graphs/graphVlad.js"></script>
 
 <head>
     <title>DUSA Data App</title>
@@ -16,7 +17,7 @@
 
 <body>
 
-    <%@ include file="includes/sidebar.jsp" %>
+    <%@ include file="../includes/sidebar.jsp"%>
 
     <div class="main_content">
     
@@ -29,6 +30,6 @@
 		
     </div>
 	
-
+	
 </body>
 </html>

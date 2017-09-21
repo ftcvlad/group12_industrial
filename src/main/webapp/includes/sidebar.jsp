@@ -30,4 +30,11 @@
                 <image class="module_button_image" src="images/settings.png"></image>
             </div>
         </button>
+        
+        <button onclick="location.href='graphVlad'" class="module_button">
+            Graph
+            <div>
+                <image class="module_button_image <c:if test="${page == 'graphs1'}">selected</c:if>"></image>
+            </div>
+        </button>
     </div>

@@ -1,0 +1,28 @@
+.filtersContainer{
+	display: flex;
+	flex-wrap: wrap;
+	
+    background: bisque;
+    align-items: flex-end;
+}
+
+.filterItem {
+	margin:15px;
+}
+
+#selectpickerLocationGraph9{
+	
+}
+
+.select-container{
+	max-width:150px;
+}
+
+.filterButton{
+	width:150px;
+}
+
+#graph9{
+	height:400px;
+	width:100%;
+}

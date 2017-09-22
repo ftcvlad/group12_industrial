@@ -20,13 +20,10 @@
 	rel="stylesheet"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 
-<!-- Latest compiled and minified JavaScript -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<link rel="stylesheet" href="graphs/graphVlad.css">
+<link rel="stylesheet"	href="libs/bootstrap-select.min.css">
+<script src="libs/bootstrap-select.min.js"></script>
 
 </head>
 
@@ -41,36 +38,51 @@
 			<div class="panel-body">
 				<div id="graph9"></div>
 
-				<div id="filters9">
+				<div id="filters9" class="filtersContainer" style="display: none">
 
+					<div class="filterItem" >
+					    <label for="selectpickerLocationGraph9">Location</label>
+					    <div class="input-group">
+						    <select id="selectpickerLocationGraph9"  multiple>
+								<option data-outlet="235">DOJ Catering</option>
+								<option data-outlet="236">Air Bar </option>
+								<option data-outlet="237">Floor Five</option>
+								<option data-outlet="238">Library</option>
+								<option data-outlet="239">Spare</option>
+								
+								<option data-outlet="240">Food on Four</option>
+								<option data-outlet="241">Liar bar </option>
+								<option data-outlet="242">Mono</option>
+								<option data-outlet="243">Ents</option>
+								<option data-outlet="343">Remote Campus Shop</option>
+								
+								<option data-outlet="456">DUSA The Union Marketplace</option>
+								<option data-outlet="2676">Premier Shop</option>
+								<option data-outlet="2677">College Shop</option>
+								<option data-outlet="2679">Ninewells Shop</option>
+							</select>
+					    </div>
+					    
 
-					<select id="selectpickerLocationGraph9" multiple>
-						<option data-outlet="235">DOJ Catering</option>
-						<option data-outlet="236">Air Bar </option>
-						<option data-outlet="237">Floor Five</option>
-						<option data-outlet="238">Library</option>
-						<option data-outlet="239">Spare</option>
-						
-						<option data-outlet="240">Food on Four</option>
-						<option data-outlet="241">Liar bar </option>
-						<option data-outlet="242">Mono</option>
-						<option data-outlet="243">Ents</option>
-						<option data-outlet="343">Remote Campus Shop</option>
-						
-						<option data-outlet="456">DUSA The Union Marketplace</option>
-						<option data-outlet="2676">Premier Shop</option>
-						<option data-outlet="2677">College Shop</option>
-						<option data-outlet="2679">Ninewells Shop</option>
-					</select>
-					
-					<select id="transVsSpendingGraph9">
-						<option data-yaxistype="1">Total spending</option>
-						<option data-yaxistype="2">Total transactions </option>
-					</select>
-					
-					<div >
-						<button type="button" class="btn btn-primary" onClick="requestData()">Filter</button>
 					</div>
+					
+					<div class="filterItem">
+					    <label for="transVsSpendingGraph9">Type</label>
+					    <div class="input-group">
+							<select id="transVsSpendingGraph9">
+								<option data-yaxistype="1">Total spending</option>
+								<option data-yaxistype="2">Total transactions </option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="filterItem">
+						<button type="button" class="btn btn-primary btn-sm filterButton" onClick="requestData()">Filter</button>
+					</div>
+					
+					
+					
+			
 
 				</div>
 

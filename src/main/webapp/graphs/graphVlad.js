@@ -21,7 +21,7 @@ var yAxisTypes = {
 	"totalTransactions": 2
 };
 
-var bandWidth = 20;
+var percentileStep = 10;
 var allLocations = [235, 236, 237, 238, 239, 240, 241, 242, 243, 343, 456, 2676, 2677, 2679];
 var fetching = false;
 
@@ -33,18 +33,15 @@ var filters = {
 
 $( document ).ready(function() {
    
-   
-    
-    
-    //LOCATIONS selector
+	//LOCATIONS selector
     $('#selectpickerLocationGraph9').selectpicker({
 	  size: 14,
-	  actionsBox: true
+	  actionsBox: true,
+	  width: "150px"
+	 
 	});
-	
+	$('#selectpickerLocationGraph9').addClass('btn-group-sm').addClass('select-container').selectpicker('setStyle');
 	$('#selectpickerLocationGraph9').selectpicker('selectAll');
-	
-	
 	$('#selectpickerLocationGraph9').on('changed.bs.select', function ( event, clickedIndex, newValue, oldValue) {
 			 	
 	 	if (clickedIndex === undefined){//select/deselect all
@@ -61,18 +58,22 @@ $( document ).ready(function() {
 	
 	
     $('#transVsSpendingGraph9').selectpicker({
-	  size: 2
+	  size: 2,
+	  width: "150px"
 	});
-	
+	$('#transVsSpendingGraph9').addClass('btn-group-sm').addClass('select-container').selectpicker('setStyle');
 	$('#transVsSpendingGraph9').on('changed.bs.select', function ( event, clickedIndex, newValue, oldValue) {
-
  		filters.yAxisType = $(event.target[clickedIndex]).data("yaxistype");
 	});
+    
+    $('#filters9').show();
+    
     
     requestData();
   	
 });	
   
+
 
   
 function requestData(){
@@ -102,16 +103,33 @@ function requestData(){
   function plotGraph9(data, yAxisType){
   
   	var yAxisTitle = (yAxisType === yAxisTypes.totalSpending) ? "Total Spending" : "Total transactions";
+  	var xAxisTitle = (yAxisType === yAxisTypes.totalSpending) ? "Percentiles (% of customers spending less)" : "Percentiles (% of customers having fewer transactions)";
+  	var title = (yAxisType === yAxisTypes.totalSpending) ? "Spending distribution" : "Transaction distribution";
+  
+  
+  	var categories = [];
+  	
+  	var a = 100;
+	do{
+	   a-= percentileStep;
+	   categories.push(a+'%')
+	} while (a>0);
+  	
+  	
+  	
   
   	 var myChart = Highcharts.chart('graph9', {
         chart: {
             type: 'column'
         },
         title: {
-            text: 'Fruit Consumption'
+            text: title
         },
         xAxis: {
-            categories: ['100% - 90%', '90%-80%', '80%-70%']
+            categories: categories,
+            title: {
+            	text: xAxisTitle
+            }
         },
         yAxis: {
             title: {
@@ -119,7 +137,7 @@ function requestData(){
             }
         },
         series: [{
-            name: 'Jane',
+             showInLegend: false,  
             data: data
         }]
     });

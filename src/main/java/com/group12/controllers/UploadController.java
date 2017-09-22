@@ -19,8 +19,8 @@ import com.group12.models.DataUpload;
 import com.group12.models.RetailModel;
 import com.group12.models.YoyoTransaction;
 
-@WebServlet(name = "ServletExample", urlPatterns = { "upload" }, loadOnStartup = 1)
-public class servletExample extends HttpServlet {
+@WebServlet(name = "UploadController", urlPatterns = { "upload" })
+public class UploadController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 

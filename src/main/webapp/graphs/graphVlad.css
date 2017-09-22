@@ -1,0 +1,59 @@
+.filtersContainer{
+	display: flex;
+	flex-wrap: wrap;
+	
+    background: bisque;
+    align-items: flex-end;
+}
+
+.filterItem {
+	margin:15px;
+}
+
+#selectpickerLocationGraph9{
+	
+}
+
+.select-container{
+	max-width:150px;
+}
+
+.filterButton{
+	width:150px;
+}
+
+#graph9{
+	height:400px;
+	width:100%;
+	position: relative;
+}
+
+#loadingOverlay{
+	position:absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    background: rgba(0, 0, 0, 0.62);
+    
+    //display: none;
+	
+}
+
+#spinnerContainer div {
+    background: white !important;
+}
+
+#spinnerTextContainer{
+	margin-bottom: 100px;
+}
+
+#spinnerContainer{
+	margin-bottom:auto;
+	
+}

@@ -70,7 +70,7 @@ button {
 }
 
 /* include in module_button class, to button to indicate it's selected */
-.selected{
+.selectedMenuItem {
     background-color: #3B434C;
     color: #3286D8;
     cursor: pointer;

@@ -12,11 +12,20 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Formula;
+
 import com.google.gson.annotations.SerializedName;
 
 @Entity
 @Table(name = "retail_data")
 public class YoyoTransaction{
+	
+	public YoyoTransaction() {}
+	
+	public YoyoTransaction(int ct, float st) {
+		this.countTotal = ct;
+		this.sumTotal = st;
+	}
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
 	int id;
@@ -30,7 +39,24 @@ public class YoyoTransaction{
 	@SerializedName("I") @Column(name = "Discount") float discount;
 	@SerializedName("J") @Column(name = "Total") float total;
 	
+	@Formula(value = "SUM(total)")
+	float sumTotal;
 	
+	@Formula(value = "COUNT(total)")
+	int countTotal;
+	
+	public int getCountTotal() {
+		return countTotal;
+	}
+	public void setCountTotal(int countTotal) {
+		this.countTotal = countTotal;
+	}
+	public float getSumTotal() {
+		return sumTotal;
+	}
+	public void setSumTotal(float sumTotal) {
+		this.sumTotal = sumTotal;
+	}
 	public Date getDateTime() {
 		return dateTime;
 	}
@@ -82,7 +108,14 @@ public class YoyoTransaction{
 	}
 	@Override 
 	public String toString() {
-		return dateTime.toString()+ " "+outletRef+" "+ customer+" "+transactionType+" "+spent+" "+discount+" "+total+ " "+id;
+		
+		String str = "";
+		if (dateTime != null) {
+			str+= dateTime.toString()+" ";
+		}
+		
+		
+		return str+outletRef+" "+ customer+" "+transactionType+" "+spent+" "+discount+" "+total+ " "+id+" "+sumTotal+" "+countTotal;
 	
 	}
 	

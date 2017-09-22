@@ -70,7 +70,7 @@ public class GraphController extends HttpServlet {
 		//max 5 people error
 		List<Float> bucketTotals = new ArrayList<Float>();
 		
-		int bucketSizeInPercent = 20;
+		int bucketSizeInPercent = 10;
 		int customersInBucket = Math.max((int) Math.round(data.size()*(bucketSizeInPercent/100.0)), 1);
 		
 		int numberOfBucketsToFill = 100/ bucketSizeInPercent;
@@ -78,7 +78,7 @@ public class GraphController extends HttpServlet {
 		float nextBucketValue = 0;
 		boolean hasNonEmptyBuckets = false;
 		for (int i=0; i<data.size(); i++) {
-			if (filters.getGraphType() == GraphFilters.TOTAL_SPENDING) {
+			if (filters.getYAxisType() == GraphFilters.TOTAL_SPENDING) {
 				nextBucketValue += data.get(i).getSumTotal();
 			}
 			else {

@@ -37,11 +37,11 @@ public class GraphModel {
 			
 			Order sortOrder = null;
 			
-			if (filters.getGraphType() == GraphFilters.TOTAL_TRANSACTIONS) {
+			if (filters.getYAxisType() == GraphFilters.TOTAL_TRANSACTIONS) {
 				cQuery.multiselect(root.get("countTotal"));
 				sortOrder = builder.desc(root.get("countTotal"));
 			}
-			else if (filters.getGraphType() == GraphFilters.TOTAL_SPENDING) {
+			else if (filters.getYAxisType() == GraphFilters.TOTAL_SPENDING) {
 				cQuery.multiselect(root.get("sumTotal"));
 				sortOrder = builder.desc(root.get("sumTotal"));
 			}

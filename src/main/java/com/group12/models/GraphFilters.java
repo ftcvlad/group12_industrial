@@ -10,7 +10,7 @@ public class GraphFilters{
 	public static final int TOTAL_TRANSACTIONS = 2;
 	
 	@SerializedName("locations") List<Integer> locations = null;
-	@SerializedName("graphType") int graphType; //# of transactions VS totalSpending
+	@SerializedName("yAxisType") int yAxisType; //# of transactions VS totalSpending
 	//dates
 	//???
 	
@@ -20,11 +20,11 @@ public class GraphFilters{
 	public void setLocations(List<Integer> locations) {
 		this.locations = locations;
 	}
-	public int getGraphType() {
-		return graphType;
+	public int getYAxisType() {
+		return yAxisType;
 	}
-	public void setGraphType(int graphType) {
-		this.graphType = graphType;
+	public void setYAxisType(int yAxisType) {
+		this.yAxisType = yAxisType;
 	}
 	
 	

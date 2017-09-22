@@ -3,7 +3,7 @@
     <div id="sidebar">
         <image id="DusaLogo" src="images/DLOG.png"></images>
   
-       	<button onclick="location.href='upload'" class="module_button <c:if test="${page == 'upload'}">selected</c:if>" id="uploadBtn">
+       	<button onclick="location.href='upload'" class="module_button <c:if test="${page == 'upload'}">selectedMenuItem</c:if>" id="uploadBtn">
            Upload
            <div>
                <image class="module_button_image" src="images/upload.png"></image>
@@ -34,7 +34,7 @@
         <button onclick="location.href='graphVlad'" class="module_button">
             Graph
             <div>
-                <image class="module_button_image <c:if test="${page == 'graphs1'}">selected</c:if>"></image>
+                <image class="module_button_image <c:if test="${page == 'graphs1'}">selectedMenuItem</c:if>"></image>
             </div>
         </button>
     </div>

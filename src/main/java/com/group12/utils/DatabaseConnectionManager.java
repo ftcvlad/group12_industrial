@@ -9,8 +9,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import com.group12.ConfigurationLoader;
-import com.group12.models.DataUpload;
-import com.group12.models.YoyoTransaction;
+import com.group12.beans.DataUpload;
+import com.group12.beans.YoyoTransaction;
 
 //import com.mysql.jdbc.Driver;
 

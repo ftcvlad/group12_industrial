@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.group12.models.GraphFilters;
+import com.group12.beans.GraphFilters;
 import com.group12.models.GraphModel;
-import com.group12.models.YoyoTransaction;
+import com.group12.beans.YoyoTransaction;
 
 
 

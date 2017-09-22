@@ -14,6 +14,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.group12.utils.DatabaseConnectionManager;
+import com.group12.beans.YoyoTransaction;
+import com.group12.beans.GraphFilters;
 
 public class GraphModel {
 

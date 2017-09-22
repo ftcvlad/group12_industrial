@@ -1,4 +1,4 @@
-package com.group12.models;
+package com.group12.beans;
 
 import java.util.Date;
 

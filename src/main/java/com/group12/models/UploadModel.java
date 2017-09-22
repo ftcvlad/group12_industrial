@@ -12,7 +12,10 @@ import org.hibernate.Transaction;
 
 import com.group12.utils.DatabaseConnectionManager;
 
-public class RetailModel {
+import com.group12.beans.DataUpload;
+import com.group12.beans.YoyoTransaction;
+
+public class UploadModel {
 
 	/*
 	 * mysql style public static void saveRetailData() {

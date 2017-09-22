@@ -15,16 +15,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.group12.models.DataUpload;
-import com.group12.models.RetailModel;
-import com.group12.models.YoyoTransaction;
+import com.group12.beans.DataUpload;
+import com.group12.models.UploadModel;
+import com.group12.beans.YoyoTransaction;
 
 @WebServlet(name = "UploadController", urlPatterns = { "upload" })
 public class UploadController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		List<DataUpload> allUploads = RetailModel.getAllDataUploads();
+		List<DataUpload> allUploads = UploadModel.getAllDataUploads();
 
 		request.setAttribute("page", "upload");
 		request.setAttribute("allDataUploads", allUploads);
@@ -43,11 +43,11 @@ public class UploadController extends HttpServlet {
 		List<YoyoTransaction> list = gson.fromJson(reader, new TypeToken<List<YoyoTransaction>>() {
 		}.getType());
 
-		boolean wasUploaded = RetailModel.checkFileAlreadyUploaded(list);
+		boolean wasUploaded = UploadModel.checkFileAlreadyUploaded(list);
 		if (wasUploaded) {
 			response.setStatus(400);
 		} else {
-			DataUpload finishedUpload = RetailModel.saveRetailData(list, fileName);
+			DataUpload finishedUpload = UploadModel.saveRetailData(list, fileName);
 
 			if (finishedUpload == null) {
 				response.setStatus(500);

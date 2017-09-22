@@ -3,8 +3,9 @@ package com.group12.controllers;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,17 +24,10 @@ import com.group12.models.YoyoTransaction;
 public class GraphController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-/*		System.out.println("-------");
-		Enumeration<String> parameterNames = request.getParameterNames();
-	        while (parameterNames.hasMoreElements()) {
-	            String paramName = parameterNames.nextElement();
-	            System.out.println(paramName);
-	        }*/
 		
 		
 		String filters = request.getParameter("filters");
-		System.out.println(filters);
+	
 		if ( filters != null) {
 		
 			Gson gson = new Gson();
@@ -43,7 +37,7 @@ public class GraphController extends HttpServlet {
 			//switch here for type of graph
 			//request.getParameter("graphType)..............
 			
-			List<Float> result = getGraph9Data(filtObj);
+			Map<String, List<Float>> result = getGraph9Data(filtObj);
 			
 			String jsonResult = new Gson().toJson(result);
 			
@@ -60,24 +54,32 @@ public class GraphController extends HttpServlet {
 	}
 	
 	
-	private static List<Float> getGraph9Data(GraphFilters filters) {
+	private static Map<String, List<Float>> getGraph9Data(GraphFilters filters) {
 		List<YoyoTransaction> data = GraphModel.getGraph9Data(filters);
 		
-		for (YoyoTransaction y: data) {
-			System.out.println(y);
-		}
+		
 		//combine in buckets. there can be less people in the last bucket, or some people may be disregarded
 		//max 5 people error
-		List<Float> bucketTotals = new ArrayList<Float>();
+		List<Float> bucketTotalSpendingTransaction = new ArrayList<Float>();
+		List<Float> averageTotalSpendingTransaction = new ArrayList<Float>();
+		
+		List<Float> averageTransactionValue = new ArrayList<Float>();
 		
 		int bucketSizeInPercent = 10;
 		int customersInBucket = Math.max((int) Math.round(data.size()*(bucketSizeInPercent/100.0)), 1);
 		
 		int numberOfBucketsToFill = 100/ bucketSizeInPercent;
 		
+		float nextBucketSpending = 0;
+		int nextBucketTransactions = 0;
 		float nextBucketValue = 0;
+		float totalValue = 0;
 		boolean hasNonEmptyBuckets = false;
 		for (int i=0; i<data.size(); i++) {
+		
+			nextBucketSpending += data.get(i).getSumTotal();
+			nextBucketTransactions+=  data.get(i).getCountTotal();
+			
 			if (filters.getYAxisType() == GraphFilters.TOTAL_SPENDING) {
 				nextBucketValue += data.get(i).getSumTotal();
 			}
@@ -87,8 +89,16 @@ public class GraphController extends HttpServlet {
 			
 			hasNonEmptyBuckets = true;
 			if ((i+1) % customersInBucket == 0 ) {
-				bucketTotals.add(nextBucketValue);
+				bucketTotalSpendingTransaction.add(nextBucketValue);
+				averageTotalSpendingTransaction.add(nextBucketValue/customersInBucket);
+				averageTransactionValue.add(nextBucketSpending/nextBucketTransactions);//+
+				
+				totalValue+= nextBucketValue;
+				
 				nextBucketValue = 0;
+				nextBucketSpending = 0;
+				nextBucketTransactions = 0;
+				
 				numberOfBucketsToFill--;
 				hasNonEmptyBuckets = false;
 				if (numberOfBucketsToFill == 0) {//drop some people
@@ -99,14 +109,27 @@ public class GraphController extends HttpServlet {
 		}
 		
 		if (hasNonEmptyBuckets) {
-			bucketTotals.add(nextBucketValue);//last bucket smaller 
+			bucketTotalSpendingTransaction.add(nextBucketValue);//last bucket smaller 
+			averageTotalSpendingTransaction.add(nextBucketValue/customersInBucket);
+			averageTransactionValue.add(nextBucketSpending/nextBucketTransactions);
+			totalValue+=nextBucketValue;
 		}
 		
+		//turn bucketTotalSpendingTransaction into percentage
+		for (int i=0; i<bucketTotalSpendingTransaction.size();i++) {
+			bucketTotalSpendingTransaction.set(i, (bucketTotalSpendingTransaction.get(i)/totalValue)*100);
+		}
 		
-		return bucketTotals;
-/*		for (Float f: bucketTotals) {
-			System.out.print(f+" ");
-		}*/
+		//System.out.println("totalSP: "+bucketTotalSpendingTransaction.get(0)+"; "+"transValue: "+averageTransactionValue.get(0));
+		
+		Map<String, List<Float>> map = new TreeMap<String, List<Float>>();
+		map.put("bucketTotalSpendingTransaction", bucketTotalSpendingTransaction);
+		map.put("averageTotalSpendingTransaction", averageTotalSpendingTransaction);
+		map.put("averageTransactionValue", averageTransactionValue);
+		return map;
+		
+		
+
 	}
 	
 }

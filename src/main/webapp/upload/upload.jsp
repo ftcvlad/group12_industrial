@@ -21,8 +21,7 @@
 <script lang="javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.11.3/xlsx.core.min.js"></script>
 	
-	<script lang="javascript"
-	src="upload/spinner.min.js"></script>
+	<script lang="javascript" src="libs/spinner.min.js"></script>
 	
 	
 
@@ -61,8 +60,6 @@
 							</label>
 							<span class='label label-info' id="upload-file-info">No file chosen</span>
 						</div>
-						
-		
 						
 						<div >
 							<button type="button" class="btn btn-primary" onClick="uploadData()">Upload</button>

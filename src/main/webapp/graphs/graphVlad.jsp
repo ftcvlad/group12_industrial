@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="graphs/graphVlad.css">
 <link rel="stylesheet"	href="libs/bootstrap-select.min.css">
 <script src="libs/bootstrap-select.min.js"></script>
+<script lang="javascript" src="libs/spinner.min.js"></script>
 
 </head>
 
@@ -36,8 +37,13 @@
 		<div class="panel panel-default">
 
 			<div class="panel-body">
-				<div id="graph9"></div>
-
+				<div id="graph9">
+					<div id="loadingOverlay">
+						<div id="spinnerContainer" ></div>
+						<div id="spinnerTextContainer">Fetching...</div>
+					</div>
+				</div>
+				
 				<div id="filters9" class="filtersContainer" style="display: none">
 
 					<div class="filterItem" >

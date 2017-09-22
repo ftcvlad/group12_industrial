@@ -21,12 +21,10 @@ import com.google.gson.annotations.SerializedName;
 public class YoyoTransaction{
 	
 	public YoyoTransaction() {}
-	public YoyoTransaction(float st) {
-		this.sumTotal = st;
-	}
 	
-	public YoyoTransaction(int ct) {
+	public YoyoTransaction(int ct, float st) {
 		this.countTotal = ct;
+		this.sumTotal = st;
 	}
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 

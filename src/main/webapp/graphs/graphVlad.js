@@ -31,7 +31,12 @@ var filters = {
 	yAxisType:  yAxisTypes.totalSpending//transactions vs spending
 };
 
+var spinner ;
+
 $( document ).ready(function() {
+   
+   	spinner = new Spinner({top:'50%', width: 1, length:30, radius:15}).spin();
+  	document.getElementById("spinnerContainer").appendChild(spinner.el);
    
 	//LOCATIONS selector
     $('#selectpickerLocationGraph9').selectpicker({
@@ -74,11 +79,32 @@ $( document ).ready(function() {
 });	
   
 
+function appendOverlay(){
 
+	if ($("#loadingOverlay").length === 0){
+		$("#graph9").append('<div id="loadingOverlay">'+
+						'<div id="spinnerContainer" ></div>'+
+						'<div id="spinnerTextContainer">Fetching...</div>'+
+					'</div>');
+					
+		document.getElementById("spinnerContainer").appendChild(spinner.el);
+	
+	}
+	
+
+}
   
 function requestData(){
 	if (fetching) return;
+	
+	if (filters.locations.length === 0){
+		alert('you must select at least 1 location');
+		return;
+	}
+	
+	appendOverlay();
 	fetching = true;
+	
 	
   	$.ajax({
     	url: "graphVlad", 
@@ -87,12 +113,15 @@ function requestData(){
     	data: {"filters":JSON.stringify(filters)},
     	dataType:'json', 
     	success: function(data){
+    		
         	plotGraph9(data, filters.yAxisType);
     	},
     	error: function(jqXHR, textStatus, errorThrown){
+    		$("#loadingOverlay").remove();
     		alert(textStatus);
     	},
     	complete: function(){
+    		
     		fetching = false;
     	}
 	});
@@ -102,7 +131,7 @@ function requestData(){
   	
   function plotGraph9(data, yAxisType){
   
-  	var yAxisTitle = (yAxisType === yAxisTypes.totalSpending) ? "Total Spending" : "Total transactions";
+  	var yAxisTitle = (yAxisType === yAxisTypes.totalSpending) ? "% of all revenue" : "% of all transactions";
   	var xAxisTitle = (yAxisType === yAxisTypes.totalSpending) ? "Percentiles (% of customers spending less)" : "Percentiles (% of customers having fewer transactions)";
   	var title = (yAxisType === yAxisTypes.totalSpending) ? "Spending distribution" : "Transaction distribution";
   
@@ -116,8 +145,17 @@ function requestData(){
 	} while (a>0);
   	
   	
+  	var dataPoints = [];
+  	for (var i=0; i<data.bucketTotalSpendingTransaction.length; i++){
+  		dataPoints.push({"y": data.bucketTotalSpendingTransaction[i], 
+  						"average1":data.averageTotalSpendingTransaction[i]
+  						} );
+  	}
+  	
+ 
   	
   
+  	 var tooltipTitle =  (yAxisType === yAxisTypes.totalSpending) ? 'Average customer spending (\u00A3): ' : 'Average customer transactions: ';
   	 var myChart = Highcharts.chart('graph9', {
         chart: {
             type: 'column'
@@ -131,15 +169,39 @@ function requestData(){
             	text: xAxisTitle
             }
         },
-        yAxis: {
-            title: {
-                text: yAxisTitle
-            }
-        },
+        yAxis: [{
+	            	title: {text: yAxisTitle}
+	            },
+	            {
+	            	title: {text: "Average transaction value"},
+	            	opposite: true
+	            }],
         series: [{
-             showInLegend: false,  
-            data: data
-        }]
+           			data: dataPoints,
+           			
+           			yAxis: 0,
+           			name: "percentOfAll"
+		        },
+		        {
+           			data: data.averageTransactionValue,
+           			
+           			yAxis: 1,
+           			name: "average transaction value"
+		        }],
+		tooltip: {
+				  formatter: function() {
+
+			        	 if (this.series.name == 'percentOfAll') {
+					         return ' ' + yAxisTitle + ': ' + this.point.y.toFixed(2) + '<br />'+
+			        					tooltipTitle + this.point.average1.toFixed(2) + '<br />'; 
+					     } 
+					     else {
+					         return " Average transaction value (\u00A3): "+ this.point.y.toFixed(2);
+					     }
+			        		
+			      }
+				}
+		
     });
   
   

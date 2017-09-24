@@ -36,12 +36,12 @@ var allGraphs = {
 		plotData: plotGraph9,
 		spinner: null
 	 },
-	 "7": {
+	 "6": {
 	 	filters:{
-			id: 7
+			id: 6
 		},
 		fetching: false,
-		plotData: plotGraph7,
+		plotData: plotGraph6,
 		spinner: null
 	 }
 	 
@@ -146,12 +146,12 @@ $( document ).ready(function() {
     
     $('#filters9').show();
     
-     $('#filters7').show();
+     $('#filters6').show();
     
    
     
      requestData(9);
-     requestData(7);
+     requestData(6);
   	
 });	
   
@@ -169,12 +169,16 @@ function filterMultipleGraphs(){
 function appendOverlay(graphId){
 
 	if ($("#loadingOverlay"+graphId).length === 0){
-		$("#graph"+graphId).append('<div id="loadingOverlay'+graphId+'">'+
-						'<div id="spinnerContainer'+graphId+'" ></div>'+
-						'<div id="spinnerTextContainer'+graphId+'">Fetching...</div>'+
+		$("#graph"+graphId).append('<div id="loadingOverlay'+graphId+'" class="loadingOverlay">'+
+						'<div id="spinnerContainer'+graphId+'" class="spinnerContainer" ></div>'+
+						'<div id="spinnerTextContainer'+graphId+'" class="spinnerTextContainer">Fetching...</div>'+
 					'</div>');
 					
 		document.getElementById("spinnerContainer"+graphId).appendChild(allGraphs[graphId].spinner.el);
+		
+		
+		
+
 	}
 }
 
@@ -201,7 +205,7 @@ function attachDatetimeFilters(graphId, filters){
 
   
 function requestData(graphId){
-
+	
 	if (allGraphs[graphId].fetching) return;
 	
 	var filters = allGraphs[graphId].filters;
@@ -335,8 +339,8 @@ function requestData(graphId){
   }
   
   
-  //GRAPH 7 !!! 	
-  function plotGraph7(data){
+  //GRAPH 6 !!! 	
+  function plotGraph6(data){
 
 	var totalSpending = data.map(function(next) {
 	   return {name: locationsMap[next.C] , y: next.sumTotal };
@@ -350,7 +354,7 @@ function requestData(graphId){
 	   return {name: locationsMap[next.C] , y: next.countTotal };
 	});
   	 
-  	 var chart = new Highcharts.Chart('graph7', {
+  	 var chart = new Highcharts.Chart('graph6', {
 		
 		chart: {
 		    type: 'pie'

@@ -95,7 +95,7 @@ public class GraphModel {
 	
 	
 	
-	public static List<YoyoTransaction> getGraph7Data(GraphFilters filters) {
+	public static List<YoyoTransaction> getGraph6Data(GraphFilters filters) {
 		
 		SessionFactory sf = DatabaseConnectionManager.getSessionFactory();
 

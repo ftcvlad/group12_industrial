@@ -90,12 +90,12 @@
 					</div>
 
 					<div class=" form-group ">
-						<input type="checkbox" data-id="7" name="fancy-checkbox-default"
-							id="calendarCheckbox7" autocomplete="off" />
+						<input type="checkbox" data-id="6" name="fancy-checkbox-default"
+							id="calendarCheckbox6" autocomplete="off" />
 						<div class=" btn-group ">
-							<label for="calendarCheckbox7" class="btn btn-default btn-sm ">
+							<label for="calendarCheckbox6" class="btn btn-default btn-sm ">
 								<span class=" glyphicon glyphicon-ok "></span> <span> </span>
-							</label> <label for="calendarCheckbox7"
+							</label> <label for="calendarCheckbox6"
 								class=" btn btn-default btn-sm active ">Location statistics</label>
 						</div>
 					</div>
@@ -169,18 +169,18 @@
 
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<div id="graph7">
-					<div id="loadingOverlay7" class="loadingOverlay">
-						<div id="spinnerContainer7" class="spinnerContainer"></div>
-						<div id="spinnerTextContainer7" class="spinnerTextContainer">Fetching...</div>
+				<div id="graph6">
+					<div id="loadingOverlay6" class="loadingOverlay">
+						<div id="spinnerContainer6" class="spinnerContainer"></div>
+						<div id="spinnerTextContainer6" class="spinnerTextContainer">Fetching...</div>
 					</div>
 				</div>
 
-				<div id="filters7" class="filtersContainer" style="display: none">
+				<div id="filters6" class="filtersContainer" style="display: none">
 
 					<div class="filterItem">
 						<button type="button" class="btn btn-primary btn-sm filterButton"
-							onClick="requestData(7)">Filter</button>
+							onClick="requestData(6)">Filter</button>
 					</div>
 				</div>
 

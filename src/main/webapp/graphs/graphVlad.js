@@ -29,7 +29,7 @@ var allGraphs = {
 	"9": {
 		filters:{
 			locations: allLocations.slice(),
-			yAxisType:  yAxisTypes.totalSpending//transactions vs spending
+			yAxisType:  yAxisTypes.totalSpending//transactions vs spending,
 		},
 		fetching: false,
 		plotData: plotGraph9,
@@ -39,8 +39,8 @@ var allGraphs = {
 };
 
 var calendar ={
-	startDate: null,
-	endDate: null,
+	startDatetime: null,
+	endDatetime: null,
 	selectedGraphs: []
 	
 };
@@ -50,6 +50,41 @@ var calendar ={
 
 
 $( document ).ready(function() {
+   
+   
+    //CALENDAR
+    $('#datetimepickerStart').datetimepicker();
+    $('#datetimepickerEnd').datetimepicker({
+        useCurrent: false //Important! See issue #1075
+    });
+    $("#datetimepickerStart").on("dp.change", function (e) {
+        $('#datetimepickerEnd').data("DateTimePicker").minDate(e.date);
+        
+        
+        calendar.startDatetime = e.date;//moment.js object
+        
+    });
+    $("#datetimepickerEnd").on("dp.change", function (e) {
+        $('#datetimepickerStart').data("DateTimePicker").maxDate(e.date);
+        
+        calendar.endDatetime = e.date;
+    });
+   
+   
+   
+   	$("#calendarCheckboxes :checkbox").change(function(e){
+   		var id = $(this).data("id");
+	    if (this.checked){
+	    	calendar.selectedGraphs.push(id);
+	    }
+	    else{
+	    	calendar.selectedGraphs.splice(calendar.selectedGraphs.indexOf(id), 1);
+	    }
+	});
+   
+   
+
+   
    
    	//TODO: move initialisation for each graph here
    	for (var id in allGraphs) {
@@ -85,9 +120,9 @@ $( document ).ready(function() {
 	 	}
 	});
 	
+	
+	
 	//TYPE (total trans/total spending) selector
-	
-	
     $('#transVsSpendingGraph9').selectpicker({
 	  size: 2,
 	  width: "150px"
@@ -97,26 +132,13 @@ $( document ).ready(function() {
  		 allGraphs["9"].filters.yAxisType = $(event.target[clickedIndex]).data("yaxistype");
 	});
     
+    
+    
+    
     $('#filters9').show();
     
     
-    //CALENDAR
-    $('#datetimepickerStart').datetimepicker();
-    $('#datetimepickerEnd').datetimepicker({
-        useCurrent: false //Important! See issue #1075
-    });
-    $("#datetimepickerStart").on("dp.change", function (e) {
-        $('#datetimepickerEnd').data("DateTimePicker").minDate(e.date);
-        
-        
-        calendar.startDate = e.date;//moment.js object
-        
-    });
-    $("#datetimepickerEnd").on("dp.change", function (e) {
-        $('#datetimepickerStart').data("DateTimePicker").maxDate(e.date);
-        
-        calendar.endDate = e.date;
-    });
+   
     
     requestData(9);
   	
@@ -125,27 +147,11 @@ $( document ).ready(function() {
   
   
   
-function filterWithCalendar(){
+function filterMultipleGraphs(){
 	
-	if (calendar.startDate === null || calendar.endDate === null){
-		alert("select start and end date to use calendar!");
-		return;
+	for (var i=0; i<calendar.selectedGraphs.length; i++){
+		requestData(calendar.selectedGraphs[i]);
 	}
-	
-	for (var i=0; i<calendar.selectedGraphs; i++){
-		console.log(calendar.startDate.toDate());
-		
-		var nextGraphFilters = allGraphs[calendar.selectedGraphs[i]].filters;
-		
-		nextGraphFilters["startDate"] = calendar.startDate.toDate();
-		nextGraphFilters["endDate"] = calendar.endDate.toDate();
-		
-		
-		
-		
-	}
-	
-	
 }  
   
 
@@ -166,11 +172,25 @@ function removeOverlay(graphId){
 }
 
 
+function attachDatetimeFilters(graphId, filters){
 
+	if (calendar.selectedGraphs.indexOf(graphId) !== -1){
+		if (calendar.startDatetime === null || calendar.endDatetime === null){
+			return false;
+		}
+		filters.startDatetime = calendar.startDatetime.format("D/M/YYYY hh:mm:ss").toString();
+		filters.endDatetime = calendar.endDatetime.format("D/M/YYYY hh:mm:ss").toString();
+	}
+	else {
+		delete filters.startDatetime;
+		delete filters.endDatetime; 
+	}
+	return true;
+}
 
   
 function requestData(graphId){
-	
+
 	if (allGraphs[graphId].fetching) return;
 	
 	var filters = allGraphs[graphId].filters;
@@ -179,6 +199,16 @@ function requestData(graphId){
 		alert('you must select at least 1 location');
 		return;
 	}
+	
+	
+	if (!attachDatetimeFilters(graphId, filters)){
+		alert('datetime not setup correctly');
+		return;
+	}
+	
+	console.log(filters);
+	
+	
 	
 	appendOverlay(graphId);
 	allGraphs[graphId].fetching = true;

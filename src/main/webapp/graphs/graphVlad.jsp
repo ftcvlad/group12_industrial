@@ -59,21 +59,42 @@
 		        </div>
 		        
 		        
+		        <div id="calendarCheckboxes">
+		        	<div class="[ form-group ]">
+			            <input type="checkbox" data-id="9" name="fancy-checkbox-default" id="calendarCheckbox9" autocomplete="off" />
+			            <div class="[ btn-group ]">
+			                <label for="calendarCheckbox9" class="[ btn btn-default ]">
+			                    <span class="[ glyphicon glyphicon-ok ]"></span>
+			                    <span> </span>
+			                </label>
+			                <label for="calendarCheckbox9" class="[ btn btn-default active ]">
+			                    Spending distribution
+			                </label>
+			            </div>
+			        </div>
+			        
+			        
+			        <div class="[ form-group ]">
+			            <input type="checkbox" data-id="2" name="fancy-checkbox-default" id="calendarCheckbox2" autocomplete="off" />
+			            <div class="[ btn-group ]">
+			                <label for="calendarCheckbox2" class="[ btn btn-default ]">
+			                    <span class="[ glyphicon glyphicon-ok ]"></span>
+			                    <span> </span>
+			                </label>
+			                <label for="calendarCheckbox2" class="[ btn btn-default active ]">
+			                    Other graph
+			                </label>
+			            </div>
+			        </div>
 		        
-		        <div class="[ form-group ]">
-		            <input type="checkbox" name="fancy-checkbox-default" id="fancy-checkbox-default" autocomplete="off" />
-		            <div class="[ btn-group ]">
-		                <label for="fancy-checkbox-default" class="[ btn btn-default ]">
-		                    <span class="[ glyphicon glyphicon-ok ]"></span>
-		                    <span> </span>
-		                </label>
-		                <label for="fancy-checkbox-default" class="[ btn btn-default active ]">
-		                    Default Checkbox
-		                </label>
-		            </div>
+		        
+		        
+		        
 		        </div>
+		        
+		        
 			   
-
+				<button type="button" class="btn btn-primary btn-sm filterButton" onClick="filterMultipleGraphs()">Apply calendar</button>
 		
 		</div>
 

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.group12.beans.GraphFilters;
 import com.group12.models.GraphModel;
 import com.group12.beans.YoyoTransaction;
@@ -30,7 +31,8 @@ public class GraphController extends HttpServlet {
 	
 		if ( filters != null) {
 		
-			Gson gson = new Gson();
+			
+			Gson gson = new GsonBuilder().setDateFormat("dd/mm/yyyy hh:mm:ss").create();
 			GraphFilters filtObj =  gson.fromJson(filters, GraphFilters.class);
 			
 			

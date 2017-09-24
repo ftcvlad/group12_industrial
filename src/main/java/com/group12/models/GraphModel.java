@@ -1,5 +1,6 @@
 package com.group12.models;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -13,9 +14,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import com.group12.utils.DatabaseConnectionManager;
-import com.group12.beans.YoyoTransaction;
 import com.group12.beans.GraphFilters;
+import com.group12.beans.YoyoTransaction;
+import com.group12.utils.DatabaseConnectionManager;
 
 public class GraphModel {
 
@@ -55,6 +56,15 @@ public class GraphModel {
 			
 			Predicate predicate = root.get("outletRef").in(filters.getLocations());
 			cQuery.where(predicate);
+			
+			
+			Date start = filters.getStartDatetime();
+			Date end = filters.getEndDatetime();
+			if ( start != null && end != null) {
+				 Predicate periodFilter = builder.between(root.get("dateTime"), start, end);
+				 cQuery.where(periodFilter);
+			}
+			
 			cQuery.groupBy(root.get("customer"));
 			cQuery.orderBy(sortOrder);
 		

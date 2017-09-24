@@ -10,10 +10,6 @@
 	margin:15px;
 }
 
-#selectpickerLocationGraph9{
-	
-}
-
 .select-container{
 	max-width:150px;
 }
@@ -28,7 +24,7 @@
 	position: relative;
 }
 
-#loadingOverlay{
+.loadingOverlay{
 	position:absolute;
 	top:0;
 	bottom:0;
@@ -45,15 +41,76 @@
 	
 }
 
-#spinnerContainer div {
+.spinnerContainer div {
     background: white !important;
 }
 
-#spinnerTextContainer{
+.spinnerTextContainer{
 	margin-bottom: 100px;
 }
 
-#spinnerContainer{
+.spinnerContainer{
 	margin-bottom:auto;
 	
+}
+
+
+#calendar{
+	background: cadetblue;
+	
+	display:flex;
+	flex-direction:column;
+}
+
+
+#datetimepickerEnd, #datetimepickerStart{
+	width:250px;
+	margin-right:30px;
+}
+
+#calendarCheckboxes{
+	border: solid 1px black;
+    padding: 10px;
+}
+
+#datepickerHolder{
+	display:flex;
+	flex-wrap: wrap;
+	
+}
+
+.form-group input[type="checkbox"] {
+    display: none;
+}
+
+.form-group input[type="checkbox"] + .btn-group > label span {
+    width: 20px;
+}
+
+.form-group input[type="checkbox"] + .btn-group > label span:first-child {
+    display: none;
+}
+.form-group input[type="checkbox"] + .btn-group > label span:last-child {
+    display: inline-block;   
+}
+
+.form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+    display: inline-block;
+}
+.form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
+    display: none;   
+}
+
+
+
+.panel-heading .accordion-toggle:after {
+    /* symbol for "opening" panels */
+    font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
+    content: "\e114";    /* adjust as needed, taken from bootstrap.css */
+    float: right;        /* adjust as needed */
+    color: grey;         /* adjust as needed */
+}
+.panel-heading .accordion-toggle.collapsed:after {
+    /* symbol for "collapsed" panels */
+    content: "\e080";    /* adjust as needed, taken from bootstrap.css */
 }

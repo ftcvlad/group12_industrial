@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.group12.beans.GraphFilters;
 import com.group12.models.GraphModel;
 import com.group12.beans.YoyoTransaction;
@@ -30,7 +31,8 @@ public class GraphController extends HttpServlet {
 	
 		if ( filters != null) {
 		
-			Gson gson = new Gson();
+			
+			Gson gson = new GsonBuilder().setDateFormat("dd/mm/yyyy hh:mm:ss").create();
 			GraphFilters filtObj =  gson.fromJson(filters, GraphFilters.class);
 			
 			
@@ -38,6 +40,8 @@ public class GraphController extends HttpServlet {
 			//request.getParameter("graphType)..............
 			
 			Map<String, List<Float>> result = getGraph9Data(filtObj);
+			
+			
 			
 			String jsonResult = new Gson().toJson(result);
 			
@@ -126,6 +130,11 @@ public class GraphController extends HttpServlet {
 		map.put("bucketTotalSpendingTransaction", bucketTotalSpendingTransaction);
 		map.put("averageTotalSpendingTransaction", averageTotalSpendingTransaction);
 		map.put("averageTransactionValue", averageTransactionValue);
+		
+		List<Float> hack =  new ArrayList<Float>();
+		hack.add((float) filters.getYAxisType());
+		map.put("yAxisType",hack);
+		
 		return map;
 		
 		

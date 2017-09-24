@@ -1,6 +1,8 @@
 package com.group12.beans;
 
+import java.util.Date;
 import java.util.List;
+
 
 import com.google.gson.annotations.SerializedName;
 
@@ -11,11 +13,27 @@ public class GraphFilters{
 	
 	@SerializedName("locations") List<Integer> locations = null;
 	@SerializedName("yAxisType") int yAxisType; //# of transactions VS totalSpending
-	//dates
-	//???
+	@SerializedName("startDatetime") private Date startDatetime;
+	@SerializedName("endDatetime") private Date endDatetime;
+	
+	
+	
+	//other ???
 	
 	public List<Integer> getLocations() {
 		return locations;
+	}
+	public Date getStartDatetime() {
+		return startDatetime;
+	}
+	public void setStartDatetime(Date startDatetime) {
+		this.startDatetime = startDatetime;
+	}
+	public Date getEndDatetime() {
+		return endDatetime;
+	}
+	public void setEndDatetime(Date endDatetime) {
+		this.endDatetime = endDatetime;
 	}
 	public void setLocations(List<Integer> locations) {
 		this.locations = locations;

@@ -23,6 +23,9 @@
 
 <link rel="stylesheet" href="graphs/graphVlad.css">
 <link rel="stylesheet"	href="libs/bootstrap-select.min.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+
 <script src="libs/bootstrap-select.min.js"></script>
 <script lang="javascript" src="libs/spinner.min.js"></script>
 
@@ -34,13 +37,54 @@
 
 	<div class="main_content">
 
+		<div id="calendar">
+			
+		        <div class="form-group datepicker" >
+		            <div class='input-group date' id='datetimepickerStart'>
+		                <input type='text' class="form-control" />
+		                <span class="input-group-addon">
+		                    <span class="glyphicon glyphicon-calendar"></span>
+		                </span>
+		            </div>
+		        </div>
+		   
+		    
+		        <div class="form-group datepicker">
+		            <div class='input-group date' id='datetimepickerEnd'>
+		                <input type='text' class="form-control" />
+		                <span class="input-group-addon">
+		                    <span class="glyphicon glyphicon-calendar"></span>
+		                </span>
+		            </div>
+		        </div>
+		        
+		        
+		        
+		        <div class="[ form-group ]">
+		            <input type="checkbox" name="fancy-checkbox-default" id="fancy-checkbox-default" autocomplete="off" />
+		            <div class="[ btn-group ]">
+		                <label for="fancy-checkbox-default" class="[ btn btn-default ]">
+		                    <span class="[ glyphicon glyphicon-ok ]"></span>
+		                    <span> </span>
+		                </label>
+		                <label for="fancy-checkbox-default" class="[ btn btn-default active ]">
+		                    Default Checkbox
+		                </label>
+		            </div>
+		        </div>
+			   
+
+		
+		</div>
+
+
 		<div class="panel panel-default">
 
 			<div class="panel-body">
 				<div id="graph9">
-					<div id="loadingOverlay">
-						<div id="spinnerContainer" ></div>
-						<div id="spinnerTextContainer">Fetching...</div>
+					<div id="loadingOverlay9" class="loadingOverlay">
+						<div id="spinnerContainer9" class="spinnerContainer" ></div>
+						<div id="spinnerTextContainer9" class="spinnerTextContainer">Fetching...</div>
 					</div>
 				</div>
 				
@@ -68,8 +112,7 @@
 								<option data-outlet="2679">Ninewells Shop</option>
 							</select>
 					    </div>
-					    
-
+					   
 					</div>
 					
 					<div class="filterItem">
@@ -83,13 +126,8 @@
 					</div>
 					
 					<div class="filterItem">
-						<button type="button" class="btn btn-primary btn-sm filterButton" onClick="requestData()">Filter</button>
+						<button type="button" class="btn btn-primary btn-sm filterButton" onClick="requestData(9)">Filter</button>
 					</div>
-					
-					
-					
-			
-
 				</div>
 
 			</div>
@@ -103,6 +141,10 @@
 
 	</div>
 
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+	
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
 		integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"

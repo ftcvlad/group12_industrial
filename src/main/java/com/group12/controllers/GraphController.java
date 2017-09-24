@@ -39,6 +39,8 @@ public class GraphController extends HttpServlet {
 			
 			Map<String, List<Float>> result = getGraph9Data(filtObj);
 			
+			
+			
 			String jsonResult = new Gson().toJson(result);
 			
 			response.setContentType("application/json");
@@ -126,6 +128,11 @@ public class GraphController extends HttpServlet {
 		map.put("bucketTotalSpendingTransaction", bucketTotalSpendingTransaction);
 		map.put("averageTotalSpendingTransaction", averageTotalSpendingTransaction);
 		map.put("averageTransactionValue", averageTransactionValue);
+		
+		List<Float> hack =  new ArrayList<Float>();
+		hack.add((float) filters.getYAxisType());
+		map.put("yAxisType",hack);
+		
 		return map;
 		
 		

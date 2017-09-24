@@ -116,17 +116,18 @@ $( document ).ready(function() {
 	$('#selectpickerLocationGraph9').addClass('btn-group-sm').addClass('select-container').selectpicker('setStyle');
 	$('#selectpickerLocationGraph9').selectpicker('selectAll');
 	
-	var graph9LocationsRef = allGraphs["9"].filters.locations;
+	
 	$('#selectpickerLocationGraph9').on('changed.bs.select', function ( event, clickedIndex, newValue, oldValue) {
 			 	
 	 	if (clickedIndex === undefined){//select/deselect all
 	 		 var firstSelected = $(event.target[0]).is(':selected');
-	 		graph9LocationsRef = (firstSelected === true) ? allLocations.slice() : [] ;
+	 		allGraphs["9"].filters.locations = (firstSelected === true) ? allLocations.slice() : [] ;
 	 	}
 	 	else{//select/deselect 1 option
 	 		var outletRef = $(event.target[clickedIndex]).data("outlet");
-	 		newValue === true ? graph9LocationsRef.push(outletRef) : graph9LocationsRef.splice(graph9LocationsRef.indexOf(outletRef), 1);
+	 		newValue === true ? allGraphs["9"].filters.locations.push(outletRef) : allGraphs["9"].filters.locations.splice(allGraphs["9"].filters.locations.indexOf(outletRef), 1);
 	 	}
+	 	
 	});
 	
 	

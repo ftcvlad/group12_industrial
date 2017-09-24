@@ -15,6 +15,7 @@ public class GraphFilters{
 	@SerializedName("yAxisType") int yAxisType; //# of transactions VS totalSpending
 	@SerializedName("startDatetime") private Date startDatetime;
 	@SerializedName("endDatetime") private Date endDatetime;
+	@SerializedName("id") private int id;
 	
 	
 	
@@ -22,6 +23,12 @@ public class GraphFilters{
 	
 	public List<Integer> getLocations() {
 		return locations;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public Date getStartDatetime() {
 		return startDatetime;

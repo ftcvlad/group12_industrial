@@ -23,6 +23,14 @@ import com.group12.beans.YoyoTransaction;
 
 @WebServlet(name = "GraphController", urlPatterns = { "graphVlad" })
 public class GraphController extends HttpServlet {
+	
+	private static final int GRAPH1 = 1;
+	private static final int GRAPH7 = 7;
+	private static final int GRAPH9 = 9;
+	
+	
+	
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
@@ -32,18 +40,26 @@ public class GraphController extends HttpServlet {
 		if ( filters != null) {
 		
 			
+			
 			Gson gson = new GsonBuilder().setDateFormat("dd/mm/yyyy hh:mm:ss").create();
 			GraphFilters filtObj =  gson.fromJson(filters, GraphFilters.class);
+			String jsonResult = null;
 			
 			
-			//switch here for type of graph
-			//request.getParameter("graphType)..............
+			if (filtObj.getId() == GRAPH9) {
+				Map<String, List<Float>> result = getGraph9Data(filtObj);
+				//check if map is null (if error and was rolled back)
+				jsonResult = new Gson().toJson(result);
+				
+			}
+			else if (filtObj.getId() == GRAPH7) {
+				List<YoyoTransaction> result = getGraph7Data(filtObj);
+				jsonResult = new Gson().toJson(result);
+				
+			}
 			
-			Map<String, List<Float>> result = getGraph9Data(filtObj);
 			
-			
-			
-			String jsonResult = new Gson().toJson(result);
+
 			
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
@@ -58,9 +74,17 @@ public class GraphController extends HttpServlet {
 	}
 	
 	
+	private static List<YoyoTransaction> getGraph7Data(GraphFilters filters) {
+		
+		List<YoyoTransaction> result = GraphModel.getGraph7Data(filters);
+		return result;
+		
+	}
+	
+	
 	private static Map<String, List<Float>> getGraph9Data(GraphFilters filters) {
 		List<YoyoTransaction> data = GraphModel.getGraph9Data(filters);
-		
+		if (data == null) return null;
 		
 		//combine in buckets. there can be less people in the last bucket, or some people may be disregarded
 		//max 5 people error

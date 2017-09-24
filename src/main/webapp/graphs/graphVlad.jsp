@@ -14,6 +14,7 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="graphs/graphVlad.js"></script>
 <script src="http://code.highcharts.com/highcharts.js"></script>
+<script type="text/javascript" src="libs/highchartPlugins.js"></script>
 
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -54,21 +55,17 @@
 			<div id="calendar" class="panel-body">
 				<div id="datepickerHolder">
 					<div class="form-group datepicker">
-
 						<div class='input-group date' id='datetimepickerStart'>
 							<span class="input-group-addon" id="basic-addon1">Start</span> 
 							<input	type='text' class="form-control" /> 
 							<span class="input-group-addon"> 
 								<span class="glyphicon glyphicon-calendar"></span>
 							</span>
-
 						</div>
-
 					</div>
 
 
 					<div class="form-group datepicker">
-
 						<div class='input-group date' id='datetimepickerEnd'>
 							<span class="input-group-addon" id="basic-addon1">End&nbsp;
 							</span> <input type='text' class="form-control" /> <span
@@ -79,8 +76,6 @@
 					</div>
 				</div>
 
-
-				
 				<div id="calendarCheckboxes">
 					<div class=" form-group ">
 						<input type="checkbox" data-id="9" name="fancy-checkbox-default"
@@ -94,33 +89,21 @@
 						</div>
 					</div>
 
-
-					<!-- <div class=" form-group ">
-						<input type="checkbox" data-id="2" name="fancy-checkbox-default"
-							id="calendarCheckbox2" autocomplete="off" />
+					<div class=" form-group ">
+						<input type="checkbox" data-id="7" name="fancy-checkbox-default"
+							id="calendarCheckbox7" autocomplete="off" />
 						<div class=" btn-group ">
-							<label for="calendarCheckbox2" class="btn btn-default btn-sm ">
+							<label for="calendarCheckbox7" class="btn btn-default btn-sm ">
 								<span class=" glyphicon glyphicon-ok "></span> <span> </span>
-							</label> <label for="calendarCheckbox2"
-								class=" btn btn-default btn-sm active "> Other graph </label>
+							</label> <label for="calendarCheckbox7"
+								class=" btn btn-default btn-sm active ">Location statistics</label>
 						</div>
-					</div> -->
-
-
-
-
+					</div>
 				</div>
 			
-
-
 				<div style="margin-top:10px;">
 					<button type="button" class="btn btn-primary btn-sm filterButton" onClick="filterMultipleGraphs()">Apply calendar</button>
 				</div>
-
-
-
-
-				
 
 			</div>
 
@@ -184,8 +167,28 @@
 		</div>
 
 
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div id="graph7">
+					<div id="loadingOverlay7" class="loadingOverlay">
+						<div id="spinnerContainer7" class="spinnerContainer"></div>
+						<div id="spinnerTextContainer7" class="spinnerTextContainer">Fetching...</div>
+					</div>
+				</div>
 
-		<div class="graph_container"></div>
+				<div id="filters7" class="filtersContainer" style="display: none">
+
+					<div class="filterItem">
+						<button type="button" class="btn btn-primary btn-sm filterButton"
+							onClick="requestData(7)">Filter</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+		
 
 
 

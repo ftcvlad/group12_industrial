@@ -1,18 +1,18 @@
 var locationsMap ={
-	"DOJ Catering": 235,
-	"Air Bar": 236,
-	"Floor Five": 237,
-	"Library": 238,
-	"Spare": 239,
-	"Food on Four": 240,
-	"Liar bar": 241,
-	"Mono": 242,
-	"Ents":243,
-	"Remote Campus Shop": 343,
-	"DUSA The Union Marketplace": 456,
-	"Premier Shop": 2676,
-	"College Shop": 2677,
-	"Ninewells Shop": 2679
+	"235": "DOJ Catering",
+	"236": "Air Bar",
+	"237": "Floor Five",
+	"238": "Library",
+	"239": "Spare",
+	"240": "Food on Four",
+	"241": "Liar bar",
+	"242": "Mono",
+	"243": "Ents",
+	"343": "Remote Campus Shop",
+	"456": "DUSA The Union Marketplace",
+	"2676": "Premier Shop",
+	"2677": "College Shop",
+	"2679":"Ninewells Shop"
 };
 
 var yAxisTypes = {
@@ -29,12 +29,22 @@ var allGraphs = {
 	"9": {
 		filters:{
 			locations: allLocations.slice(),
-			yAxisType:  yAxisTypes.totalSpending//transactions vs spending,
+			yAxisType:  yAxisTypes.totalSpending,//transactions vs spending,
+			id: 9
 		},
 		fetching: false,
 		plotData: plotGraph9,
 		spinner: null
+	 },
+	 "7": {
+	 	filters:{
+			id: 7
+		},
+		fetching: false,
+		plotData: plotGraph7,
+		spinner: null
 	 }
+	 
 
 };
 
@@ -70,8 +80,7 @@ $( document ).ready(function() {
         calendar.endDatetime = e.date;
     });
    
-   
-   
+
    	$("#calendarCheckboxes :checkbox").change(function(e){
    		var id = $(this).data("id");
 	    if (this.checked){
@@ -137,10 +146,12 @@ $( document ).ready(function() {
     
     $('#filters9').show();
     
+     $('#filters7').show();
     
    
     
-    requestData(9);
+     requestData(9);
+     requestData(7);
   	
 });	
   
@@ -321,4 +332,112 @@ function requestData(graphId){
   
   
   
+  }
+  
+  
+  //GRAPH 7 !!! 	
+  function plotGraph7(data){
+
+	var totalSpending = data.map(function(next) {
+	   return {name: locationsMap[next.C] , y: next.sumTotal };
+	});
+	
+	var uniqueCustomers = data.map(function(next) {
+	   return {name: locationsMap[next.C] , y: next.uniqueCustomers };
+	});
+	
+	var totalTransactions = data.map(function(next) {
+	   return {name: locationsMap[next.C] , y: next.countTotal };
+	});
+  	 
+  	 var chart = new Highcharts.Chart('graph7', {
+		
+		chart: {
+		    type: 'pie'
+		},
+		title: {
+		    text: 'Location statistics'
+		},
+		legend:{
+			enabled:true
+		},
+		series: [{
+		    data: totalSpending,
+		    center: ['20%'],
+		    name: 'Total spending',
+		    title: {
+	            // align: 'left',
+	            // x: 0
+	            // style: { color: XXX, fontStyle: etc }
+	            text: '<b>Total spending</b>',
+	            verticalAlign: 'top',
+	            y: -40
+       		},
+       		showInLegend:true
+		},
+		{
+		    data: totalTransactions,
+		    center: ['50%'],
+		   
+		    name: 'Total transactions',
+		    title: {
+	            text: '<b>Total transactions</b>',
+	            verticalAlign: 'top',
+	            y: -40
+       		},
+       		showInLegend:false
+		},
+		{
+		    data: uniqueCustomers,
+		    center: ['80%', '50%'],
+		    name: 'Unique customers',
+		     innerSize: '35%',
+		    title: {
+	            text: '<b>Unique customers</b>',
+	            verticalAlign: 'top',
+	            y: -40
+       		},
+       		showInLegend:false
+		}],
+		plotOptions: {
+		    pie: {
+		        dataLabels: {
+		            enabled: false
+		        },
+		        cursor: 'pointer', 
+				allowPointSelect: true   ,
+				size: "60%"        
+		    }            
+		}
+	}, function(chart) {//https://stackoverflow.com/questions/16730755/two-pies-one-legend-with-unique-items-merge-legends
+            
+        $(chart.series[0].data).each(function(i, e) {
+            e.legendItem.on('click', function(event) {
+                var legendItem=e.name;
+                
+                event.stopPropagation();
+                
+                $(chart.series).each(function(j,f){
+                       $(this.data).each(function(k,z){
+                           if(z.name==legendItem) {
+                               if(z.visible){
+                                   z.setVisible(false);
+                               }
+                               else{
+                                   z.setVisible(true);
+                               }
+                           }
+                       });
+                });
+                
+            });
+            
+        });
+     });
+  	 
+  	 
+	
+  	 
+  	 
+  	 
   }

@@ -22,9 +22,16 @@ public class YoyoTransaction{
 	
 	public YoyoTransaction() {}
 	
-	public YoyoTransaction(int ct, float st) {
-		this.countTotal = ct;
-		this.sumTotal = st;
+	public YoyoTransaction(int countTotal, float sumTotal) {
+		this.countTotal = countTotal;
+		this.sumTotal = sumTotal;
+	}
+	
+	public YoyoTransaction(int countTotal, float sumTotal, int outletRef, int uniqueCustomers ) {
+		this.countTotal = countTotal;
+		this.sumTotal = sumTotal;
+		this.outletRef = outletRef;
+		this.uniqueCustomers = uniqueCustomers;
 	}
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
@@ -45,6 +52,17 @@ public class YoyoTransaction{
 	@Formula(value = "COUNT(total)")
 	int countTotal;
 	
+	@Formula(value = "COUNT(Distinct customer)")
+	int uniqueCustomers;
+	
+	public int getUniqueCustomers() {
+		return uniqueCustomers;
+	}
+
+	public void setUniqueCustomers(int uniqueCustomers) {
+		this.uniqueCustomers = uniqueCustomers;
+	}
+
 	public int getCountTotal() {
 		return countTotal;
 	}
@@ -115,7 +133,8 @@ public class YoyoTransaction{
 		}
 		
 		
-		return str+outletRef+" "+ customer+" "+transactionType+" "+spent+" "+discount+" "+total+ " "+id+" "+sumTotal+" "+countTotal;
+		return str+outletRef+" "+ customer+" "+transactionType+" "+spent+" "+discount+
+				" "+total+ " "+id+" "+sumTotal+" "+countTotal+ " "+uniqueCustomers;
 	
 	}
 	

@@ -459,7 +459,7 @@ function requestData(graphId){
             
         });
      });
-  	 
+  }  	 
   	//GRAPH 2
   	  function plotGraph6(data){
 

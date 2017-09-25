@@ -44,6 +44,7 @@ var allGraphs = {
 		plotData: plotGraph6,
 		spinner: null
 	 },
+	 /*,
 	 "2": {
 		 filters:{
 		 		id: 2
@@ -51,7 +52,9 @@ var allGraphs = {
 			fetching: false,
 			plotData: plotGraph2,
 			spinner: null
-	}/*,
+	}*/
+	
+	/*,
 	"5": {
 		filters:{
 			id: 5
@@ -163,11 +166,13 @@ $( document ).ready(function() {
     $('#filters9').show();
     
      $('#filters6').show();
+     //$('#filters65').show();
     
    
     
      requestData(9);
      requestData(6);
+     //requestData(5);
   	
 });	
   

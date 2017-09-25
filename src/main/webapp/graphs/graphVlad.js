@@ -459,7 +459,9 @@ function requestData(graphId){
             
         });
      });
-  }  	 
+  }
+
+/*
   	//GRAPH 2
   	  function plotGraph6(data){
 
@@ -560,7 +562,8 @@ function requestData(graphId){
   	        });
   	     });
 }	 
-  	 
+*/
+
 //GRAPH 5 	
 function plotGraph5(data){
   	   

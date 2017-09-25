@@ -59,10 +59,14 @@ public class GraphController extends HttpServlet {
 				jsonResult = new Gson().toJson(result);
 				
 			}
+			
+			/*
 			else if (filtObj.getId() == GRAPH2) {
 				List<YoyoTransaction> result = getGraph2Data(filtObj);
 				jsonResult = new Gson().toJson(result);		
 			}
+			*/
+			
 			/*else if (filtObj.getId() == GRAPH5) {
 				List<YoyoTransaction> result = getGraph5Data(filtObj);
 				jsonResult = new Gson().toJson(result);		

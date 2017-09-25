@@ -92,7 +92,7 @@ $( document ).ready(function() {
 	});
    
    
-
+	//----------------------------------------------------------------------------------------
    
    
    	//TODO: move initialisation for each graph here

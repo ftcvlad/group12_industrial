@@ -60,8 +60,7 @@ public class GraphController extends HttpServlet {
 			}
 			else if (filtObj.getId() == GRAPH2) {
 				List<YoyoTransaction> result = getGraph2Data(filtObj);
-				jsonResult = new Gson().toJson(result);
-				
+				jsonResult = new Gson().toJson(result);		
 			}
 			
 			

@@ -145,6 +145,62 @@ public class GraphModel {
 		
 		
 	}
+	
+//Retrieves data from Database for specific graph (Graph 2)
+public static List<YoyoTransaction> getGraph2Data(GraphFilters filters) {
+		
+		SessionFactory sf = DatabaseConnectionManager.getSessionFactory();
+
+		Session session = sf.openSession();
+		Transaction tx = null;
+		List<YoyoTransaction> list;
+		try {
+
+			
+			//Boiler plate DB connection & mandatory data retrieval
+			tx = session.beginTransaction();
+			
+			CriteriaBuilder builder = session.getCriteriaBuilder();
+			CriteriaQuery<YoyoTransaction> cQuery = builder.createQuery(YoyoTransaction.class);
+			
+			Root<YoyoTransaction> root = cQuery.from(YoyoTransaction.class); 
+			
+			Order sortOrder = builder.desc(root.get("sumTotal"));
+			
+			cQuery.multiselect(root.get("countTotal"), root.get("sumTotal"), root.get("outletRef"), root.get("uniqueCustomers") );
+			
+			//Date selection
+			Date start = filters.getStartDatetime();
+			Date end = filters.getEndDatetime();
+			if ( start != null && end != null) {
+				 Predicate periodFilter = builder.between(root.get("dateTime"), start, end);
+				 cQuery.where(periodFilter);
+			}
+			
+			//DB data retrieval
+			//f = k + [(13*m-1)/5] + D + [D/4] + [C/4] - 2*C
+			//f%7 (If f%7=0 the day is Sunday, 1 is Monday, etc
+			cQuery.groupBy(root.get("dateTime"));
+			cQuery.orderBy(sortOrder);
+		
+			//Connection termination
+			list = session.createQuery(cQuery).getResultList();
+
+			tx.commit();
+
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+			return null;
+		} finally {
+			session.close();
+		}
+
+		return list;
+		
+		
+	}
 
 	
 

@@ -25,6 +25,7 @@ import com.group12.beans.YoyoTransaction;
 public class GraphController extends HttpServlet {
 	
 	private static final int GRAPH1 = 1;
+	private static final int GRAPH2 = 2;
 	private static final int GRAPH6 = 6;
 	private static final int GRAPH9 = 9;
 	
@@ -54,6 +55,11 @@ public class GraphController extends HttpServlet {
 			}
 			else if (filtObj.getId() == GRAPH6) {
 				List<YoyoTransaction> result = getGraph6Data(filtObj);
+				jsonResult = new Gson().toJson(result);
+				
+			}
+			else if (filtObj.getId() == GRAPH2) {
+				List<YoyoTransaction> result = getGraph2Data(filtObj);
 				jsonResult = new Gson().toJson(result);
 				
 			}

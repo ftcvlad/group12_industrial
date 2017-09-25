@@ -26,6 +26,7 @@ public class GraphController extends HttpServlet {
 	
 	private static final int GRAPH1 = 1;
 	private static final int GRAPH2 = 2;
+	private static final int GRAPH5 = 5;
 	private static final int GRAPH6 = 6;
 	private static final int GRAPH9 = 9;
 	
@@ -62,6 +63,10 @@ public class GraphController extends HttpServlet {
 				List<YoyoTransaction> result = getGraph2Data(filtObj);
 				jsonResult = new Gson().toJson(result);		
 			}
+			/*else if (filtObj.getId() == GRAPH5) {
+				List<YoyoTransaction> result = getGraph5Data(filtObj);
+				jsonResult = new Gson().toJson(result);		
+			}*/
 			
 			
 
@@ -86,6 +91,14 @@ public class GraphController extends HttpServlet {
 		
 	}
 	
+	/*
+	private static List<YoyoTransaction> getGraph5Data(GraphFilters filters) {
+		
+		List<YoyoTransaction> result = GraphModel.getGraph5Data(filters);
+		return result;
+		
+	}
+	*/
 	
 	private static Map<String, List<Float>> getGraph9Data(GraphFilters filters) {
 		List<YoyoTransaction> data = GraphModel.getGraph9Data(filters);

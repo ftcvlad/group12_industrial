@@ -45,15 +45,22 @@ var allGraphs = {
 		spinner: null
 	 },
 	 "2": {
-		 	filters:{
-				id: 2
-			},
+		 filters:{
+		 		id: 2
+		 	},
 			fetching: false,
 			plotData: plotGraph2,
 			spinner: null
-		 }
+	}/*,
+	"5": {
+		filters:{
+			id: 5
+		},
+		fetching: false,
+		plotData: plotGraph2,
+		spinner: null
+	}*/
 	 
-
 };
 
 var calendar ={
@@ -547,10 +554,9 @@ function requestData(graphId){
   	            
   	        });
   	     });
+}	 
   	 
-  	 
-	
-  	 
-  	 
-  	 
-  }
+//GRAPH 5 	
+function plotGraph5(data){
+  	   
+}

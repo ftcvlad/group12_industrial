@@ -146,6 +146,51 @@ public class GraphModel {
 		
 	}
 	
+/*
+	public static List<YoyoTransaction> getGraph5Data(GraphFilters filters) {
+		
+		SessionFactory sf = DatabaseConnectionManager.getSessionFactory();
+
+		Session session = sf.openSession();
+		Transaction tx = null;
+		List<YoyoTransaction> list;
+		try {
+
+			tx = session.beginTransaction();
+			CriteriaBuilder builder = session.getCriteriaBuilder();
+			CriteriaQuery<YoyoTransaction> cQuery = builder.createQuery(YoyoTransaction.class);
+			
+			Root<YoyoTransaction> root = cQuery.from(YoyoTransaction.class); 
+			
+			Order sortOrder = builder.desc();
+			
+			cQuery.multiselect();
+			
+			
+			Date start = filters.getStartDatetime();
+			Date end = filters.getEndDatetime();
+			if ( start != null && end != null) {
+				 Predicate periodFilter = builder.between(root.get("dateTime"), start, end);
+				 cQuery.where(periodFilter);
+			}
+			
+			cQuery.groupBy();
+			cQuery.orderBy();
+		
+			list = session.createQuery(cQuery).getResultList();
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+			return null;
+		} finally {
+			session.close();
+		}
+		return list;	
+	}
+*/
+	
 //Retrieves data from Database for specific graph (Graph 2)
 public static List<YoyoTransaction> getGraph2Data(GraphFilters filters) {
 		

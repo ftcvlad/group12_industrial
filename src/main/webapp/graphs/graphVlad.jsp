@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
+
 <!DOCTYPE html>
 
 
@@ -110,82 +111,23 @@
 
 		</div>
 
-		<div class="panel panel-default">
+		<!-- GRAPH 9 -->
+	    <jsp:include page="/includes/graphComponent.jsp">
+	        <jsp:param name="graphId" value="9"/>
+	        <jsp:param name="locationFilter" value="true"/>
+	        <jsp:param name="transSpendingFilter" value="true"/>
+	    </jsp:include>
+		
 
-			<div class="panel-body">
-				<div id="graph9">
-					<div id="loadingOverlay9" class="loadingOverlay">
-						<div id="spinnerContainer9" class="spinnerContainer"></div>
-						<div id="spinnerTextContainer9" class="spinnerTextContainer">Fetching...</div>
-					</div>
-				</div>
-
-				<div id="filters9" class="filtersContainer" style="display: none">
-
-					<div class="filterItem">
-						<label for="selectpickerLocationGraph9">Location</label>
-						<div class="input-group">
-							<select id="selectpickerLocationGraph9" multiple>
-								<option data-outlet="235">DOJ Catering</option>
-								<option data-outlet="236">Air Bar </option>
-								<option data-outlet="237">Floor Five</option>
-								<option data-outlet="238">Library</option>
-								<option data-outlet="239">Spare</option>
-
-								<option data-outlet="240">Food on Four</option>
-								<option data-outlet="241">Liar bar </option>
-								<option data-outlet="242">Mono</option>
-								<option data-outlet="243">Ents</option>
-								<option data-outlet="343">Remote Campus Shop</option>
-
-								<option data-outlet="456">DUSA The Union Marketplace</option>
-								<option data-outlet="2676">Premier Shop</option>
-								<option data-outlet="2677">College Shop</option>
-								<option data-outlet="2679">Ninewells Shop</option>
-							</select>
-						</div>
-
-					</div>
-
-					<div class="filterItem">
-						<label for="transVsSpendingGraph9">Type</label>
-						<div class="input-group">
-							<select id="transVsSpendingGraph9">
-								<option data-yaxistype="1">Total spending</option>
-								<option data-yaxistype="2">Total transactions </option>
-							</select>
-						</div>
-					</div>
-
-					<div class="filterItem">
-						<button type="button" class="btn btn-primary btn-sm filterButton"
-							onClick="requestData(9)">Filter</button>
-					</div>
-				</div>
-
-			</div>
-		</div>
+		<!-- GRAPH 6 -->
+		<jsp:include page="/includes/graphComponent.jsp">
+	        <jsp:param name="graphId" value="6"/>
+	        <jsp:param name="locationFilter" value="false"/>
+	        <jsp:param name="transSpendingFilter" value="false"/>
+	    </jsp:include>
 
 
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<div id="graph6">
-					<div id="loadingOverlay6" class="loadingOverlay">
-						<div id="spinnerContainer6" class="spinnerContainer"></div>
-						<div id="spinnerTextContainer6" class="spinnerTextContainer">Fetching...</div>
-					</div>
-				</div>
-
-				<div id="filters6" class="filtersContainer" style="display: none">
-
-					<div class="filterItem">
-						<button type="button" class="btn btn-primary btn-sm filterButton"
-							onClick="requestData(6)">Filter</button>
-					</div>
-				</div>
-
-			</div>
-		</div>
+		
 
 
 		

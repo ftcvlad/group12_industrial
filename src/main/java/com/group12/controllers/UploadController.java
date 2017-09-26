@@ -38,10 +38,11 @@ public class UploadController extends HttpServlet {
 
 		String fileName = request.getParameter("fileName");
 
-		Gson gson = new GsonBuilder().setDateFormat("dd/mm/yyyy hh:mm:ss").create();
+		Gson gson = new GsonBuilder().setDateFormat("MM/dd/yyyy'  'HH:mm:ss").create();
 		BufferedReader reader = request.getReader();
 		List<YoyoTransaction> list = gson.fromJson(reader, new TypeToken<List<YoyoTransaction>>() {
 		}.getType());
+		
 
 		boolean wasUploaded = UploadModel.checkFileAlreadyUploaded(list);
 		if (wasUploaded) {
@@ -56,7 +57,7 @@ public class UploadController extends HttpServlet {
 				PrintWriter out = response.getWriter();
 				
 				
-				SimpleDateFormat dt1 = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+				SimpleDateFormat dt1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				String start = dt1.format(finishedUpload.getPeriodStart());
 				String end = dt1.format(finishedUpload.getPeriodEnd());
 				

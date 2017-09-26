@@ -25,6 +25,8 @@ import com.group12.beans.YoyoTransaction;
 public class GraphController extends HttpServlet {
 	
 	private static final int GRAPH1 = 1;
+	private static final int GRAPH2 = 2;
+	private static final int GRAPH5 = 5;
 	private static final int GRAPH6 = 6;
 	private static final int GRAPH9 = 9;
 	private static final int GRAPH10 = 10;
@@ -40,7 +42,7 @@ public class GraphController extends HttpServlet {
 		
 			
 			
-			Gson gson = new GsonBuilder().setDateFormat("dd/mm/yyyy hh:mm:ss").create();
+			Gson gson = new GsonBuilder().setDateFormat("dd/MM/yyyy'  'HH:mm:ss").create();
 			GraphFilters filtObj =  gson.fromJson(filters, GraphFilters.class);
 			String jsonResult = null;
 			
@@ -61,6 +63,18 @@ public class GraphController extends HttpServlet {
 				jsonResult = new Gson().toJson(result);
 				
 			}
+			
+			/*
+			else if (filtObj.getId() == GRAPH2) {
+				List<YoyoTransaction> result = getGraph2Data(filtObj);
+				jsonResult = new Gson().toJson(result);		
+			}
+			*/
+			
+			/*else if (filtObj.getId() == GRAPH5) {
+				List<YoyoTransaction> result = getGraph5Data(filtObj);
+				jsonResult = new Gson().toJson(result);		
+			}*/
 			
 			
 
@@ -85,6 +99,14 @@ public class GraphController extends HttpServlet {
 		
 	}
 	
+	/*
+	private static List<YoyoTransaction> getGraph5Data(GraphFilters filters) {
+		
+		List<YoyoTransaction> result = GraphModel.getGraph5Data(filters);
+		return result;
+		
+	}
+	*/
 	
 	private static Map<String, List<Float>> getGraph9Data(GraphFilters filters) {
 		List<YoyoTransaction> data = GraphModel.getGraph9Data(filters);
@@ -169,6 +191,7 @@ public class GraphController extends HttpServlet {
 
 	}
 	
+<<<<<<< HEAD
 	private static List<YoyoTransaction> getGraph10Data(GraphFilters filters) {
 		
 		List<YoyoTransaction> result = GraphModel.getGraph10Data(filters);
@@ -177,3 +200,6 @@ public class GraphController extends HttpServlet {
 	}
 	
 }
+=======
+}
+>>>>>>> branch 'master' of https://github.com/ftcvlad/group12_industrial

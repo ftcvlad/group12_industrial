@@ -44,7 +44,6 @@ var allGraphs = {
 		plotData: plotGraph6,
 		spinner: null
 	 },
-<<<<<<< HEAD
 	 "10": {
 		 	filters:{
 				id: 10
@@ -53,28 +52,6 @@ var allGraphs = {
 			plotData: plotGraph10,
 			spinner: null
 		 }
-=======
-	 /*,
-	 "2": {
-		 filters:{
-		 		id: 2
-		 	},
-			fetching: false,
-			plotData: plotGraph2,
-			spinner: null
-	}*/
-	
-	/*,
-	"5": {
-		filters:{
-			id: 5
-		},
-		fetching: false,
-		plotData: plotGraph2,
-		spinner: null
-	}*/
-	 
->>>>>>> branch 'master' of https://github.com/ftcvlad/group12_industrial
 };
 
 var calendar ={
@@ -176,22 +153,14 @@ $( document ).ready(function() {
     $('#filters9').show();
     
      $('#filters6').show();
-<<<<<<< HEAD
      
      $('#filters10').show();
-=======
-     //$('#filters65').show();
->>>>>>> branch 'master' of https://github.com/ftcvlad/group12_industrial
     
    
     
      requestData(9);
      requestData(6);
-<<<<<<< HEAD
      requestData(10);
-=======
-     //requestData(5);
->>>>>>> branch 'master' of https://github.com/ftcvlad/group12_industrial
   	
 });	
   
@@ -473,13 +442,9 @@ function requestData(graphId){
             
         });
      });
-<<<<<<< HEAD
   	 
 	 
-=======
->>>>>>> branch 'master' of https://github.com/ftcvlad/group12_industrial
   }
-<<<<<<< HEAD
   
   // Scott Graph10
   function plotGraph10(data){
@@ -550,113 +515,3 @@ function requestData(graphId){
 		 
 	  }
   
-=======
-
-/*
-  	//GRAPH 2
-  	  function plotGraph6(data){
-
-  		var totalSpending = data.map(function(next) {
-  		   return {name: locationsMap[next.C] , y: next.sumTotal };
-  		});
-  		
-  		var uniqueCustomers = data.map(function(next) {
-  		   return {name: locationsMap[next.C] , y: next.uniqueCustomers };
-  		});
-  		
-  		var totalTransactions = data.map(function(next) {
-  		   return {name: locationsMap[next.C] , y: next.countTotal };
-  		});
-  	  	 
-  	  	 var chart = new Highcharts.Chart('graph2', {
-  			
-  			chart: {
-  			    type: 'pie'
-  			},
-  			title: {
-  			    text: 'Location statistics'
-  			},
-  			legend:{
-  				enabled:true
-  			},
-  			series: [{
-  			    data: totalSpending,
-  			    center: ['20%'],
-  			    name: 'Total spending',
-  			    title: {
-  		            // align: 'left',
-  		            // x: 0
-  		            // style: { color: XXX, fontStyle: etc }
-  		            text: '<b>Total spending</b>',
-  		            verticalAlign: 'top',
-  		            y: -40
-  	       		},
-  	       		showInLegend:true
-  			},
-  			{
-  			    data: totalTransactions,
-  			    center: ['50%'],
-  			   
-  			    name: 'Total transactions',
-  			    title: {
-  		            text: '<b>Total transactions</b>',
-  		            verticalAlign: 'top',
-  		            y: -40
-  	       		},
-  	       		showInLegend:false
-  			},
-  			{
-  			    data: uniqueCustomers,
-  			    center: ['80%', '50%'],
-  			    name: 'Unique customers',
-  			     innerSize: '35%',
-  			    title: {
-  		            text: '<b>Unique customers</b>',
-  		            verticalAlign: 'top',
-  		            y: -40
-  	       		},
-  	       		showInLegend:false
-  			}],
-  			plotOptions: {
-  			    pie: {
-  			        dataLabels: {
-  			            enabled: false
-  			        },
-  			        cursor: 'pointer', 
-  					allowPointSelect: true   ,
-  					size: "60%"        
-  			    }            
-  			}
-  		}, function(chart) {//https://stackoverflow.com/questions/16730755/two-pies-one-legend-with-unique-items-merge-legends
-  	            
-  	        $(chart.series[0].data).each(function(i, e) {
-  	            e.legendItem.on('click', function(event) {
-  	                var legendItem=e.name;
-  	                
-  	                event.stopPropagation();
-  	                
-  	                $(chart.series).each(function(j,f){
-  	                       $(this.data).each(function(k,z){
-  	                           if(z.name==legendItem) {
-  	                               if(z.visible){
-  	                                   z.setVisible(false);
-  	                               }
-  	                               else{
-  	                                   z.setVisible(true);
-  	                               }
-  	                           }
-  	                       });
-  	                });
-  	                
-  	            });
-  	            
-  	        });
-  	     });
-}	 
-*/
-
-//GRAPH 5 	
-function plotGraph5(data){
-  	   
-}
->>>>>>> branch 'master' of https://github.com/ftcvlad/group12_industrial

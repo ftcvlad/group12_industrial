@@ -100,7 +100,6 @@
 								class=" btn btn-default btn-sm active ">Location statistics</label>
 						</div>
 					</div>
-<<<<<<< HEAD
 					
 					<div class=" form-group ">
 						<input type="checkbox" data-id="6" name="fancy-checkbox-default"
@@ -112,22 +111,6 @@
 								class=" btn btn-default btn-sm active ">Total Spending</label>
 						</div>
 					</div>
-=======
-
-					<!-- GRAPH 5
-					<div class=" form-group ">
-						<input type="checkbox" data-id="5" name="fancy-checkbox-default"
-							id="calendarCheckbox6" autocomplete="off" />
-						<div class=" btn-group ">
-							<label for="calendarCheckbox6" class="btn btn-default btn-sm ">
-								<span class=" glyphicon glyphicon-ok "></span> <span> </span>
-							</label> <label for="calendarCheckbox5"
-								class=" btn btn-default btn-sm active ">Location statistics</label>
-						</div>
-					</div>
-					-->
-					
->>>>>>> branch 'master' of https://github.com/ftcvlad/group12_industrial
 				</div>
 			
 				<div style="margin-top:10px;">
@@ -154,37 +137,12 @@
 	        <jsp:param name="transSpendingFilter" value="false"/>
 	    </jsp:include>
 	    
-<<<<<<< HEAD
 	    <!-- GRAPH 10 -->
 		<jsp:include page="/includes/graphComponent.jsp">
 	        <jsp:param name="graphId" value="10"/>
 	        <jsp:param name="locationFilter" value="false"/>
 	        <jsp:param name="transSpendingFilter" value="false"/>
 	    </jsp:include>
-=======
-	    <!-- GRAPH 2 -->
-		<jsp:include page="/includes/graphComponent.jsp">
-	        <jsp:param name="graphId" value="2"/>
-	        <jsp:param name="locationFilter" value="false"/>
-	        <jsp:param name="transSpendingFilter" value="false"/>
-	    </jsp:include>
-	    
-	    <!-- GRAPH 5
-		<jsp:include page="/includes/graphComponent.jsp">
-	        <jsp:param name="graphId" value="2"/>
-	        <jsp:param name="locationFilter" value="false"/>
-	        <jsp:param name="transSpendingFilter" value="false"/>
-	    </jsp:include>
-		-->
-		
-
-		
-
-
-		
-
-
->>>>>>> branch 'master' of https://github.com/ftcvlad/group12_industrial
 
 	</div>
 

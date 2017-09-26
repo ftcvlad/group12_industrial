@@ -41,7 +41,7 @@ public class GraphController extends HttpServlet {
 		
 			
 			
-			Gson gson = new GsonBuilder().setDateFormat("dd/mm/yyyy hh:mm:ss").create();
+			Gson gson = new GsonBuilder().setDateFormat("MM/dd/yyyy'  'HH:mm:ss").create();
 			GraphFilters filtObj =  gson.fromJson(filters, GraphFilters.class);
 			String jsonResult = null;
 			

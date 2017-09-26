@@ -30,7 +30,7 @@
 		</div>
 		
 		<div class="graph_container">
-
+			<div id = piechart2></div>
 		</div>
 		
 		<div class="graph_container">
@@ -338,5 +338,6 @@
 		      });
 		}
 	</script>
+
 </body>
 </html>

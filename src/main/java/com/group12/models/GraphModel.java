@@ -21,7 +21,7 @@ import com.group12.utils.DatabaseConnectionManager;
 public class GraphModel {
 
 
-
+	
 	public static List<YoyoTransaction> getGraph9Data(GraphFilters filters) {
 		SessionFactory sf = DatabaseConnectionManager.getSessionFactory();
 
@@ -145,7 +145,57 @@ public class GraphModel {
 		
 		
 	}
+	
+	public static List<YoyoTransaction> getGraph10Data(GraphFilters filters) {
+		
+		SessionFactory sf = DatabaseConnectionManager.getSessionFactory();
 
+		Session session = sf.openSession();
+		Transaction tx = null;
+		List<YoyoTransaction> list;
+		try {
+
+			tx = session.beginTransaction();
+
+			
+			CriteriaBuilder builder = session.getCriteriaBuilder();
+			CriteriaQuery<YoyoTransaction> cQuery = builder.createQuery(YoyoTransaction.class);
+			
+			Root<YoyoTransaction> root = cQuery.from(YoyoTransaction.class); 
+			
+			Order sortOrder = builder.desc(root.get("dateTime"));
+			
+			cQuery.multiselect(root.get("countTotal"), root.get("sumTotal"), root.get("outletRef"), root.get("uniqueCustomers") );
+			
+			
+			Date start = filters.getStartDatetime();
+			Date end = filters.getEndDatetime();
+			if ( start != null && end != null) {
+				 Predicate periodFilter = builder.between(root.get("dateTime"), start, end);
+				 cQuery.where(periodFilter);
+			}
+			
+			cQuery.groupBy(root.get("outletRef"));
+			cQuery.orderBy(sortOrder);
+		
+			
+			list = session.createQuery(cQuery).getResultList();
+
+			tx.commit();
+
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+			return null;
+		} finally {
+			session.close();
+		}
+
+		return list;
+		
+		
+	}
 	
 
 }

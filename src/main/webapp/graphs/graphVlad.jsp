@@ -100,6 +100,17 @@
 								class=" btn btn-default btn-sm active ">Location statistics</label>
 						</div>
 					</div>
+					
+					<div class=" form-group ">
+						<input type="checkbox" data-id="6" name="fancy-checkbox-default"
+							id="calendarCheckbox10" autocomplete="off" />
+						<div class=" btn-group ">
+							<label for="calendarCheckbox10" class="btn btn-default btn-sm ">
+								<span class=" glyphicon glyphicon-ok "></span> <span> </span>
+							</label> <label for="calendarCheckbox10"
+								class=" btn btn-default btn-sm active ">Total Spending</label>
+						</div>
+					</div>
 				</div>
 			
 				<div style="margin-top:10px;">
@@ -125,14 +136,13 @@
 	        <jsp:param name="locationFilter" value="false"/>
 	        <jsp:param name="transSpendingFilter" value="false"/>
 	    </jsp:include>
-
-
-		
-
-
-		
-
-
+	    
+	    <!-- GRAPH 10 -->
+		<jsp:include page="/includes/graphComponent.jsp">
+	        <jsp:param name="graphId" value="10"/>
+	        <jsp:param name="locationFilter" value="false"/>
+	        <jsp:param name="transSpendingFilter" value="false"/>
+	    </jsp:include>
 
 	</div>
 

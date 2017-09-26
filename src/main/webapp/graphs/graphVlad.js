@@ -43,9 +43,15 @@ var allGraphs = {
 		fetching: false,
 		plotData: plotGraph6,
 		spinner: null
-	 }
-	 
-
+	 },
+	 "10": {
+		 	filters:{
+				id: 10
+			},
+			fetching: false,
+			plotData: plotGraph10,
+			spinner: null
+		 }
 };
 
 var calendar ={
@@ -104,8 +110,7 @@ $( document ).ready(function() {
 	       
 	    }
 	}
-  	
-   
+   	
 	//LOCATIONS selector
     $('#selectpickerLocationGraph9').selectpicker({
 	  size: 14,
@@ -148,11 +153,14 @@ $( document ).ready(function() {
     $('#filters9').show();
     
      $('#filters6').show();
+     
+     $('#filters10').show();
     
    
     
      requestData(9);
      requestData(6);
+     requestData(10);
   	
 });	
   
@@ -176,9 +184,6 @@ function appendOverlay(graphId){
 					'</div>');
 					
 		document.getElementById("spinnerContainer"+graphId).appendChild(allGraphs[graphId].spinner.el);
-		
-		
-		
 
 	}
 }
@@ -223,9 +228,7 @@ function requestData(graphId){
 	}
 	
 	console.log(filters);
-	
-	
-	
+
 	appendOverlay(graphId);
 	allGraphs[graphId].fetching = true;
 	
@@ -440,9 +443,75 @@ function requestData(graphId){
         });
      });
   	 
-  	 
-	
-  	 
-  	 
-  	 
+	 
   }
+  
+  // Scott Graph10
+  function plotGraph10(data){
+
+		var totalSpending = data.map(function(next) {
+		   return {name: locationsMap[next.C] , y: next.sumTotal };
+		});
+
+	  	var chart = new Highcharts.Chart('graph10', {
+			
+			chart: {
+			    zoomType: 'x'
+			},
+			xAxis: {
+	            type: 'datetime',
+	            labels: {
+	                format: '{value: %b}'
+	              },
+	        },
+	        yAxis: {
+	            title:{
+	            	text: 'Total Amount Spent'
+	            },
+	        },
+			title: {
+			    text: 'Total Spending Over Time'
+			},
+			legend:{
+				enabled:true
+			},
+			series: [{
+				type: 'area',
+			    data: totalSpending,
+			    name: 'Total spending',
+			    title: {
+		            text: '<b>Total spending</b>',
+	       		},
+	       		showInLegend:true
+			}],
+			plotOptions: {
+				area: {
+	                fillColor: {
+	                    linearGradient: {
+	                        x1: 0,
+	                        y1: 0,
+	                        x2: 0,
+	                        y2: 1
+	                    },
+	                    stops: [
+	                        [0, Highcharts.getOptions().colors[0]],
+	                        [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+	                    ]
+	                },
+	                marker: {
+	                    radius: 2
+	                },
+	                lineWidth: 1,
+	                states: {
+	                    hover: {
+	                        lineWidth: 1
+	                    }
+	                },
+	                threshold: null
+	            }            
+			}
+		});
+	  	 
+		 
+	  }
+  

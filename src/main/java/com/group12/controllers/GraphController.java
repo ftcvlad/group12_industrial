@@ -27,8 +27,7 @@ public class GraphController extends HttpServlet {
 	private static final int GRAPH1 = 1;
 	private static final int GRAPH6 = 6;
 	private static final int GRAPH9 = 9;
-	
-	
+	private static final int GRAPH10 = 10;
 	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -54,6 +53,11 @@ public class GraphController extends HttpServlet {
 			}
 			else if (filtObj.getId() == GRAPH6) {
 				List<YoyoTransaction> result = getGraph6Data(filtObj);
+				jsonResult = new Gson().toJson(result);
+				
+			}
+			else if (filtObj.getId() == GRAPH10) {
+				List<YoyoTransaction> result = getGraph10Data(filtObj);
 				jsonResult = new Gson().toJson(result);
 				
 			}
@@ -163,6 +167,13 @@ public class GraphController extends HttpServlet {
 		
 		
 
+	}
+	
+	private static List<YoyoTransaction> getGraph10Data(GraphFilters filters) {
+		
+		List<YoyoTransaction> result = GraphModel.getGraph10Data(filters);
+		return result;
+		
 	}
 	
 }

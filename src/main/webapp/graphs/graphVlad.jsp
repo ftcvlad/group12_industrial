@@ -83,7 +83,7 @@
 							id="calendarCheckbox9" autocomplete="off" />
 						<div class="btn-group ">
 							<label for="calendarCheckbox9" class=" btn btn-default btn-sm ">
-								<span class=" glyphicon glyphicon-ok "></span> <span> </span>
+								<span class=" glyphicon glyphicon-ok "></span> <span>Â </span>
 							</label> <label for="calendarCheckbox9"
 								class=" btn btn-default btn-sm active "> Spending
 								distribution </label>
@@ -95,19 +95,19 @@
 							id="calendarCheckbox6" autocomplete="off" />
 						<div class=" btn-group ">
 							<label for="calendarCheckbox6" class="btn btn-default btn-sm ">
-								<span class=" glyphicon glyphicon-ok "></span> <span> </span>
+								<span class=" glyphicon glyphicon-ok "></span> <span>Â </span>
 							</label> <label for="calendarCheckbox6"
 								class=" btn btn-default btn-sm active ">Location statistics</label>
 						</div>
 					</div>
 
-					<!-- GRAPH 5
+					<!-- GRAPH 2
 					<div class=" form-group ">
-						<input type="checkbox" data-id="5" name="fancy-checkbox-default"
+						<input type="checkbox" data-id="2" name="fancy-checkbox-default"
 							id="calendarCheckbox6" autocomplete="off" />
 						<div class=" btn-group ">
 							<label for="calendarCheckbox6" class="btn btn-default btn-sm ">
-								<span class=" glyphicon glyphicon-ok "></span> <span> </span>
+								<span class=" glyphicon glyphicon-ok "></span> <span>Â </span>
 							</label> <label for="calendarCheckbox5"
 								class=" btn btn-default btn-sm active ">Location statistics</label>
 						</div>
@@ -141,27 +141,12 @@
 	    </jsp:include>
 	    
 	    <!-- GRAPH 2 -->
-		<!--<jsp:include page="/includes/graphComponent.jsp">
-	        <jsp:param name="graphId" value="2"/>
-	        <jsp:param name="locationFilter" value="false"/>
-	        <jsp:param name="transSpendingFilter" value="false"/>
-	    </jsp:include>-->
-	    
-	    <!-- GRAPH 5
 		<jsp:include page="/includes/graphComponent.jsp">
 	        <jsp:param name="graphId" value="2"/>
 	        <jsp:param name="locationFilter" value="false"/>
 	        <jsp:param name="transSpendingFilter" value="false"/>
-	    </jsp:include>
-		-->
+	    </jsp:include>	    
 		
-
-		
-
-
-		
-
-
 
 	</div>
 

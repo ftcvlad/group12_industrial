@@ -34,6 +34,11 @@ public class YoyoTransaction{
 		this.uniqueCustomers = uniqueCustomers;
 	}
 	
+	public YoyoTransaction(Date dateTime, float total) {
+		this.dateTime = dateTime;
+		this.total = total;
+	}
+	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
 	int id;
 	

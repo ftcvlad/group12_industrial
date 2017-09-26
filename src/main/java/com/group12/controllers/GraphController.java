@@ -191,7 +191,6 @@ public class GraphController extends HttpServlet {
 
 	}
 	
-<<<<<<< HEAD
 	private static List<YoyoTransaction> getGraph10Data(GraphFilters filters) {
 		
 		List<YoyoTransaction> result = GraphModel.getGraph10Data(filters);
@@ -200,6 +199,5 @@ public class GraphController extends HttpServlet {
 	}
 	
 }
-=======
-}
->>>>>>> branch 'master' of https://github.com/ftcvlad/group12_industrial
+
+

@@ -44,15 +44,25 @@ var allGraphs = {
 		plotData: plotGraph6,
 		spinner: null
 	 },
-	"2": {
+	 /*,
+	 "2": {
+		 filters:{
+		 		id: 2
+		 	},
+			fetching: false,
+			plotData: plotGraph2,
+			spinner: null
+	}*/
+	
+	/*,
+	"5": {
 		filters:{
-			//locations: allLocations.slice(),
-		 	id: 2
+			id: 5
 		},
 		fetching: false,
 		plotData: plotGraph2,
 		spinner: null
-	}
+	}*/
 	 
 };
 
@@ -156,13 +166,13 @@ $( document ).ready(function() {
     $('#filters9').show();
     
      $('#filters6').show();
-     $('#filters2').show();
+     //$('#filters65').show();
     
    
     
      requestData(9);
      requestData(6);
-     requestData(2);
+     //requestData(5);
   	
 });	
   
@@ -451,90 +461,110 @@ function requestData(graphId){
      });
   }
 
-//GRAPH 2 	
-function plotGraph2(data){
-	
-	//Line
-	var chart = Highcharts.chart('graph2', {
-		chart: {
-			type: 'line'
-		},
-		title: {
-			text: 'Total Spending per Weekday'
-		},
-		xAxis: {
-			categories: ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun']
-		},
-		yAxis: {
-			title: {
-				text: 'Total Spending'
-			}
-		},
-		plotOptions: {
-			line: {
-				dataLabels: {
-					enabled: true
-				},
-				enableMouseTracking: false
-			}
-		},
-		series: [{
-			name: 'Total spending per week day',
-			data: [
-				data.Mon,
-				data.Tue,
-				data.Wed,
-				data.Thu,
-				data.Fri,
-				data.Sat,
-				data.Sun
-			]
-		}]
-	});
-	
-	//Column
-	/*
-	var chart = new Highcharts.chart('graph2', {
-		chart: {
-			type: 'column'
-		},
-		title: {
-			text: 'Total Spending Per Weekday'
-		},
-		xAxis: {
-			type: 'Weekday',
-			labels: {
-				rotation: -45,
-				style: {
-					fontSize: '13px',
-					fontFamily: 'Verdana, sans-serif'
-				}
-			}
-		},
-		yAxis: {
-			min: 0,
-			title: {
-				text: 'Total Spending'
-			}
-		},
-		legend: {
-			enabled: false
-		},
-		tooltip: {
-			pointFormat: '{point.y}'
-		},
-		series: [{
-			name: 'Total Spending',
-			data: [
-				['Monday', data.Mon],
-				['Tuesday', data.Tue],
-				['Wednesday', data.Wed],
-				['Thursday', data.Thu],
-				['Friday', data.Fri],
-				['Saturday', data.Sat],
-				['Sunday', data.Sun]
-			]
-		}]
-	});
-	*/
+/*
+  	//GRAPH 2
+  	  function plotGraph6(data){
+
+  		var totalSpending = data.map(function(next) {
+  		   return {name: locationsMap[next.C] , y: next.sumTotal };
+  		});
+  		
+  		var uniqueCustomers = data.map(function(next) {
+  		   return {name: locationsMap[next.C] , y: next.uniqueCustomers };
+  		});
+  		
+  		var totalTransactions = data.map(function(next) {
+  		   return {name: locationsMap[next.C] , y: next.countTotal };
+  		});
+  	  	 
+  	  	 var chart = new Highcharts.Chart('graph2', {
+  			
+  			chart: {
+  			    type: 'pie'
+  			},
+  			title: {
+  			    text: 'Location statistics'
+  			},
+  			legend:{
+  				enabled:true
+  			},
+  			series: [{
+  			    data: totalSpending,
+  			    center: ['20%'],
+  			    name: 'Total spending',
+  			    title: {
+  		            // align: 'left',
+  		            // x: 0
+  		            // style: { color: XXX, fontStyle: etc }
+  		            text: '<b>Total spending</b>',
+  		            verticalAlign: 'top',
+  		            y: -40
+  	       		},
+  	       		showInLegend:true
+  			},
+  			{
+  			    data: totalTransactions,
+  			    center: ['50%'],
+  			   
+  			    name: 'Total transactions',
+  			    title: {
+  		            text: '<b>Total transactions</b>',
+  		            verticalAlign: 'top',
+  		            y: -40
+  	       		},
+  	       		showInLegend:false
+  			},
+  			{
+  			    data: uniqueCustomers,
+  			    center: ['80%', '50%'],
+  			    name: 'Unique customers',
+  			     innerSize: '35%',
+  			    title: {
+  		            text: '<b>Unique customers</b>',
+  		            verticalAlign: 'top',
+  		            y: -40
+  	       		},
+  	       		showInLegend:false
+  			}],
+  			plotOptions: {
+  			    pie: {
+  			        dataLabels: {
+  			            enabled: false
+  			        },
+  			        cursor: 'pointer', 
+  					allowPointSelect: true   ,
+  					size: "60%"        
+  			    }            
+  			}
+  		}, function(chart) {//https://stackoverflow.com/questions/16730755/two-pies-one-legend-with-unique-items-merge-legends
+  	            
+  	        $(chart.series[0].data).each(function(i, e) {
+  	            e.legendItem.on('click', function(event) {
+  	                var legendItem=e.name;
+  	                
+  	                event.stopPropagation();
+  	                
+  	                $(chart.series).each(function(j,f){
+  	                       $(this.data).each(function(k,z){
+  	                           if(z.name==legendItem) {
+  	                               if(z.visible){
+  	                                   z.setVisible(false);
+  	                               }
+  	                               else{
+  	                                   z.setVisible(true);
+  	                               }
+  	                           }
+  	                       });
+  	                });
+  	                
+  	            });
+  	            
+  	        });
+  	     });
+}	 
+*/
+
+//GRAPH 5 	
+function plotGraph5(data){
+  	   
 }

@@ -58,8 +58,8 @@ function js_xlsx(file){
 			  //reading--read 183sec
 		     //read data -- converted to json (308sec) (137sec)
 			 //convert to json -- saved 194 sec
-		
-		 	  
+			
+		 	  self.postMessage({"log": XL_row_object1});
 		 	 	self.postMessage({"log": ("converted to json 3: "+new Date().getTime()), "spinnerMessageUpdate": "saving to database..." });
 		    
 		     

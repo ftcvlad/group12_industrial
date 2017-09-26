@@ -141,11 +141,11 @@
 	    </jsp:include>
 	    
 	    <!-- GRAPH 2 -->
-		<jsp:include page="/includes/graphComponent.jsp">
+		<!--<jsp:include page="/includes/graphComponent.jsp">
 	        <jsp:param name="graphId" value="2"/>
 	        <jsp:param name="locationFilter" value="false"/>
 	        <jsp:param name="transSpendingFilter" value="false"/>
-	    </jsp:include>
+	    </jsp:include>-->
 	    
 	    <!-- GRAPH 5
 		<jsp:include page="/includes/graphComponent.jsp">

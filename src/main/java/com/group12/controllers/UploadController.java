@@ -38,10 +38,14 @@ public class UploadController extends HttpServlet {
 
 		String fileName = request.getParameter("fileName");
 
-		Gson gson = new GsonBuilder().setDateFormat("MM/dd/yyyy'  'HH:mm:ss").create();
+		Gson gson = new GsonBuilder().setDateFormat("dd/MM/yyyy HH:mm:ss").create();
 		BufferedReader reader = request.getReader();
 		List<YoyoTransaction> list = gson.fromJson(reader, new TypeToken<List<YoyoTransaction>>() {
 		}.getType());
+		
+		for (YoyoTransaction y: list) {
+			System.out.println(y);
+		}
 		
 
 		boolean wasUploaded = UploadModel.checkFileAlreadyUploaded(list);

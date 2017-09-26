@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.Calendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -60,10 +59,19 @@ public class GraphController extends HttpServlet {
 				jsonResult = new Gson().toJson(result);
 				
 			}
+			
+			/*
 			else if (filtObj.getId() == GRAPH2) {
-				Map<String, Float> result = getGraph2Data(filtObj);
+				List<YoyoTransaction> result = getGraph2Data(filtObj);
 				jsonResult = new Gson().toJson(result);		
 			}
+			*/
+			
+			/*else if (filtObj.getId() == GRAPH5) {
+				List<YoyoTransaction> result = getGraph5Data(filtObj);
+				jsonResult = new Gson().toJson(result);		
+			}*/
+			
 			
 
 			
@@ -86,6 +94,15 @@ public class GraphController extends HttpServlet {
 		return result;
 		
 	}
+	
+	/*
+	private static List<YoyoTransaction> getGraph5Data(GraphFilters filters) {
+		
+		List<YoyoTransaction> result = GraphModel.getGraph5Data(filters);
+		return result;
+		
+	}
+	*/
 	
 	private static Map<String, List<Float>> getGraph9Data(GraphFilters filters) {
 		List<YoyoTransaction> data = GraphModel.getGraph9Data(filters);
@@ -168,66 +185,6 @@ public class GraphController extends HttpServlet {
 		
 		
 
-	}
-	
-	private static Map<String, Float> getGraph2Data(GraphFilters filters) {
-		
-		List<YoyoTransaction> result = GraphModel.getGraph2Data(filters);
-		Map<String, Float> data = new TreeMap<String, Float>();
-		
-		data.put("Mon", new Float(0));
-		data.put("Tue", new Float(0));
-		data.put("Wed", new Float(0));
-		data.put("Thu", new Float(0));
-		data.put("Fri", new Float(0));
-		data.put("Sat", new Float(0));
-		data.put("Sun", new Float(0));
-		
-		int weekday = 0;
-		float prev = 0.0f;
-		
-		Calendar c = Calendar.getInstance();
-		
-		for (int i = 0; i < result.size(); i++) {
-			
-			// set calender time to the current object from result
-			c.setTime(result.get(i).getDateTime());
-			
-			// get day of week in an int. (1-7, MON-SUN)
-			result.get(i).setId(c.get(Calendar.DAY_OF_WEEK));
-			weekday = c.get(Calendar.DAY_OF_WEEK);
-			
-			// add weekday to the data
-			if(weekday == 1){
-				prev = data.get("Mon");
-				data.put("Mon", prev + result.get(i).getTotal());
-			}
-			else if(weekday == 2){
-				prev = data.get("Tue");
-				data.put("Tue", prev + result.get(i).getTotal());
-			}
-			else if(weekday == 3){
-				prev = data.get("Wed");
-				data.put("Wed", prev + result.get(i).getTotal());
-			}
-			else if(weekday == 4){
-				prev = data.get("Thu");
-				data.put("Thu", prev + result.get(i).getTotal());
-			}
-			else if(weekday == 5){
-				prev = data.get("Fri");
-				data.put("Fri", prev + result.get(i).getTotal());
-			}
-			else if(weekday == 6){
-				prev = data.get("Sat");
-				data.put("Sat", prev + result.get(i).getTotal());
-			}
-			else if(weekday == 7){
-				prev = data.get("Sun");
-				data.put("Sun", prev + result.get(i).getTotal());
-			}
-		}
-		return data;
 	}
 	
 }

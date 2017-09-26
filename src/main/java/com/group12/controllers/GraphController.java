@@ -184,7 +184,7 @@ public class GraphController extends HttpServlet {
 		data.put("Sun", new Float(0));
 		
 		int weekday = 0;
-		float prev = 0.0;
+		float prev = 0.0f;
 		
 		Calendar c = Calendar.getInstance();
 		

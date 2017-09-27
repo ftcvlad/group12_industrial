@@ -53,7 +53,7 @@ public class BehaviourGraphController extends HttpServlet {
 		}
 		else {
 			request.setAttribute("page", "exploreBehaviour");
-			request.getRequestDispatcher("graphs/behaviourGraphs.jsp").forward(request, response);
+			request.getRequestDispatcher("graphs/exploreBehaviour/behaviourGraphs.jsp").forward(request, response);
 		}
 		
 	}

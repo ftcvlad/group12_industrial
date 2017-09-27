@@ -51,6 +51,7 @@
 								 	<c:if test="${item == 10}">Time comparison</c:if>
 								 	<c:if test="${item == 9}">Spending distribution</c:if>
 								 	<c:if test="${item == 6}">Location statistics</c:if>
+								 	<c:if test="${item == 11}">Customer base growth</c:if>
 								 	<c:if test="${item == 999}">Placeholder</c:if>
 								</label>
 							</div>

@@ -64,7 +64,7 @@ public class EntitiesGraphsController extends HttpServlet {
 		else {
 			
 			request.setAttribute("page", "exploreEntities");
-			request.getRequestDispatcher("graphs/entitiesGraphs.jsp").forward(request, response);
+			request.getRequestDispatcher("graphs/exploreEntities/entitiesGraphs.jsp").forward(request, response);
 		}
 		
 	}

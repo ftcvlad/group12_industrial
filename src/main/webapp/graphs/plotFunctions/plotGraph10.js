@@ -102,6 +102,6 @@ function plotGraph10(data){
 		        series: allSeries
 		    });
 		
-		
+	
 		
 }

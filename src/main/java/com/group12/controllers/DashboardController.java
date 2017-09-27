@@ -24,7 +24,7 @@ public class DashboardController extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setAttribute("page", "dashboard");
-		request.getRequestDispatcher("graphs/dashboard.jsp").forward(request, response);
+		request.getRequestDispatcher("graphs/dashboard/dashboard.jsp").forward(request, response);
 		
 		
 	}

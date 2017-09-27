@@ -31,7 +31,7 @@
 
 <script src="libs/bootstrap-select.min.js"></script>
 <script lang="javascript" src="graphs/allGraphJs.js"></script>
-<script lang="javascript" src="graphs/behaviourGraphsJs.js"></script>
+<script lang="javascript" src="graphs/exploreBehaviour/behaviourGraphsJs.js"></script>
 
 <script lang="javascript" src="libs/spinner.min.js"></script>
 
@@ -39,7 +39,7 @@
 
 <body>
 
-	<%@ include file="../includes/sidebar.jsp"%>
+	<%@ include file="../../includes/sidebar.jsp"%>
 
 	<div class="main_content">
 

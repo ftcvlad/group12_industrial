@@ -2,9 +2,7 @@ package com.group12.controllers;
 
 
 import java.io.IOException;
-
 import java.util.List;
-
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,11 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import com.group12.beans.Graph10Data;
+import com.group12.beans.Graph11Data;
 import com.group12.beans.GraphFilters;
-
 import com.group12.models.Graph10Model;
+import com.group12.models.Graph11Model;
 
 
 
@@ -27,7 +25,7 @@ public class TimeGraphsController extends HttpServlet {
 	
 
 	private static final int GRAPH10 = 10;
-	
+	private static final int GRAPH11 = 11;
 	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -50,6 +48,14 @@ public class TimeGraphsController extends HttpServlet {
 				jsonResult = gson1.toJson(result);
 				
 			}
+			else if (filtObj.getId() == GRAPH11) {
+				
+				List<Graph11Data> result = Graph11Model.getGraph11Data(filtObj);
+
+				Gson gson1 = new GsonBuilder().create();
+				jsonResult = gson1.toJson(result);
+				
+			}
 			
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
@@ -57,7 +63,7 @@ public class TimeGraphsController extends HttpServlet {
 		}
 		else {
 			request.setAttribute("page", "exploreTime");
-			request.getRequestDispatcher("graphs/timeGraphs.jsp").forward(request, response);
+			request.getRequestDispatcher("graphs/exploreTime/timeGraphs.jsp").forward(request, response);
 		}
 		
 	}

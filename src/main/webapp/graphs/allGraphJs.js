@@ -248,7 +248,6 @@ function requestData(graphId){
     	},
     	error: function(jqXHR, textStatus, errorThrown){
     		removeOverlay(graphId);
-    		alert( allGraphs[graphId].url);
     		alert(textStatus);
     	},
     	complete: function(){

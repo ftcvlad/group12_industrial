@@ -33,8 +33,9 @@
 
 
 <script src= "graphs/plotFunctions/plotGraph10.js"></script>
+<script src= "graphs/plotFunctions/plotGraph11.js"></script>
 <script lang="javascript" src="graphs/allGraphJs.js"></script>
-<script lang="javascript" src="graphs/timeGraphsJs.js"></script>
+<script lang="javascript" src="graphs/exploreTime/timeGraphsJs.js"></script>
 
 <script lang="javascript" src="libs/spinner.min.js"></script>
 
@@ -42,7 +43,7 @@
 
 <body>
 
-	<%@ include file="../includes/sidebar.jsp"%>
+	<%@ include file="../../includes/sidebar.jsp"%>
 
 	<div class="main_content">
 
@@ -51,8 +52,16 @@
 		
 		<jsp:include page="/includes/calendarComponent.jsp">
 	         <jsp:param name="graphChecboxId" value="10" />
+	          <jsp:param name="graphChecboxId" value="11" />
 	    </jsp:include>
 		
+		
+		<!-- GRAPH 11 -->
+		<jsp:include page="/includes/graphComponent.jsp">
+	        <jsp:param name="graphId" value="11"/>
+	        <jsp:param name="locationFilter" value="true"/>
+	        <jsp:param name="transSpendingFilter" value="false"/>
+	    </jsp:include>
 
 		<!-- GRAPH 10 -->
 		<jsp:include page="/includes/graphComponent.jsp">

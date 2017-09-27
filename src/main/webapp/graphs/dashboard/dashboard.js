@@ -31,6 +31,16 @@ var allGraphs = {
 		plotData: plotGraph6,
 		spinner: null,
 		url: 'entitiesGraphs'
+	 },
+	  "11":{
+	 	filters:{
+			id: 11,
+			locations: allLocations.slice()
+		},
+		fetching: false,
+		plotData: plotGraph11,
+		spinner: null,
+		url: 'timeGraphs'
 	 }
 	 
 	 

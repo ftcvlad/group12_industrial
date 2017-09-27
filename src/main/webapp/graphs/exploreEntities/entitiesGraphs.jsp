@@ -35,7 +35,7 @@
 <script src= "graphs/plotFunctions/plotGraph9.js"></script>
 <script src= "graphs/plotFunctions/plotGraph6.js"></script>
 <script lang="javascript" src="graphs/allGraphJs.js"></script>
-<script lang="javascript" src="graphs/entitiesGraphsJs.js"></script>
+<script lang="javascript" src="graphs/exploreEntities/entitiesGraphsJs.js"></script>
 
 <script lang="javascript" src="libs/spinner.min.js"></script>
 
@@ -43,7 +43,7 @@
 
 <body>
 
-	<%@ include file="../includes/sidebar.jsp"%>
+	<%@ include file="../../includes/sidebar.jsp"%>
 
 	<div class="main_content">
 

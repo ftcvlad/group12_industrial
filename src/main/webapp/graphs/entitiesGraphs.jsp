@@ -13,7 +13,6 @@
 <head>
 <title>DUSA Data App</title>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="graphs/graphVlad.js"></script>
 <script src="http://code.highcharts.com/highcharts.js"></script>
 
 <script type="text/javascript" src="libs/highchartPlugins.js"></script>
@@ -31,6 +30,9 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
 
 <script src="libs/bootstrap-select.min.js"></script>
+<script lang="javascript" src="graphs/allGraphJs.js"></script>
+<script lang="javascript" src="graphs/entitiesGraphsJs.js"></script>
+
 <script lang="javascript" src="libs/spinner.min.js"></script>
 
 </head>
@@ -41,33 +43,31 @@
 
 	<div class="main_content">
 
+
+		<!--  Calendar -->
+		
+		<jsp:include page="/includes/calendarComponent.jsp">
+	         <jsp:param name="graphChecboxId" value="9" />
+	         <jsp:param name="graphChecboxId" value="6" />
+	    </jsp:include>
 		
 
-	
-	    
-	    <!-- GRAPH 2 -->
-		<!--<jsp:include page="/includes/graphComponent.jsp">
-	        <jsp:param name="graphId" value="2"/>
-	        <jsp:param name="locationFilter" value="false"/>
-	        <jsp:param name="transSpendingFilter" value="false"/>
-	    </jsp:include>-->
-	    
-	    <!-- GRAPH 5
+		<!-- GRAPH 9 -->
 		<jsp:include page="/includes/graphComponent.jsp">
-	        <jsp:param name="graphId" value="2"/>
+	        <jsp:param name="graphId" value="9"/>
+	        <jsp:param name="locationFilter" value="true"/>
+	        <jsp:param name="transSpendingFilter" value="true"/>
+	    </jsp:include>
+
+
+		<!-- GRAPH 6 -->
+		<jsp:include page="/includes/graphComponent.jsp">
+	        <jsp:param name="graphId" value="6"/>
 	        <jsp:param name="locationFilter" value="false"/>
 	        <jsp:param name="transSpendingFilter" value="false"/>
 	    </jsp:include>
-		-->
-		
 
 		
-
-
-		
-
-
-
 	</div>
 
 

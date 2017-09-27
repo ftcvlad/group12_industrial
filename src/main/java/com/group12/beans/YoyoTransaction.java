@@ -55,6 +55,9 @@ public class YoyoTransaction{
 	@Formula(value = "COUNT(Distinct customer)")
 	int uniqueCustomers;
 	
+	@Formula(value = "UNIX_TIMESTAMP(Date(dateTime))")
+	long date;
+	
 	public int getUniqueCustomers() {
 		return uniqueCustomers;
 	}

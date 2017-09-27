@@ -1,9 +1,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<div class="panel panel-default">
+<div id="graphContainer${param.graphId}" class="panel panel-default graphContainer <c:if test="${param.onDashboard == true}">hiddenElement</c:if>"  >
 
-
+			<div class="pinButtonDiv" >
+				<button type="button" data-id="${param.graphId}" data-on="0" class="btn btn-primary btn-sm pinButton" onClick="addToDashboard(this, ${param.graphId})">Pin</button>
+			
+			</div>
 			
 			<div class="panel-body">
+				
 			
 			
 				<div id="graph${param.graphId}">

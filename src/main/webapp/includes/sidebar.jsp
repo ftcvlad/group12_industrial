@@ -11,7 +11,7 @@
         </button>
         
         <div id="graphButtons">
-	        <button onclick="location.href='http://www.google.com'" class="module_button">
+	        <button onclick="location.href='dashboard'" class="module_button <c:if test="${page == 'dashboard'}">selectedMenuItem</c:if>">
 		            Graph dashboard
 		            <div>
 		                <image class="module_button_image" src="images/graph.png"></image>

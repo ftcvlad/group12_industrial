@@ -5,7 +5,7 @@ var allGraphs = {
 
 
 
-
+var isDashboard = false;
 
 
 $( document ).ready(function() {

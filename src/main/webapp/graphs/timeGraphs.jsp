@@ -30,6 +30,9 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
 
 <script src="libs/bootstrap-select.min.js"></script>
+
+
+<script src= "graphs/plotFunctions/plotGraph10.js"></script>
 <script lang="javascript" src="graphs/allGraphJs.js"></script>
 <script lang="javascript" src="graphs/timeGraphsJs.js"></script>
 

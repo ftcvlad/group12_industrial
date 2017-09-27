@@ -84,11 +84,84 @@ $( document ).ready(function() {
     
     
 	
-  
+  	//set state of pin buttons
+	var pinnedIds = localStorage.getItem("pinnedGraphs");
+    if (pinnedIds){
+    	pinnedIds = JSON.parse(pinnedIds);
+    	$(".pinButton").each(function(index, element) {
+    		var id = $(element).data("id");
+    		if (pinnedIds.indexOf(id) !== -1){
+    			$(element).data('on', 1);
+    			$(element).text('Unpin');
+    		}  
+	    });
+    }
+  	
   	
 });	
   
   
+  
+function addToDashboard(elem, graphId){
+
+
+	if (typeof(Storage) !== "undefined") {
+	
+		var jElem = $(elem);
+		var isOn = jElem.data("on");
+		
+		var pinnedGraphs = localStorage.getItem("pinnedGraphs");
+		if (pinnedGraphs === null){
+		    pinnedGraphs = [];
+		}
+		else {
+			pinnedGraphs = JSON.parse(pinnedGraphs);
+		}
+		
+		if (isOn === 0){//PIN
+		
+		    if (pinnedGraphs.indexOf(graphId) === -1){
+		    	 pinnedGraphs.push(graphId);
+		   		 localStorage.setItem("pinnedGraphs", JSON.stringify(pinnedGraphs));
+		    }
+		    jElem.text('Unpin');
+		   	jElem.data('on', 1);
+		    
+		}
+		else if (isOn === 1){//UNPIN
+			
+		    var ind = pinnedGraphs.indexOf(graphId);
+		    if (ind !== -1){
+		    	 pinnedGraphs.splice(ind, 1);
+		   		 localStorage.setItem("pinnedGraphs", JSON.stringify(pinnedGraphs));
+		    }
+		    
+		    if (isDashboard){
+		    	jElem.parent().parent().hide();
+		    	
+		    	
+		    	
+		    	$("#graphContainer"+graphId).hide();
+		    	$("#calendarCheckbox"+graphId).parent().hide();
+		    	
+		    }
+		    else{
+		    	jElem.text('Pin');
+				jElem.data('on', 0);
+		    
+		    }
+		    
+		    
+		   
+		}
+	
+	   
+	} else {
+	   alert("your browser doesn't support local storage!");
+	}
+	
+	
+}
   
   
 function filterMultipleGraphs(){
@@ -155,7 +228,7 @@ function requestData(graphId){
 	}
 	
 	
-	
+	console.log(filters);
 	
 	appendOverlay(graphId);
 	allGraphs[graphId].fetching = true;
@@ -175,6 +248,7 @@ function requestData(graphId){
     	},
     	error: function(jqXHR, textStatus, errorThrown){
     		removeOverlay(graphId);
+    		alert( allGraphs[graphId].url);
     		alert(textStatus);
     	},
     	complete: function(){

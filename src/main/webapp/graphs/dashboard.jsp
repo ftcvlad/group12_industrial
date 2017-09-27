@@ -32,10 +32,11 @@
 <script src="libs/bootstrap-select.min.js"></script>
 
 
+<script src= "graphs/plotFunctions/plotGraph10.js"></script>
 <script src= "graphs/plotFunctions/plotGraph9.js"></script>
 <script src= "graphs/plotFunctions/plotGraph6.js"></script>
 <script lang="javascript" src="graphs/allGraphJs.js"></script>
-<script lang="javascript" src="graphs/entitiesGraphsJs.js"></script>
+<script lang="javascript" src="graphs/dashboard.js"></script>
 
 <script lang="javascript" src="libs/spinner.min.js"></script>
 
@@ -51,16 +52,27 @@
 		<!--  Calendar -->
 		
 		<jsp:include page="/includes/calendarComponent.jsp">
+	         <jsp:param name="graphChecboxId" value="10" />
 	         <jsp:param name="graphChecboxId" value="9" />
 	         <jsp:param name="graphChecboxId" value="6" />
+	          <jsp:param name="onDashboard" value="true" />
 	    </jsp:include>
 		
 
-		<!-- GRAPH 9 -->
+		<!-- GRAPH 10 -->
+		<jsp:include page="/includes/graphComponent.jsp">
+	        <jsp:param name="graphId" value="10"/>
+	        <jsp:param name="locationFilter" value="true"/>
+	        <jsp:param name="transSpendingFilter" value="true"/>
+	        <jsp:param name="onDashboard" value="true"/>
+	    </jsp:include>
+
+			<!-- GRAPH 9 -->
 		<jsp:include page="/includes/graphComponent.jsp">
 	        <jsp:param name="graphId" value="9"/>
 	        <jsp:param name="locationFilter" value="true"/>
 	        <jsp:param name="transSpendingFilter" value="true"/>
+	        <jsp:param name="onDashboard" value="true"/>
 	    </jsp:include>
 
 
@@ -69,8 +81,8 @@
 	        <jsp:param name="graphId" value="6"/>
 	        <jsp:param name="locationFilter" value="false"/>
 	        <jsp:param name="transSpendingFilter" value="false"/>
+	        <jsp:param name="onDashboard" value="true"/>
 	    </jsp:include>
-
 		
 	</div>
 

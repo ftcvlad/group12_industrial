@@ -41,7 +41,7 @@
 				
 					<c:forEach var="item" items="${paramValues.graphChecboxId}">
 					
-						<div class=" form-group ">
+						<div class="form-group <c:if test="${param.onDashboard == true}">hiddenElement</c:if>" >
 							<input type="checkbox" data-id="${item}" name="fancy-checkbox-default"
 								id="calendarCheckbox${item}" autocomplete="off" />
 							<div class="btn-group ">

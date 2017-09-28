@@ -35,6 +35,7 @@
 <script src= "graphs/plotFunctions/plotGraph10.js"></script>
 <script src= "graphs/plotFunctions/plotGraph9.js"></script>
 <script src= "graphs/plotFunctions/plotGraph6.js"></script>
+<script src= "graphs/plotFunctions/plotGraph12.js"></script>
 <script lang="javascript" src="graphs/allGraphJs.js"></script>
 <script lang="javascript" src="graphs/dashboard/dashboard.js"></script>
 
@@ -56,6 +57,7 @@
 	         <jsp:param name="graphChecboxId" value="10" />
 	         <jsp:param name="graphChecboxId" value="9" />
 	         <jsp:param name="graphChecboxId" value="6" />
+	         <jsp:param name="graphChecboxId" value="12" />
 	          <jsp:param name="onDashboard" value="true" />
 	    </jsp:include>
 		
@@ -93,6 +95,15 @@
 	        <jsp:param name="transSpendingFilter" value="false"/>
 	        <jsp:param name="onDashboard" value="true"/>
 	        <jsp:param name="comparisonFilter" value="true"/>
+	    </jsp:include>
+	    
+	    <!-- GRAPH 12 -->
+		<jsp:include page="/includes/graphComponent.jsp">
+	        <jsp:param name="graphId" value="12"/>
+	        <jsp:param name="locationFilter" value="true"/>
+	        <jsp:param name="transSpendingFilter" value="false"/>
+	        <jsp:param name="onDashboard" value="true"/>
+	        
 	    </jsp:include>
 		
 	</div>

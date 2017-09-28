@@ -2,13 +2,10 @@ package com.group12.controllers;
 
 
 import java.io.IOException;
-
 import java.util.Calendar;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.ArrayList;
-import java.util.List;
-
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,11 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-
+import com.group12.beans.Graph12Data;
 import com.group12.beans.GraphFilters;
-import com.group12.models.GraphModel;
+import com.group12.beans.GraphResponse;
 import com.group12.beans.YoyoTransaction;
+import com.group12.models.Graph12Model;
+import com.group12.models.GraphModel;
 
 
 
@@ -32,7 +30,7 @@ import com.group12.beans.YoyoTransaction;
 public class BehaviourGraphController extends HttpServlet {
 	
 
-	private static final int GRAPH999 = 999;
+	private static final int GRAPH12 = 12;
 	private static final int GRAPH2 = 2;
 	
 	
@@ -49,8 +47,13 @@ public class BehaviourGraphController extends HttpServlet {
 			GraphFilters filtObj =  gson.fromJson(filters, GraphFilters.class);
 			String jsonResult = null;
 
-			if (filtObj.getId() == GRAPH999) {
-				jsonResult = "999";
+			if (filtObj.getId() == GRAPH12) {
+				
+				List<Graph12Data> res = Graph12Model.getGraph12Data(filtObj);
+				GraphResponse gr = new GraphResponse();
+				gr.setFilters(filtObj);
+				gr.setResult12(res);
+				jsonResult = new Gson().toJson(gr);	
 			}
 			else if(filtObj.getId() == GRAPH2){
 				Map<String, Float> result = getGraph2Data(filtObj);

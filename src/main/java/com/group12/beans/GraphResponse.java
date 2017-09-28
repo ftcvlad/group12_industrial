@@ -3,12 +3,19 @@ package com.group12.beans;
 import java.util.List;
 
 public class GraphResponse {
-	List<Graph11Data> result11;
 	List<Graph10Data> result10;
+	List<Graph11Data> result11;
+	List<Graph12Data> result12;
 	GraphFilters filters;
 	
 	
 	
+	public List<Graph12Data> getResult12() {
+		return result12;
+	}
+	public void setResult12(List<Graph12Data> result12) {
+		this.result12 = result12;
+	}
 	public List<Graph11Data> getResult11() {
 		return result11;
 	}

@@ -64,63 +64,6 @@ public class Graph11Model {
 			   
 			}
 			
-			//foking filters kill my life :(((((((( and hibernate
-			
-
-			
-		
-			
-			
-		
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			/*CriteriaBuilder builder = session.getCriteriaBuilder();
-			CriteriaQuery<Object[]> criteria = builder.createQuery( Object[].class );
-			Root<YoyoTransaction> root = criteria.from( YoyoTransaction.class );
-			
-		
-			criteria.multiselect( root.get("countTotal"), root.get("sumTotal"), root.get("date") );
-			
-						
-			//filter locations
-			Predicate predicate = root.get("outletRef").in(filters.getLocations());
-			criteria.where(predicate);
-			
-			//filter time
-			Date start = filters.getStartDatetime();
-			Date end = filters.getEndDatetime();
-			if ( start != null && end != null) {
-				 Predicate periodFilter = builder.between(root.get("dateTime"), start, end);
-				 criteria.where(periodFilter);
-			}
-			
-			
-			criteria.groupBy(root.get("date"));
-			Order sortOrder = builder.asc(root.get("date"));
-			criteria.orderBy(sortOrder);
-
-			list = session.createQuery(criteria).getResultList();
-
-			res = new ArrayList<Graph11Data>();
-			
-			for ( Object[] values : list ) {
-				//res.add(new Graph11Data((int) values[0], (float) values[1], (long) values[2]));
-			} */
-			
-			
-
 			tx.commit();
 
 		} catch (HibernateException e) {

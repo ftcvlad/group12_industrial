@@ -30,6 +30,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
 
 <script src="libs/bootstrap-select.min.js"></script>
+<script src= "graphs/plotFunctions/plotGraph12.js"></script>
 <script src= "graphs/plotFunctions/plotGraph2.js"></script>
 <script lang="javascript" src="graphs/allGraphJs.js"></script>
 <script lang="javascript" src="graphs/exploreBehaviour/behaviourGraphsJs.js"></script>
@@ -48,9 +49,16 @@
 		<!--  Calendar -->
 		
 		<jsp:include page="/includes/calendarComponent.jsp">
-	     	  <jsp:param name="graphChecboxId" value="999" />
+	     	  <jsp:param name="graphChecboxId" value="12" />
 	    </jsp:include>
 		
+		
+		<!-- GRAPH 12 -->
+		<jsp:include page="/includes/graphComponent.jsp">
+			<jsp:param name="graphId" value="12"/>
+			<jsp:param name="locationFilter" value="true"/>
+			<jsp:param name="transSpendingFilter" value="false"/>
+		</jsp:include>
 
 		<!-- GRAPH 2 -->
 		<jsp:include page="/includes/graphComponent.jsp">

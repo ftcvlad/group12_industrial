@@ -52,6 +52,7 @@
 								 	<c:if test="${item == 9}">Spending distribution</c:if>
 								 	<c:if test="${item == 6}">Location statistics</c:if>
 								 	<c:if test="${item == 11}">Customer base growth</c:if>
+								 	<c:if test="${item == 12}">Daily buying behaviour</c:if>
 								 	<c:if test="${item == 999}">Placeholder</c:if>
 								</label>
 							</div>

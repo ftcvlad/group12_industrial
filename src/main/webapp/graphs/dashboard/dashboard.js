@@ -43,7 +43,18 @@ var allGraphs = {
 		plotData: plotGraph11,
 		spinner: null,
 		url: 'timeGraphs'
+	 },
+	  "12":{
+	 	filters:{
+			id: 12,
+			locations: allLocations.slice()
+		},
+		fetching: false,
+		plotData: plotGraph12,
+		spinner: null,
+		url: 'behaviourGraphs'
 	 }
+	 
 	 
 	 
 };

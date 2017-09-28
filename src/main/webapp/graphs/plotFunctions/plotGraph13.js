@@ -3,23 +3,6 @@ function plotGraph13(res){
 
 	console.log(res);
 	
-	/*var seriesObj = {
-		"235": {name: "DOJ catering", color: "", data: [], shadow: false},
-		"236": {name: "Air Bar", color: "", data: [], shadow: false},
-		"237": {name: "Floor Five", color: "", data: [], shadow: false},
-		"238": {name: "Library", color: "", data: [], shadow: false},
-		"239": {name: "Spare", color: "", data: [], shadow: false},
-		"240": {name: "Food on Four", color: "", data: [], shadow: false},
-		"241": {name: "Liar bar", color: "", data: [], shadow: false},
-		"242": {name: "Mono", color: "", data: [], shadow: false},
-		"243": {name: "Ents", color: "", data: [], shadow: false},
-		"343": {name: "Remote Campus Shop", color: "", data: [], shadow: false},
-		"456": {name: "DUSA The Union Marketplace", color: "", data: [], shadow: false},,
-		"2676": {name: "Premier Shop", color: "", data: [], shadow: false},
-		"2677": {name: "College Shop", color: "", data: [], shadow: false},,
-		"2679": {name: "Ninewells Shop", color: "", data: [], shadow: false},
-	};*/
-
 	var seriesObj = {
 		"235": {name: "DOJ catering", color:"rgba(250, 190, 190, 1)", data: [], shadow: false},
 		"236": {name: "Air Bar", color:"rgba(60, 180, 75, 1)", data: [], shadow: false},
@@ -37,17 +20,22 @@ function plotGraph13(res){
 		"2679": {name: "Ninewells Shop",  color:"rgba(128, 0, 0, 1)",  data: [], shadow: false},
 	};
 	
+	var uniqueCustomers = res.length;
+	var nextTransactions ;
 	for (var i=0; i<res.length; i++){
-		seriesObj[res[i].outletRef].data.push([res[i].countTotal, res[i].sumTotal]);
+	
+		nextTransactions = res[i].countTotal +(+(Math.random()-0.5).toFixed(2));
+		
+		seriesObj[res[i].outletRef].data.push([nextTransactions, res[i].sumTotal]);
 	
 	}
 	
 	var allSeries = [];
 	for (var property in seriesObj) {
 	    if (seriesObj.hasOwnProperty(property)) {
-	    	//if (property != 241){
-	    		allSeries.push(seriesObj[property]);
-	    	//}
+	    	
+	    	allSeries.push(seriesObj[property]);
+	    
 	    
 	        
 	    }
@@ -62,15 +50,15 @@ function plotGraph13(res){
 	        animation: false
 	    },
 	    title: {
-	        text: 'Height Versus Weight of 507 Individuals by Gender'
+	        text: 'Customer preference scatter'
 	    },
 	    subtitle: {
-	        text: 'Source: Heinz  2003'
+	        text: 'Unique customers: '+uniqueCustomers
 	    },
 	    xAxis: {
 	        title: {
 	            enabled: true,
-	            text: 'Spending'
+	            text: 'Transactions'
 	        },
 	        startOnTick: true,
 	        endOnTick: true,
@@ -79,7 +67,7 @@ function plotGraph13(res){
 	    },
 	    yAxis: {
 	        title: {
-	            text: 'Transactions'
+	            text: 'Spending'
 	        }
 	    },
 	  /*  legend: {
@@ -95,7 +83,7 @@ function plotGraph13(res){
 	    plotOptions: {
 	        scatter: {
 	            marker: {
-	                radius: 3,
+	                radius: 2,
 	                states: {
 	                    hover: {
 	                        enabled: true,

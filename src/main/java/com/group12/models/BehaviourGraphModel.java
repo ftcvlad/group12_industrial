@@ -42,25 +42,24 @@ public class BehaviourGraphModel {
 				DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				String startStr = df.format(start);
 				String endStr = df.format(end);
-				betweenDates = " AND (dateTime BETWEEN '"+startStr+"' AND '"+endStr+"')" ;
+				betweenDates = " AND (dateTime BETWEEN '"+startStr+"' AND '"+endStr+"') " ;
 			}
-			
-/*			String rawSql = "select count(customer), unix_timestamp(Date(dateTime)) " + 
-					"from" + 
-					"	(SELECT customer , dateTime FROM retail_data WHERE outletRef IN (:values) " + betweenDates + 
-					"	GROUP BY customer) as T " + 
-					"GROUP BY Date(dateTime) " + 
-					"ORDER BY dateTime; ";*/
 
 			
-			String rawSql = "select Customer, OutletRef, sum(c), sum(s) " + 
-					" from (select Customer, OutletRef, count(Total) as c, sum(Total) as s" + betweenDates +
-					"	from retail_data WHERE outletRef IN (:values) " + 
-					"	group by Customer, OutletRef " + 
-					"	order by Customer, c desc) x " + 
-					" group by Customer " + 
-					" order by Customer ";
-			
+			String rawSql = " select A.Customer, OutletRef, c, s " + 
+							" from " + 
+								" (select Customer, OutletRef" + 
+								" from (select Customer, OutletRef, count(Total) as c, sum(Total) as s " + 
+								"	from retail_data " + 
+								"	group by Customer, OutletRef " + 
+								"	order by Customer, c desc) x " + 
+								" group by Customer) as A " + 
+							" inner join " + 
+								" (select sum(Total) as s, count(Total) as c, Customer " + 
+								" from retail_data WHERE outletRef IN (:values) " + betweenDates+
+								" group by Customer) as B " + 
+							" on A.Customer=B.Customer; ";
+	
 			
 			
 			@SuppressWarnings("rawtypes")
@@ -76,7 +75,7 @@ public class BehaviourGraphModel {
 				Graph13Data gd = new Graph13Data();
 				gd.setCustomer( (short)  nextO[0]);
 				gd.setOutletRef( (short) nextO[1]);
-				gd.setCountTotal(((BigDecimal) nextO[2]).intValue());
+				gd.setCountTotal(((BigInteger) nextO[2]).intValue());
 				gd.setSumTotal(((BigDecimal) nextO[3]).floatValue());
 				
 			    res.add(gd);

@@ -1,6 +1,15 @@
 
 var allGraphs = {
-	
+	"2": {
+		filters:{
+		   id: 2,
+		   locations: allLocations.slice()
+	   },
+	   fetching: false,
+	   plotData: plotGraph2,
+	   spinner: null,
+	   url: 'behaviourGraphs'
+	},
 	 "10":{
 	 	filters:{
 			id: 10,
@@ -82,14 +91,13 @@ $( document ).ready(function() {
 	
 	pinnedIds = JSON.parse(pinnedIds);
 	
-	console.log(pinnedIds);
 	for (var i=0; i<pinnedIds.length; i++){
 	
 		var nextId = pinnedIds[i];
 		if (allGraphs[nextId].filters.locations){
 		
 			
-			//GRAPH 10
+			
 			$('#selectpickerLocationGraph'+nextId).selectpicker({
 			  size: 14,
 			  actionsBox: true,
@@ -117,7 +125,7 @@ $( document ).ready(function() {
 		
 		
 		if (allGraphs[nextId].filters.yAxisType){
-			 //GRAPH 10
+			
 		    $('#transVsSpendingGraph'+nextId).selectpicker({
 			  size: 2,
 			  width: "150px"

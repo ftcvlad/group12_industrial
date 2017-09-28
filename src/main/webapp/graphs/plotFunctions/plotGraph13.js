@@ -1,7 +1,4 @@
 function plotGraph13(res){
-
-
-	console.log(res);
 	
 	var seriesObj = {
 		"235": {name: "DOJ catering", color:"rgba(250, 190, 190, 1)", data: [], shadow: false},
@@ -23,25 +20,17 @@ function plotGraph13(res){
 	var uniqueCustomers = res.length;
 	var nextTransactions ;
 	for (var i=0; i<res.length; i++){
-	
-		nextTransactions = res[i].countTotal +(+(Math.random()-0.5).toFixed(2));
-		
+		nextTransactions = res[i].countTotal +(+(Math.random()-0.5).toFixed(2));//+jittering
 		seriesObj[res[i].outletRef].data.push([nextTransactions, res[i].sumTotal]);
-	
 	}
 	
 	var allSeries = [];
 	for (var property in seriesObj) {
 	    if (seriesObj.hasOwnProperty(property)) {
-	    	
 	    	allSeries.push(seriesObj[property]);
-	    
-	    
-	        
 	    }
 	}
 	
-	console.log(allSeries);
 	
 	Highcharts.chart('graph13', {
 	    chart: {
@@ -70,16 +59,6 @@ function plotGraph13(res){
 	            text: 'Spending'
 	        }
 	    },
-	  /*  legend: {
-	        layout: 'vertical',
-	        align: 'left',
-	        verticalAlign: 'top',
-	        x: 100,
-	        y: 70,
-	        floating: true,
-	        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
-	        borderWidth: 1
-	    },*/
 	    plotOptions: {
 	        scatter: {
 	            marker: {

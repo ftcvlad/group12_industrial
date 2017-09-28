@@ -31,6 +31,7 @@
 
 <script src="libs/bootstrap-select.min.js"></script>
 
+<script src= "graphs/plotFunctions/plotGraph2.js"></script>
 <script src= "graphs/plotFunctions/plotGraph11.js"></script>
 <script src= "graphs/plotFunctions/plotGraph10.js"></script>
 <script src= "graphs/plotFunctions/plotGraph9.js"></script>
@@ -54,6 +55,7 @@
 		<!--  Calendar -->
 		
 		<jsp:include page="/includes/calendarComponent.jsp">
+			<jsp:param name="graphChecboxId" value="2" />
 			<jsp:param name="graphChecboxId" value="11" />
 	         <jsp:param name="graphChecboxId" value="10" />
 	         <jsp:param name="graphChecboxId" value="9" />
@@ -110,6 +112,14 @@
 	    <!-- GRAPH 13 -->
 		<jsp:include page="/includes/graphComponent.jsp">
 	        <jsp:param name="graphId" value="13"/>
+	        <jsp:param name="locationFilter" value="true"/>
+	        <jsp:param name="transSpendingFilter" value="false"/>
+	        <jsp:param name="onDashboard" value="true"/>
+	    </jsp:include>
+	    
+	     <!-- GRAPH 2 -->
+		<jsp:include page="/includes/graphComponent.jsp">
+	        <jsp:param name="graphId" value="2"/>
 	        <jsp:param name="locationFilter" value="true"/>
 	        <jsp:param name="transSpendingFilter" value="false"/>
 	        <jsp:param name="onDashboard" value="true"/>

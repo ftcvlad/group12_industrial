@@ -52,6 +52,7 @@
 		<jsp:include page="/includes/calendarComponent.jsp">
 	     	  <jsp:param name="graphChecboxId" value="12" />
 	     	  <jsp:param name="graphChecboxId" value="13" />
+	     	  <jsp:param name="graphChecboxId" value="2" />
 	    </jsp:include>
 		
 		
@@ -72,7 +73,7 @@
 		<!-- GRAPH 2 -->
 		<jsp:include page="/includes/graphComponent.jsp">
 			<jsp:param name="graphId" value="2"/>
-			<jsp:param name="locationFilter" value="false"/>
+			<jsp:param name="locationFilter" value="true"/>
 			<jsp:param name="transSpendingFilter" value="false"/>
 		</jsp:include>
 

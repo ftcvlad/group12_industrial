@@ -41,15 +41,17 @@ public class Graph2Model {
 				DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				String startStr = df.format(start);
 				String endStr = df.format(end);
-				betweenDates = " AND (dateTime BETWEEN '"+startStr+"' AND '"+endStr+"')" ;
+				betweenDates = " AND (dateTime BETWEEN '"+startStr+"' AND '"+endStr+"') " ;
 			}
 			
-			String rawSql = "SELECT sum(Total), DAYNAME((dateTime)) AS Day_Name1 FROM retail_data GROUP BY Day_Name1";
+			String rawSql = "SELECT sum(Total), DAYNAME((dateTime)) AS Day_Name1 "
+					+ " FROM retail_data WHERE outletRef IN (:values) " + betweenDates
+					+ " GROUP BY Day_Name1";
 
 			@SuppressWarnings("rawtypes")
 			Query query = session.createNativeQuery(rawSql);
 
-			//query.setParameterList("values", filters.getLocations());
+			query.setParameterList("values", filters.getLocations());
 
 			List<Object[]> allObj = query.getResultList();
 

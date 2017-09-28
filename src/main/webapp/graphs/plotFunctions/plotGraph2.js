@@ -1,7 +1,15 @@
 //GRAPH 2 	
 function plotGraph2(data){
 	
-	console.log(data);
+	var _data = {
+		Mon : data[1].spent,
+		Tue : data[5].spent,
+		Wed : data[6].spent,
+		Thu : data[4].spent,
+		Fri : data[0].spent,
+		Sat : data[2].spent,
+		Sun : data[3].spent
+	};
 	
 	//Line
 	var chart = Highcharts.chart('graph2', {
@@ -30,13 +38,13 @@ function plotGraph2(data){
 		series: [{
 			name: 'Total spending per week day',
 			data: [
-				data.Mon,
-				data.Tue,
-				data.Wed,
-				data.Thu,
-				data.Fri,
-				data.Sat,
-				data.Sun
+				_data.Mon,
+				_data.Tue,
+				_data.Wed,
+				_data.Thu,
+				_data.Fri,
+				_data.Sat,
+				_data.Sun
 			]
 		}]
 	});

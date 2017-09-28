@@ -1,7 +1,10 @@
 package com.group12.models;
 
 import java.math.BigInteger;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -9,7 +12,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import org.hibernate.type.StandardBasicTypes;
 
 import com.group12.beans.Graph11Data;
 import com.group12.beans.GraphFilters;
@@ -31,34 +33,35 @@ public class Graph11Model {
 			
 			tx = session.beginTransaction();
 
-		
-			
+			Date start  = filters.getStartDatetime();
+			Date end  = filters.getEndDatetime();
+			String betweenDates = "";
+			if (end != null && start != null) {
+				DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				String startStr = df.format(start);
+				String endStr = df.format(end);
+				betweenDates = " AND (dateTime BETWEEN '"+startStr+"' AND '"+endStr+"')" ;
+			}
 			
 			String rawSql = "select count(customer), unix_timestamp(Date(dateTime)) " + 
 					"from" + 
-					"	(SELECT customer , dateTime FROM retail_data" + 
+					"	(SELECT customer , dateTime FROM retail_data WHERE outletRef IN (:values) " + betweenDates + 
 					"	GROUP BY customer) as T " + 
 					"GROUP BY Date(dateTime) " + 
 					"ORDER BY dateTime; ";
-			
-			/*String rawSql = "select count(customer), unix_timestamp(Date(dateTime)) " + 
-					"from" + 
-					"	(SELECT customer , dateTime FROM retail_data" + 
-					"	GROUP BY customer) as T " + 
-					"GROUP BY year(dateTime), month(dateTime) " + 
-					"ORDER BY dateTime; ";*/
-			
-	
-			
+
 			
 			@SuppressWarnings("rawtypes")
 			Query query = session.createNativeQuery(rawSql);
+			
+			query.setParameterList("values", filters.getLocations());
+
 		
 			List<Object[]> allObj = query.getResultList();
 			
 			for(Object[] nextO : allObj) {
 			    res.add(new Graph11Data( ((BigInteger) nextO[0]).intValue(), ((BigInteger) nextO[1]).longValue()));
-			    System.out.println(res.get(res.size()-1));
+			   
 			}
 			
 			//foking filters kill my life :(((((((( and hibernate

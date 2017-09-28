@@ -2,12 +2,15 @@ function plotGraph11(data){
 
 
 		//[{day: 1440370800 nOfNewCustomers:7},...]
-
+		var sum = 0;
 		var processed = [];
 		for (var i=0; i<data.length; i++){
 			processed.push([data[i].day*1000, data[i].nOfNewCustomers]);
+			sum+= data[i].nOfNewCustomers;
 		
 		}
+		
+		console.log(sum);
 		
 		
 		Highcharts.chart('graph11', {
@@ -17,6 +20,9 @@ function plotGraph11(data){
 		        title: {
 		            text: 'Customer base growth'
 		        },
+		        subtitle: {
+				    text: 'Total unique customers: ' + sum
+				},
 		        xAxis: {
 		            type: 'datetime',
 		             dateTimeLabelFormats:{

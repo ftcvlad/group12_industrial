@@ -15,6 +15,7 @@ import com.google.gson.GsonBuilder;
 import com.group12.beans.Graph10Data;
 import com.group12.beans.Graph11Data;
 import com.group12.beans.GraphFilters;
+import com.group12.beans.GraphResponse;
 import com.group12.models.Graph10Model;
 import com.group12.models.Graph11Model;
 
@@ -44,16 +45,24 @@ public class TimeGraphsController extends HttpServlet {
 				
 				List<Graph10Data> result = Graph10Model.getGraph10Data(filtObj);
 
+				GraphResponse grr = new GraphResponse();
+				grr.setResult10(result);
+				grr.setFilters(filtObj);
+				
 				Gson gson1 = new GsonBuilder().create();
-				jsonResult = gson1.toJson(result);
+				jsonResult = gson1.toJson(grr);
 				
 			}
 			else if (filtObj.getId() == GRAPH11) {
 				
 				List<Graph11Data> result = Graph11Model.getGraph11Data(filtObj);
-
+				
+				GraphResponse gr = new GraphResponse();
+				gr.setResult11(result);
+				gr.setFilters(filtObj);
+				
 				Gson gson1 = new GsonBuilder().create();
-				jsonResult = gson1.toJson(result);
+				jsonResult = gson1.toJson(gr);
 				
 			}
 			

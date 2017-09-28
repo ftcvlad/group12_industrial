@@ -16,11 +16,16 @@ public class GraphFilters{
 	@SerializedName("startDatetime") private Date startDatetime;
 	@SerializedName("endDatetime") private Date endDatetime;
 	@SerializedName("id") private int id;
+	@SerializedName("comparison") private boolean comparison;
 	
 	
 	
-	//other ???
-	
+	public boolean isComparison() {
+		return comparison;
+	}
+	public void setComparison(boolean comparison) {
+		this.comparison = comparison;
+	}
 	public List<Integer> getLocations() {
 		return locations;
 	}

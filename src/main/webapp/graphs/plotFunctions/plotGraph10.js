@@ -1,36 +1,67 @@
 function plotGraph10(data){
 	
-		//countPerDay: 9, sumPerDay: 16.85, day: 1440370800
+		//
+		
+		//result10: [{countPerDay: 9, sumPerDay: 16.85, day: 1440370800},...], filters: {}
 
-		var type = allGraphs["10"].filters.yAxisType;
-		
-		
-		
+		var type = data.filters.yAxisType;
 		var allSeries = [];
 		
-		var lengthOfCompPeriod = "year";
-		
-		if (lengthOfCompPeriod === "year"){
-			var previousYear = "";
+		var sum = 0;
+		if (data.filters.comparison === false){
+			var processed = [];
+			for (var i=0; i<data.result10.length; i++){
 			
-			for (var i=0; i<data.length;i++){
-				var myMoment =  moment(data[i].day*1000);//multiply by 1000 as unix timestamps in seconds, js uses milliseconds
-				var nextYear = myMoment.year();
-			
-				if (previousYear !== nextYear){
-					allSeries.push({name:nextYear, data: [], type: 'area'});
-				}
-				
 				if (type === yAxisTypes.totalSpending){
-					allSeries[allSeries.length-1].data.push([myMoment.year(2015).unix()*1000,  data[i].sumPerDay]);
+					processed.push([data.result10[i].day*1000, data.result10[i].sumPerDay]);
+					sum+=data.result10[i].sumPerDay;
 				}
 				else {
-					allSeries[allSeries.length-1].data.push([myMoment.year(2015).unix()*1000,  data[i].countPerDay]);
+					processed.push([data.result10[i].day*1000, data.result10[i].countPerDay]);
+					sum+=data.result10[i].countPerDay;
 				}
-				previousYear = nextYear;
+				
 			}
+			
+			allSeries = [{
+			        	name: type === yAxisTypes.totalSpending ? "Spending per day" : "Transactions per day",
+			        	data: processed,
+			        	type: 'area'
+			        }];
+		
 		
 		}
+		else{
+			
+		
+			var lengthOfCompPeriod = "year";
+			
+			if (lengthOfCompPeriod === "year"){
+				var previousYear = "";
+				
+				for (var i=0; i<data.result10.length;i++){
+					var myMoment =  moment(data.result10[i].day*1000);//multiply by 1000 as unix timestamps in seconds, js uses milliseconds
+					var nextYear = myMoment.year();
+				
+					if (previousYear !== nextYear){
+						allSeries.push({name:nextYear, data: [], type: 'area'});
+					}
+					
+					if (type === yAxisTypes.totalSpending){
+						allSeries[allSeries.length-1].data.push([myMoment.year(2015).unix()*1000,  data.result10[i].sumPerDay]);
+						sum+= data.result10[i].sumPerDay;
+					}
+					else {
+						allSeries[allSeries.length-1].data.push([myMoment.year(2015).unix()*1000,  data.result10[i].countPerDay]);
+						sum+=data.result10[i].countPerDay;
+					}
+					previousYear = nextYear;
+				}
+			
+			}
+		}
+		
+		
 		
 		var yAxisTitle = "";
 		if (type === yAxisTypes.totalSpending){
@@ -48,6 +79,9 @@ function plotGraph10(data){
 		        title: {
 		            text: 'Time comparison'
 		        },
+		        subtitle: {
+				    text: 'Total: ' + Math.floor(sum)
+				},
 		        xAxis: {
 		            type: 'datetime',
 		             dateTimeLabelFormats:{

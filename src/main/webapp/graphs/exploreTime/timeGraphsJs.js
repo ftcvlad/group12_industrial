@@ -5,7 +5,8 @@ var allGraphs = {
 	 	filters:{
 			id: 10,
 			locations: allLocations.slice(),
-			yAxisType:  yAxisTypes.totalSpending
+			yAxisType:  yAxisTypes.totalSpending,
+			comparison: true
 		},
 		fetching: false,
 		plotData: plotGraph10,
@@ -15,7 +16,8 @@ var allGraphs = {
 	 "11":{
 	 	filters:{
 			id: 11,
-			locations: allLocations.slice()
+			locations: allLocations.slice(),
+			comparison: true
 		},
 		fetching: false,
 		plotData: plotGraph11,

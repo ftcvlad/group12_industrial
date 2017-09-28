@@ -66,6 +66,7 @@
 	        <jsp:param name="locationFilter" value="true"/>
 	        <jsp:param name="transSpendingFilter" value="true"/>
 	        <jsp:param name="onDashboard" value="true"/>
+	        <jsp:param name="comparisonFilter" value="true"/>
 	    </jsp:include>
 
 			<!-- GRAPH 9 -->
@@ -91,6 +92,7 @@
 	        <jsp:param name="locationFilter" value="true"/>
 	        <jsp:param name="transSpendingFilter" value="false"/>
 	        <jsp:param name="onDashboard" value="true"/>
+	        <jsp:param name="comparisonFilter" value="true"/>
 	    </jsp:include>
 		
 	</div>

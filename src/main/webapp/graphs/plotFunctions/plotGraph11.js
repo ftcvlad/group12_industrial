@@ -1,16 +1,54 @@
 function plotGraph11(data){
 
 
-		//[{day: 1440370800 nOfNewCustomers:7},...]
+
+		//result11: [{day: 1440370800 nOfNewCustomers:7},...], filters: {}
+		//console.log(data);
 		var sum = 0;
-		var processed = [];
-		for (var i=0; i<data.length; i++){
-			processed.push([data[i].day*1000, data[i].nOfNewCustomers]);
-			sum+= data[i].nOfNewCustomers;
+		var allSeries = [];
+		if (data.filters.comparison === false){
+			var processed = [];
+			for (var i=0; i<data.result11.length; i++){
+				processed.push([data.result11[i].day*1000, data.result11[i].nOfNewCustomers]);
+				sum+= data.result11[i].nOfNewCustomers;
+			}
+			
+			allSeries = [{
+			        	name: "New customers",
+			        	data: processed,
+			        	type: 'area'
+			        }];
+		
+		}
+		else {
+		
+			var previousYear = "";
+		
+			for (var i=0; i<data.result11.length;i++){
+				var myMoment =  moment(data.result11[i].day*1000);
+				var nextYear = myMoment.year();
+			
+				if (previousYear !== nextYear){
+					allSeries.push({name:nextYear, data: [], type: 'area'});
+				}
+	
+				allSeries[allSeries.length-1].data.push([myMoment.year(2015).unix()*1000,  data.result11[i].nOfNewCustomers]);
+				sum+= data.result11[i].nOfNewCustomers;
+				previousYear = nextYear;
+			}
 		
 		}
 		
-		console.log(sum);
+		
+		
+
+	
+		
+		
+		
+		
+		
+		
 		
 		
 		Highcharts.chart('graph11', {
@@ -64,11 +102,7 @@ function plotGraph11(data){
 		            }
 		        },
 			
-		        series: [{
-		        	name: "New customers",
-		        	data: processed,
-		        	type: 'area'
-		        }]
+		        series: allSeries
 		    });
 		
 

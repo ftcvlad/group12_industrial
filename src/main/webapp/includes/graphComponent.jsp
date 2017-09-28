@@ -60,7 +60,16 @@
 						</div>
 					</c:if>
 					
-
+					<c:if test="${param.comparisonFilter == true}">
+						<div class="filterItem">
+							<label for="comparisonCheckbox${param.graphId}">Comparison</label>
+							<div class="input-group">
+								 <input checked onclick="(function(id){
+									    allGraphs[id].filters.comparison = !allGraphs[id].filters.comparison;
+								    		})(${param.graphId});" id="comparisonCheckbox${param.graphId}" class="form-check-input" type="checkbox" value="">
+							</div>
+						</div>
+					</c:if>
 					
 
 					<div class="filterItem">

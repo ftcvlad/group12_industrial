@@ -53,6 +53,16 @@ var allGraphs = {
 		plotData: plotGraph12,
 		spinner: null,
 		url: 'behaviourGraphs'
+	 },
+	 "13":{
+	 	filters:{
+			id: 13,
+			locations: allLocations.slice()
+		},
+		fetching: false,
+		plotData: plotGraph13,
+		spinner: null,
+		url: 'behaviourGraphs'
 	 }
 	 
 	 

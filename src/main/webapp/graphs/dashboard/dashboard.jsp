@@ -65,6 +65,12 @@
 	          <jsp:param name="onDashboard" value="true" />
 	    </jsp:include>
 		
+		<div class="panel panel-default"  style="color: lightgrey; display:none" id="dashboardMessage" >
+			<div class="panel-body">
+				<h2>You can pin graphs of your choice to dashboard. Currently no graphs pinned.</h2>
+			</div>
+		</div>
+		
 
 		<!-- GRAPH 10 -->
 		<jsp:include page="/includes/graphComponent.jsp">

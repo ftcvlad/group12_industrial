@@ -91,6 +91,10 @@ $( document ).ready(function() {
 	
 	pinnedIds = JSON.parse(pinnedIds);
 	
+	if (pinnedIds.length === 0){
+		$("#dashboardMessage").show();
+	}
+	
 	for (var i=0; i<pinnedIds.length; i++){
 	
 		var nextId = pinnedIds[i];

@@ -144,6 +144,10 @@ function addToDashboard(elem, graphId){
 		    	$("#graphContainer"+graphId).hide();
 		    	$("#calendarCheckbox"+graphId).parent().hide();
 		    	
+		    	if (pinnedGraphs.length === 0){
+		    		$("#dashboardMessage").show();
+		    	}
+		    	
 		    }
 		    else{
 		    	jElem.text('Pin');

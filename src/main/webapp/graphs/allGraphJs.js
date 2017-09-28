@@ -228,7 +228,7 @@ function requestData(graphId){
 	}
 	
 	
-	console.log(filters);
+	//console.log(filters);
 	
 	appendOverlay(graphId);
 	allGraphs[graphId].fetching = true;

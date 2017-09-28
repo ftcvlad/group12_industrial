@@ -16,8 +16,7 @@ import com.group12.beans.Graph10Data;
 import com.group12.beans.Graph11Data;
 import com.group12.beans.GraphFilters;
 import com.group12.beans.GraphResponse;
-import com.group12.models.Graph10Model;
-import com.group12.models.Graph11Model;
+import com.group12.models.TimeGraphModel;
 
 
 
@@ -43,7 +42,7 @@ public class TimeGraphsController extends HttpServlet {
 
 			if (filtObj.getId() == GRAPH10) {
 				
-				List<Graph10Data> result = Graph10Model.getGraph10Data(filtObj);
+				List<Graph10Data> result = TimeGraphModel.getGraph10Data(filtObj);
 
 				GraphResponse grr = new GraphResponse();
 				grr.setResult10(result);
@@ -55,7 +54,7 @@ public class TimeGraphsController extends HttpServlet {
 			}
 			else if (filtObj.getId() == GRAPH11) {
 				
-				List<Graph11Data> result = Graph11Model.getGraph11Data(filtObj);
+				List<Graph11Data> result = TimeGraphModel.getGraph11Data(filtObj);
 				
 				GraphResponse gr = new GraphResponse();
 				gr.setResult11(result);

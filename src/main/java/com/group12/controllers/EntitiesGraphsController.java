@@ -6,16 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.group12.beans.GraphFilters;
 import com.group12.beans.YoyoTransaction;
-import com.group12.models.GraphModel;
+import com.group12.models.EntitiesGraphModel;
 
 
 
@@ -26,9 +28,6 @@ public class EntitiesGraphsController extends HttpServlet {
 	private static final int GRAPH6 = 6;
 	private static final int GRAPH9 = 9;
 
-	
-	
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
@@ -73,14 +72,14 @@ public class EntitiesGraphsController extends HttpServlet {
 	
 	private static List<YoyoTransaction> getGraph6Data(GraphFilters filters) {
 		
-		List<YoyoTransaction> result = GraphModel.getGraph6Data(filters);
+		List<YoyoTransaction> result = EntitiesGraphModel.getGraph6Data(filters);
 		return result;
 		
 	}
 	
 	
 	private static Map<String, List<Float>> getGraph9Data(GraphFilters filters) {
-		List<YoyoTransaction> data = GraphModel.getGraph9Data(filters);
+		List<YoyoTransaction> data = EntitiesGraphModel.getGraph9Data(filters);
 		if (data == null) return null;
 		
 		//combine in buckets. there can be less people in the last bucket, or some people may be disregarded

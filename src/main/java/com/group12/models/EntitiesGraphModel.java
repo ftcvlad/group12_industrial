@@ -18,7 +18,7 @@ import com.group12.beans.GraphFilters;
 import com.group12.beans.YoyoTransaction;
 import com.group12.utils.DatabaseConnectionManager;
 
-public class GraphModel {
+public class EntitiesGraphModel {
 
 
 

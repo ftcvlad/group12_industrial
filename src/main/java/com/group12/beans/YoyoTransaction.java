@@ -32,6 +32,12 @@ public class YoyoTransaction{
 		this.sumTotal = sumTotal;
 		this.outletRef = outletRef;
 		this.uniqueCustomers = uniqueCustomers;
+	}	
+	
+	// Graph 2 - constructor
+	public YoyoTransaction(Date dateTime, float total) {
+		this.dateTime = dateTime;
+		this.total = total;
 	}
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) 

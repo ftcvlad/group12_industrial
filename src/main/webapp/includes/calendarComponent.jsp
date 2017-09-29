@@ -49,7 +49,7 @@
 									<span class=" glyphicon glyphicon-ok "></span> <span> </span>
 								</label> <label for="calendarCheckbox${item}" class=" btn btn-default btn-sm active ">
 								 	<c:if test="${item == 2}">Total spending per weekday</c:if>
-								 	<c:if test="${item == 10}">Time comparison</c:if>
+								 	<c:if test="${item == 10}">Sales over time</c:if>
 								 	<c:if test="${item == 9}">Spending distribution</c:if>
 								 	<c:if test="${item == 6}">Location statistics</c:if>
 								 	<c:if test="${item == 11}">Customer base growth</c:if>

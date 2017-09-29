@@ -56,6 +56,7 @@
 	    </jsp:include>
 		
 
+		<a name="graph9"></a>
 		<!-- GRAPH 9 -->
 		<jsp:include page="/includes/graphComponent.jsp">
 	        <jsp:param name="graphId" value="9"/>
@@ -63,7 +64,7 @@
 	        <jsp:param name="transSpendingFilter" value="true"/>
 	    </jsp:include>
 
-
+		<a name="graph6"></a>
 		<!-- GRAPH 6 -->
 		<jsp:include page="/includes/graphComponent.jsp">
 	        <jsp:param name="graphId" value="6"/>

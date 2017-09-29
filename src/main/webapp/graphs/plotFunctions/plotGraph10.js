@@ -77,7 +77,7 @@ function plotGraph10(data){
 		            zoomType: 'x'
 		        },
 		        title: {
-		            text: 'Time comparison'
+		            text: 'Sales over time'
 		        },
 		        subtitle: {
 				    text: 'Total: ' + Math.floor(sum)

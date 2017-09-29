@@ -55,7 +55,7 @@
 	     	  <jsp:param name="graphChecboxId" value="2" />
 	    </jsp:include>
 		
-		
+		<a name="graph13"></a>
 		<!-- GRAPH 13 -->
 		<jsp:include page="/includes/graphComponent.jsp">
 			<jsp:param name="graphId" value="13"/>
@@ -63,6 +63,7 @@
 			<jsp:param name="transSpendingFilter" value="false"/>
 		</jsp:include>
 		
+		<a name="graph12"></a>
 		<!-- GRAPH 12 -->
 		<jsp:include page="/includes/graphComponent.jsp">
 			<jsp:param name="graphId" value="12"/>
@@ -70,6 +71,7 @@
 			<jsp:param name="transSpendingFilter" value="false"/>
 		</jsp:include>
 
+		<a name="graph2"></a>
 		<!-- GRAPH 2 -->
 		<jsp:include page="/includes/graphComponent.jsp">
 			<jsp:param name="graphId" value="2"/>

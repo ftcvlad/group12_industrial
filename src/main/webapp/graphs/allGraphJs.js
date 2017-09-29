@@ -252,7 +252,7 @@ function requestData(graphId){
     	},
     	error: function(jqXHR, textStatus, errorThrown){
     		removeOverlay(graphId);
-    		alert(textStatus);
+    		console.error(textStatus);
     	},
     	complete: function(){
     		

@@ -1,7 +1,13 @@
 <link rel="stylesheet" href="includes/sidebarStyles.css">
 <!-- tag for sidebar -->
     <div id="sidebar">
-        <image id="DusaLogo" src="images/DLOG.png"></images>
+       
+  		<button onclick="location.href='index.jsp'" class="module_button" >
+           <div>
+               <image class="module_button_image" src="images/DLOG.png"></image>
+           </div>
+        </button>
+  
   
        	<button onclick="location.href='upload'" class="module_button <c:if test="${page == 'upload'}">selectedMenuItem</c:if>" id="uploadBtn">
            Upload
@@ -46,7 +52,7 @@
         </div>
 
         
-        <button onclick="location.href='http://www.google.com'" class="module_button">
+        <button onclick="location.href='settings'" class="module_button <c:if test="${page == 'settings'}">selectedMenuItem</c:if>">
             Settings
             <div>
                 <image class="module_button_image" src="images/settings.png"></image>
@@ -54,3 +60,12 @@
         </button>
         
     </div>
+    
+    <!--  and a little nav -->
+   
+    	<ul class="nav nav-pills ">
+		  <li  class="pull-right" role="presentation"><a href="#">Sign in</a></li>
+		  <li style="border-right: solid 1px white" class="pull-right" role="presentation"><a href="#">Sign up</a></li>
+		</ul>
+   
+	

@@ -103,3 +103,31 @@ button {
 #graphCategoryButtons button{
 	height:70px;
 }
+
+
+
+
+
+/*NAVBAR*/
+body{
+	margin:0;
+}
+
+
+.nav-pills{
+	margin-left: 180px;
+	background: grey;
+	color:white;
+	padding:5px;
+}
+
+.nav-pills a{
+	color: white;
+	
+}
+
+.nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: none;
+    background-color: #706e6e;
+  
+}

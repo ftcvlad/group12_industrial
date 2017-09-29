@@ -71,6 +71,12 @@
 #calendarCheckboxes{
 	border: solid 1px black;
     padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#calendarCheckboxes > div{
+	margin-right:20px;
 }
 
 #datepickerHolder{
